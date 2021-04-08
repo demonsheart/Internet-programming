@@ -1,7 +1,7 @@
 /* 
  * CS:APP Data Lab 
  *
- * 何荣金 2019151059
+ * @author demonsheart
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
