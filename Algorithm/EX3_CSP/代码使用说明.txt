@@ -1,0 +1,4 @@
+保证 cpp与col文件同目录
+minGraph.col 是从 Map.png 中编写的数据
+MACGraph.cpp 默认给le450_5a.col le450_25a.col着色
+SimpleGraph.cpp 默认给minGraph.col着色
