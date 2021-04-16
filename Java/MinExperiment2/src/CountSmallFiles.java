@@ -14,7 +14,7 @@ public class CountSmallFiles {
             long startTime = System.currentTimeMillis();
 
             // 创建线程池
-            ExecutorService es = Executors.newFixedThreadPool(5);
+            ExecutorService es = Executors.newFixedThreadPool(8);
             for (String fileName : str) {
                 es.submit(new Task(fileName));
             }
@@ -55,7 +55,8 @@ class Task implements Runnable {
         String filePath = "src/Datasets/File100/" + fileName;
         BufferedReader br = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8));
         String line;
-        List<String> lists = new ArrayList<>();
+        //通过Map统计频次
+        HashMap<String, Integer> mp = new HashMap<>();
         while ((line = br.readLine()) != null) {
             // 每一行以非单词字符分割 并且将单词转换为小写
             line = line.toLowerCase(Locale.ROOT);
@@ -65,17 +66,11 @@ class Task implements Runnable {
                     if (word.length() == 1 && !word.equals("a") && !word.equals("i")) {
                         continue;
                     }
-                    lists.add(word);
+                    mp.merge(word, 1, Integer::sum);
                 }
             }
         }
         br.close();
-
-        //通过Map统计频次
-        Map<String, Integer> mp = new TreeMap<>();
-        for (String word : lists) {
-            mp.merge(word, 1, Integer::sum);
-        }
 
         //将Map的键值对取出到list中， 再通过频次降序排序
         ArrayList<Map.Entry<String, Integer>> res = new ArrayList<>(mp.entrySet());

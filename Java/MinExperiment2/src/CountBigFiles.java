@@ -6,10 +6,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 public class CountBigFiles {
-    // 文件较大 直接设为静态
-    public static int threadSize = 16;
-    public static List<List<String>> lists = new LinkedList<>();
-    public static Map<String, Integer> res = new TreeMap<>();
+    public static int threadSize = 1;
     public static String rootPath = "src/Datasets/BigFiles/";
     // src/Datasets/BigFiles/
     // src/Datasets/File100/
@@ -30,24 +27,21 @@ public class CountBigFiles {
         for (int i = 1; i <= threadSize; ++i) {
             tasks.add(new CountPartOfBigFiles(i));
         }
+        HashMap<String, Integer> mp = new HashMap<>();
         // 任务批量提交并执行
-        List<Future<Object>> futures = es.invokeAll(tasks);
+        List<Future<HashMap<String, Integer>>> futures = es.invokeAll(tasks);
         // 获取执行结果，这个方法会产生阻塞，会一直等到任务执行完毕才返回
-        for (Future<Object> future : futures) {
-            future.get();
+        for (Future<HashMap<String, Integer>> future : futures) {
+            HashMap<String, Integer> f = future.get();
+            for (Map.Entry<String, Integer> v : f.entrySet()) {
+                mp.merge(v.getKey(), v.getValue(), Integer::sum);
+            }
         }
         es.shutdown();
 
-        //通过Map统计频次
-        for (List<String> list : lists) {
-            for (String word : list) {
-                res.merge(word, 1, Integer::sum);
-            }
-        }
-
         //统计输出
         //将Map的键值对取出到list中， 再通过频次降序排序
-        ArrayList<Map.Entry<String, Integer>> re = new ArrayList<>(res.entrySet());
+        ArrayList<Map.Entry<String, Integer>> re = new ArrayList<>(mp.entrySet());
         // 降序排序
         re.sort((o1, o2) -> o2.getValue() - o1.getValue());
 
@@ -68,16 +62,19 @@ public class CountBigFiles {
  * 线程池的任务
  * 分部分读取大文件
  */
-class CountPartOfBigFiles implements Callable<Object> {
+class CountPartOfBigFiles implements Callable<HashMap<String, Integer>> {
 
     private final int currentPart;
+    private HashMap<String, Integer> mp;
+
 
     public CountPartOfBigFiles(int currentPart) {
         this.currentPart = currentPart;
+        mp = new HashMap<>();
     }
 
     @Override
-    public Object call() throws Exception {
+    public HashMap<String, Integer> call() throws Exception {
         try {
             RandomAccessFile fileAccess = new RandomAccessFile(CountBigFiles.rootPath + CountBigFiles.fileName, "r");
             // 计算[start, end]偏移量范围
@@ -104,7 +101,6 @@ class CountPartOfBigFiles implements Callable<Object> {
 
             fileAccess.seek(start);
             String line;
-            List<String> list = new ArrayList<>();
             while (fileAccess.getFilePointer() < end) {
                 // 每一行以非单词字符分割 并且将单词转换为小写
                 line = fileAccess.readLine().toLowerCase(Locale.ROOT);
@@ -114,14 +110,13 @@ class CountPartOfBigFiles implements Callable<Object> {
                         if (word.length() == 1 && !word.equals("a") && !word.equals("i")) {
                             continue;
                         }
-                        list.add(word);
+                        mp.merge(word, 1, Integer::sum);
                     }
                 }
             }
-            CountBigFiles.lists.add(list);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return this.mp;
     }
 }
