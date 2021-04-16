@@ -1,41 +1,46 @@
 import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.*;
 
-public class Server {
-    private static final int SERVER_PORT = 8888;
+public class PoorServer {
+    private static final int SERVER_PORT = 9999;
+    private static final int ThreadNum = 100;
 
     public static void main(String[] args) throws IOException {
         System.out.println("===============TCP SERVER==============");
         ServerSocket server = null;
+        ExecutorService es = Executors.newFixedThreadPool(ThreadNum);
         try {
             server = new ServerSocket(SERVER_PORT);
 
             System.out.println("Listening Port is " + server.getLocalPort() + "...");
             while (true) {
                 Socket client = server.accept();
-                new ServerThread(client).start();
+                es.submit(new ThreadPoorServer(client));
             }
         } catch (Exception e) {
             e.printStackTrace();
             server.close();
+            es.shutdown();
         }
     }
 }
 
-class ServerThread extends Thread {
-    private Socket threadClient;
+class ThreadPoorServer implements Runnable {
+    private Socket socket;
     private String name;
     private String time;
 
-    public ServerThread(Socket threadSocket) {
-        this.threadClient = threadSocket;
+    ThreadPoorServer(Socket socket) {
+        this.socket = socket;
     }
+
 
     @Override
     public void run() {
         try {
-            InputStream is = threadClient.getInputStream();
+            InputStream is = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line = br.readLine();
 
@@ -47,7 +52,7 @@ class ServerThread extends Thread {
             System.out.println(name + " connected to server on " + time + " with message: '" + message + "'");
             this.writelog();
 
-            OutputStream out = threadClient.getOutputStream();
+            OutputStream out = socket.getOutputStream();
             out.write(("Hello! " + name + ". Your request has been processed!").getBytes(StandardCharsets.UTF_8));
             out.flush();
 
@@ -60,12 +65,11 @@ class ServerThread extends Thread {
 
     private synchronized void writelog() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("log1.txt", true));
-            bw.write(threadClient.getInetAddress() + ":" + threadClient.getPort() + " [" + time + "]" + '\n');
+            BufferedWriter bw = new BufferedWriter(new FileWriter("log2.txt", true));
+            bw.write(socket.getInetAddress() + ":" + socket.getPort() + " [" + time + "]" + '\n');
             bw.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
