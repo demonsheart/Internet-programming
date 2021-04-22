@@ -3,14 +3,37 @@ import cn.wanghaomiao.xpath.model.JXNode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.lang.Thread;
+
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
 public class Spider {
-    private static final String USER_AGENT = "User-Agent:Mozilla/5.0 (Windows; U; Windows NT 6.1; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50";
+    private static final String USER_AGENT[] = new String[]{
+            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
+            "Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
+            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6",
+            "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6",
+            "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5",
+            "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5",
+            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
+            "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
+            "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
+            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
+            "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+            "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+            "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+            "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24",
+            "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
+    };
     private static final String api = "https://www.baidu.com/s?wd=";
+    private static int i = 0;
+    private static int UAlen = USER_AGENT.length;
 
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
@@ -38,11 +61,11 @@ public class Spider {
         HashMap<String, String> mp = new HashMap<>();
         String url = api + URLEncoder.encode(entry, StandardCharsets.UTF_8);
         // 请求
-        Document doc = Jsoup.connect(url).userAgent(USER_AGENT).get();
+        Document doc = Jsoup.connect(url).userAgent(USER_AGENT[(i++) % UAlen]).get();
 
         // xpath解析
         JXDocument jxDocument = new JXDocument(doc);
-        List<JXNode> jxNodes = jxDocument.selN("//h3");
+        List<JXNode> jxNodes = jxDocument.selN("//div[@id='content_left']/div/h3");
         for (JXNode jxNode : jxNodes) {
             List<JXNode> titleNode = jxNode.sel("/a[1]").get(0).sel("/em/text() | /text()");
             StringBuffer buf = new StringBuffer();
@@ -60,7 +83,10 @@ public class Spider {
     }
 
     public static String get_real_url(String url) throws Exception {
+        Thread.sleep(500);
         URLConnection connection = new URL(url).openConnection();
+        connection.setRequestProperty("user-agent", USER_AGENT[(i++) % UAlen]);
+        connection.connect();
         return connection.getHeaderField("Location");
     }
 }
