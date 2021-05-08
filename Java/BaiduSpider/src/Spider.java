@@ -3,6 +3,9 @@ import cn.wanghaomiao.xpath.model.JXNode;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.Writer;
 import java.lang.Thread;
 
 import java.net.*;
@@ -31,6 +34,7 @@ public class Spider {
             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24",
             "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
     };
+    private static final String referer = "https://www.baidu.com";
     private static final String api = "https://www.baidu.com/s?wd=";
     private static int i = 0;
     private static int UAlen = USER_AGENT.length;
@@ -45,12 +49,16 @@ public class Spider {
                 if (entry.equals("q"))
                     break;
                 HashMap<String, String> mp = get_map(entry);
+                BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/" + entry + "_result.txt"));
                 for (Map.Entry<String, String> m : mp.entrySet()) {
                     String ur = get_real_url(m.getValue());
                     if (ur == null)
                         ur = m.getValue();
-                    System.out.println(m.getKey() + " " + ur);
+                    String st = m.getKey() + " " + ur;
+                    bw.write(st + "\n");
+                    System.out.println(st);
                 }
+                bw.close();
                 System.out.println("");
             }
         }
@@ -61,7 +69,13 @@ public class Spider {
         HashMap<String, String> mp = new HashMap<>();
         String url = api + URLEncoder.encode(entry, StandardCharsets.UTF_8);
         // 请求
-        Document doc = Jsoup.connect(url).userAgent(USER_AGENT[(i++) % UAlen]).get();
+        Document doc = Jsoup.connect(url).userAgent(USER_AGENT[(i++) % UAlen]).referrer(referer).get();
+
+        // 保存HTML文件 到entry.txt
+        String str = doc.outerHtml();
+        BufferedWriter bw = new BufferedWriter(new FileWriter("src/data/" + entry + ".txt"));
+        bw.write(str);
+        bw.close();
 
         // xpath解析
         JXDocument jxDocument = new JXDocument(doc);
@@ -83,9 +97,10 @@ public class Spider {
     }
 
     public static String get_real_url(String url) throws Exception {
-        Thread.sleep(500);
+        Thread.sleep(300);
         URLConnection connection = new URL(url).openConnection();
-        connection.setRequestProperty("user-agent", USER_AGENT[(i++) % UAlen]);
+        connection.setRequestProperty("User-Agent", USER_AGENT[(i++) % UAlen]);
+        connection.setRequestProperty("Referer",referer);
         connection.connect();
         return connection.getHeaderField("Location");
     }
