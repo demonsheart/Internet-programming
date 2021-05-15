@@ -2,6 +2,7 @@ import java.net.*;
 import java.util.*;
 import java.io.*;
 
+// https://dss1.bdstatic.com/5aV1bjqh_Q23odCf/static/message/js/mt_show_1.8.js
 public class DirectDownload {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -47,10 +48,11 @@ public class DirectDownload {
                 throw new IOException("Only read " + offset + " bytes; Expected " + contentLength + " bytes");
             }
             String filename = ur.getFile();
-            filename = filename.substring(filename.lastIndexOf('/') + 1);
             // 处理从跟路由进去的html无法匹配到文件名的问题
             if (filename.length() == 0) {
                 filename += "." + contentType.substring(contentType.lastIndexOf('/') + 1);
+            } else {
+                filename = filename.substring(filename.lastIndexOf('/') + 1);
             }
             try (FileOutputStream fout = new FileOutputStream("src/data/" + filename)) {
                 fout.write(data);
