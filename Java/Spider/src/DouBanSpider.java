@@ -27,7 +27,7 @@ public class DouBanSpider {
             "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
     };
-    private static final String Cookie = "ll=\"118282\"; bid=_pAtdo8BJ4E; __gads=ID=325cf67fe67250ff-22386e3ea6c600c9:T=1616467167:RT=1616467167:S=ALNI_Mb6MLyRzZH4muei9AdDB-hD72yk3Q; _vwo_uuid_v2=D977B64A023FAD93FF75D0CD5A963AC9A|d6c6accfcc768f13d589ebd7118e5a2f; __yadk_uid=52cysxOQmtUSX7MUelUfaZslzEL8fM8Q; __utma=30149280.1377641006.1616467167.1616467167.1621578058.2; __utmc=30149280; __utmz=30149280.1621578058.2.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); dbcl2=\"238455111:b5iagDuUM3k\"; ck=o5CE; push_noty_num=0; push_doumail_num=0; __utmv=30149280.23845; __utmb=30149280.13.9.1621578211134; __utmc=223695111; _pk_ref.100001.4cf6=%5B%22%22%2C%22%22%2C1621578237%2C%22https%3A%2F%2Fwww.douban.com%2Fpeople%2F238455111%2F%22%5D; _pk_ses.100001.4cf6=*; __utma=223695111.1540399195.1616467167.1621578237.1621578652.3; __utmb=223695111.0.10.1621578652; __utmz=223695111.1621578652.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); _pk_id.100001.4cf6=626e55b21cf74b5d.1616467167.2.1621579352.1616467167.";
+    private static final String Cookie = "";
     public static final String referer = "https://movie.douban.com/top250";
     private static List<String> urls = new ArrayList<>();
     public static int index = 0;
@@ -184,10 +184,10 @@ class OnePageSpider implements Runnable {
     private void getRemain() throws Exception {
         String st = jxDocument.selN("//div[@id='info']//text()").get(0).toString();
         // 关键在":"
-        alias = myRegex("又名:(.*)IMDb", st);
+        alias = myRegex("又名:(.*)IMDb", st).replace(',', ' ');
         IMDb = myRegex("IMDb:(.*)", st);
-        location = myRegex("制片国家/地区:(.*)语言", st);
-        language = myRegex("语言:(.*)上映日期", st);
+        location = myRegex("制片国家/地区:(.*)语言", st).replace(',', ' ');
+        language = myRegex("语言:(.*)上映日期", st).replace(',', ' ');
     }
 
     @Override
@@ -197,18 +197,18 @@ class OnePageSpider implements Runnable {
                     .referrer(DouBanSpider.referer).cookies(DouBanSpider.cookieMap).get();
             jxDocument = new JXDocument(doc);
             no = getStringFromXpath("//span[@class='top250-no']/text()");
-            movieName = getStringFromXpath("//h1/span[1]/text()");
+            movieName = getStringFromXpath("//h1/span[1]/text()").replace(',', ' ');
             System.out.println("Processing" + movieName);
             score = getStringFromXpath("//div[@class='rating_self clearfix']/strong/text()");
             scoreNum = getStringFromXpath("//div[@class='rating_sum']//span/text()");
-            summary = getStringFromXpath("//span[@property='v:summary']/text()");
+            summary = getStringFromXpath("//span[@property='v:summary']/text()").replace(',', ' ');
             imageURL = getStringFromXpath("//div[@id='mainpic']//img/@src");
             getShortReview("//div[@id='hot-comments']//span[@class='short']/text()");
-            director = getStringFromXpath("//div[@id='info']/span[1]//a/text()");
-            screenwriter = getStringFromXpath("//div[@id='info']/span[2]//a/text()");
-            roles = getStringFromXpath("//div[@id='info']/span[3]//a/text()");
-            type = getStringFromXpath("//div[@id='info']/span[@property='v:genre']/text()");
-            releaseTime = getStringFromXpath("//div[@id='info']/span[@property='v:initialReleaseDate']/text()");
+            director = getStringFromXpath("//div[@id='info']/span[1]//a/text()").replace(',', ' ');
+            screenwriter = getStringFromXpath("//div[@id='info']/span[2]//a/text()").replace(',', ' ');
+            roles = getStringFromXpath("//div[@id='info']/span[3]//a/text()").replace(',', ' ');
+            type = getStringFromXpath("//div[@id='info']/span[@property='v:genre']/text()").replace(',', ' ');
+            releaseTime = getStringFromXpath("//div[@id='info']/span[@property='v:initialReleaseDate']/text()").replace(',', ' ');
             duration = getStringFromXpath("//div[@id='info']/span[@property='v:runtime']/text()");
             getRemain();
             saveInFile();
