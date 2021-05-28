@@ -27,7 +27,7 @@ public class DouBanSpider {
             "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
     };
-    private static final String Cookie = "ll=\"118282\"; bid=_pAtdo8BJ4E; __gads=ID=325cf67fe67250ff-22386e3ea6c600c9:T=1616467167:RT=1616467167:S=ALNI_Mb6MLyRzZH4muei9AdDB-hD72yk3Q; _vwo_uuid_v2=D977B64A023FAD93FF75D0CD5A963AC9A|d6c6accfcc768f13d589ebd7118e5a2f; __yadk_uid=52cysxOQmtUSX7MUelUfaZslzEL8fM8Q; __utma=30149280.1377641006.1616467167.1616467167.1621578058.2; __utmc=30149280; __utmz=30149280.1621578058.2.2.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); dbcl2=\"238455111:b5iagDuUM3k\"; ck=o5CE; push_noty_num=0; push_doumail_num=0; __utmv=30149280.23845; __utmb=30149280.13.9.1621578211134; __utmc=223695111; _pk_ref.100001.4cf6=%5B%22%22%2C%22%22%2C1621578237%2C%22https%3A%2F%2Fwww.douban.com%2Fpeople%2F238455111%2F%22%5D; _pk_ses.100001.4cf6=*; __utma=223695111.1540399195.1616467167.1621578237.1621578652.3; __utmb=223695111.0.10.1621578652; __utmz=223695111.1621578652.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); _pk_id.100001.4cf6=626e55b21cf74b5d.1616467167.2.1621579352.1616467167.";
+    private static final String Cookie = "your Cookie";
     public static final String referer = "https://movie.douban.com/top250";
     private static List<String> urls = new ArrayList<>();
     public static int index = 0;
