@@ -51,7 +51,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
-         identifier = "../HelloWeather/Resource/SZU.gpx"
+         identifier = "../HelloWeather/Resource/XinYi.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
