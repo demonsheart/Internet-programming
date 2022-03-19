@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.*;
+import tool.MyTool;
 
 public class Text {
     private final int totalWordNum;     // 1000

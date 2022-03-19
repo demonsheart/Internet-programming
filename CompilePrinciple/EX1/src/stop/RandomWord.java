@@ -1,5 +1,7 @@
 package stop;
 
+import tool.MyTool;
+
 public class RandomWord {
     private int minLen;
     private int maxLen;
