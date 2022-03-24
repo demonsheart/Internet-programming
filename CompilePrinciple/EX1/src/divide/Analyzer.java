@@ -128,7 +128,7 @@ public class Analyzer {
                     break;
 
                 default:
-                    if (isAlpha(ch)) {                        // identifier or keywords
+                    if (isAlpha(ch)) {
                         str = getIdentifierOrKeyword(ch);
                         if (isKeyword(str))
                             output("关键字", str);
