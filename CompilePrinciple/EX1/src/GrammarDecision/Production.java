@@ -9,6 +9,7 @@ public class Production {
     private final char startVn;
 
     public static final Map<Integer, String> convertMap = Map.of(
+            -1, "Invalid",
             0, "PSG",
             1, "CSG",
             2, "CFG",
@@ -59,6 +60,8 @@ public class Production {
             }
         }
 
+        if (Vnl == 0) { return -1; }
+
         if (left.equals(String.valueOf(startVn)) && right.equals("@")) { // S2E
             return 6;
         }
@@ -95,7 +98,7 @@ public class Production {
             }
         }
 
-        return 0; // PSG Vnl == 0
+        return 0; // PSG
     }
 
     private boolean isNonTerminator(char i) {

@@ -11,6 +11,7 @@ public class Grammar {
     public int type;
     public ArrayList<Production> productions = new ArrayList<>();
     public static final Map<Integer, String> convertMap = Map.of(
+            -1, "Invalid",
             0, "PSG",
             1, "CSG",
             2, "CFG",
@@ -19,16 +20,17 @@ public class Grammar {
 
     public void initGrammarType() {
         // 特殊情况 S -> epsilon 且S在某产生式右侧
-        boolean SInRight = false, hasSTE = false;
-        for (Production production : productions) {
-            if (production.right.contains(String.valueOf(startVn))) {
-                SInRight = true;
-            }
-            if (production.type == 6) {
-                hasSTE = true;
-            }
-        }
-        if (SInRight && hasSTE) { type = 0; }
+        // FIXME: 逻辑上好像不太对
+//        boolean SInRight = false, hasSTE = false;
+//        for (Production production : productions) {
+//            if (production.right.contains(String.valueOf(startVn))) {
+//                SInRight = true;
+//            }
+//            if (production.type == 6) {
+//                hasSTE = true;
+//            }
+//        }
+//        if (SInRight && hasSTE) { type = 0; return; }
 
         int grammarType = 5;
         for (Production production : productions) {
