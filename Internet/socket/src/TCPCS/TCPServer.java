@@ -1,10 +1,10 @@
-package CS;
+package TCPCS;
 
 import java.io.*;
 import java.net.*;
 import java.util.Date;
 
-public class MyServer {
+public class TCPServer {
     public static void main(String[] args) {
         try {
             ServerSocket server = new ServerSocket(9527);

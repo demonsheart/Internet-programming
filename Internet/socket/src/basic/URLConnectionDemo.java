@@ -1,9 +1,8 @@
-package demo;
+package basic;
 import java.io.FileOutputStream;
 import java.net.URL ;
 import java.net.URLConnection ;
 import java.io.InputStream ;
-import java.util.Scanner ;
 
 public class URLConnectionDemo {
 

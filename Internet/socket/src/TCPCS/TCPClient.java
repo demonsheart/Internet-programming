@@ -1,9 +1,9 @@
-package CS;
+package TCPCS;
 
 import java.io.*;
 import java.net.*;
 
-public class MyClient {
+public class TCPClient {
     public static void main(String[] args) {
         try {
             //创建客户端TCP socket接口
