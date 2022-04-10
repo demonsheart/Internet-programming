@@ -7,6 +7,16 @@
 
 import UIKit
 
+// 处理滚动数据源
+protocol FakeSearchDataSource {
+    // TODO: 处理滚动数据源
+}
+
+// 处理点击代理
+protocol FakeSearchDelegate {
+    // TODO: 处理点击代理
+}
+
 /// 左边含搜索标识的bar 内部是滚动的一个collectionView
 class FakeSearchBar: UIControl {
     
@@ -197,7 +207,7 @@ extension FakeSearchBar {
             label.numberOfLines = 1
             label.textAlignment = .center
             label.lineBreakMode = .byClipping
-            label.font = .systemFont(ofSize: 12)
+            label.font = .systemFont(ofSize: 13)
             return label
         }()
         
