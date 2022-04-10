@@ -16,6 +16,8 @@
 		9481DFB128028A260081CAC2 /* PersonalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481DFB028028A260081CAC2 /* PersonalPageViewController.swift */; };
 		9481DFB328028B980081CAC2 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481DFB228028B980081CAC2 /* UIColor+Ext.swift */; };
 		9481DFB5280290070081CAC2 /* UINavigationbar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481DFB4280290070081CAC2 /* UINavigationbar+Ext.swift */; };
+		9481DFBA2802CB3F0081CAC2 /* TopImageBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481DFB92802CB3F0081CAC2 /* TopImageBtn.swift */; };
+		9481DFBC2802D0540081CAC2 /* FakeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481DFBB2802D0540081CAC2 /* FakeSearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		9481DFB028028A260081CAC2 /* PersonalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPageViewController.swift; sourceTree = "<group>"; };
 		9481DFB228028B980081CAC2 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		9481DFB4280290070081CAC2 /* UINavigationbar+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationbar+Ext.swift"; sourceTree = "<group>"; };
+		9481DFB92802CB3F0081CAC2 /* TopImageBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopImageBtn.swift; sourceTree = "<group>"; };
+		9481DFBB2802D0540081CAC2 /* FakeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeSearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 		9481DF94280279370081CAC2 /* TodayNews */ = {
 			isa = PBXGroup;
 			children = (
+				9481DFB82802C9910081CAC2 /* SharedViews */,
 				9481DFAF28028A050081CAC2 /* Person */,
 				9481DFAC2802885C0081CAC2 /* Home */,
 				9481DFAA280287190081CAC2 /* Extensions */,
@@ -102,6 +107,15 @@
 				9481DFB028028A260081CAC2 /* PersonalPageViewController.swift */,
 			);
 			path = Person;
+			sourceTree = "<group>";
+		};
+		9481DFB82802C9910081CAC2 /* SharedViews */ = {
+			isa = PBXGroup;
+			children = (
+				9481DFB92802CB3F0081CAC2 /* TopImageBtn.swift */,
+				9481DFBB2802D0540081CAC2 /* FakeSearchBar.swift */,
+			);
+			path = SharedViews;
 			sourceTree = "<group>";
 		};
 		A87256719BF0A93F04D9BF5F /* Frameworks */ = {
@@ -235,7 +249,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9481DFBC2802D0540081CAC2 /* FakeSearchBar.swift in Sources */,
 				9481DF96280279370081CAC2 /* AppDelegate.swift in Sources */,
+				9481DFBA2802CB3F0081CAC2 /* TopImageBtn.swift in Sources */,
 				9481DF98280279370081CAC2 /* SceneDelegate.swift in Sources */,
 				9481DFB328028B980081CAC2 /* UIColor+Ext.swift in Sources */,
 				9481DFB128028A260081CAC2 /* PersonalPageViewController.swift in Sources */,
