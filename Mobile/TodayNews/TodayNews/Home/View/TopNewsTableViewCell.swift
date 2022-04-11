@@ -22,7 +22,8 @@ class TopNewsTableViewCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.numberOfLines = 1
+        label.numberOfLines = 2
+        label.lineBreakMode = .byCharWrapping
         label.font = .systemFont(ofSize: 16)
         return label
     }()
@@ -57,10 +58,10 @@ class TopNewsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.addSubview(titleLabel)
-        self.addSubview(topLabel)
-        self.addSubview(sourceLabel)
-        self.addSubview(commentNumLabel)
+        self.contentView.addSubview(titleLabel)
+        self.contentView.addSubview(topLabel)
+        self.contentView.addSubview(sourceLabel)
+        self.contentView.addSubview(commentNumLabel)
         
         setDefaultUI()
     }
@@ -87,6 +88,7 @@ class TopNewsTableViewCell: UITableViewCell {
         titleLabel.snp.remakeConstraints { make in
             make.top.equalTo(5)
             make.left.equalTo(10)
+            make.right.equalTo(-10)
         }
         
         topLabel.isHidden = false

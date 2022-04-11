@@ -11,7 +11,7 @@ import MJRefresh
 
 class RecommendViewController: UIViewController {
     
-    var topNews = TopNewsModel.default
+    let model = RecommendViewModel()
     
     lazy var tableView: UITableView = {
         let table = UITableView()
@@ -26,6 +26,7 @@ class RecommendViewController: UIViewController {
         table.separatorInset = .init(top: 0, left: 10.xZoom, bottom: 0, right: 10.xZoom)
         table.backgroundColor = .white
         table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 80
         
         MJRefreshConfig.default.languageCode = "zh-Hans"
         table.mj_header = MJRefreshNormalHeader(refreshingBlock: {
@@ -56,9 +57,9 @@ extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return topNews.count
+            return model.topNews.count
         case 1:
-            return 3
+            return model.bigNews.count + model.threesPicNews.count + model.rightPicNews.count
         default:
             return 0
         }
@@ -68,10 +69,33 @@ extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TopNews", for: indexPath) as! TopNewsTableViewCell
-                cell.data = topNews[indexPath.row]
+                cell.selectionStyle = .none
+                cell.data = model.topNews[indexPath.row]
                 return cell
             case 1:
+                if let data = model.getData(index: indexPath.row) as? BigPicNewsModel {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "BigPicNews", for: indexPath) as! BigPicNewsTableViewCell
+                    cell.selectionStyle = .none
+                    cell.data = data
+                    return cell
+                }
+                
+                if let data = model.getData(index: indexPath.row) as? ThreePicNewsModel {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "ThreePicNews", for: indexPath) as! ThreePicNewsTableViewCell
+                    cell.selectionStyle = .none
+                    cell.data = data
+                    return cell
+                }
+                
+                if let data = model.getData(index: indexPath.row) as? RightPicNewsModel {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "RightPicNews", for: indexPath) as! RightPicNewsTableViewCell
+                    cell.selectionStyle = .none
+                    cell.data = data
+                    return cell
+                }
+                
                 return UITableViewCell()
+                
             default:
                 return UITableViewCell()
         }
@@ -82,4 +106,41 @@ extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
         print(indexPath)
     }
     
+    // MARK: - Footer
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 20
+        }
+        return CGFloat.leastNonzeroMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = SeparateView()
+        return view
+    }
+    
+}
+
+extension RecommendViewController {
+    class SeparateView: UIView {
+        let line = UIView()
+        
+        init(){
+            super.init(frame: .zero)
+            self.backgroundColor = .white
+            self.addSubview(line)
+            line.backgroundColor = .lightGray
+            line.snp.makeConstraints { make in
+                make.centerY.equalToSuperview().offset(5)
+                make.left.equalTo(10)
+                make.right.equalTo(-10)
+                make.height.equalTo(0.35)
+            }
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
+
 }

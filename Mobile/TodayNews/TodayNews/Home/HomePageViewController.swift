@@ -52,6 +52,7 @@ class HomePageViewController: UIViewController {
         pages.titleColorSelected = UIColor("F3664D")
         pages.dataSource = self
         pages.delegate = self
+        pages.selectIndex = 1
         
         return pages
     }()
