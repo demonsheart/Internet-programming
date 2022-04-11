@@ -17,7 +17,7 @@ struct WMpageDataModel {
     }
     
     // 静态数据
-    static var pagesModel: [WMpageDataModel] = [
+    static var `default`: [WMpageDataModel] = [
         WMpageDataModel(title: "关注", controller: UIViewController()),
         WMpageDataModel(title: "推荐", controller: RecommendViewController()),
         WMpageDataModel(title: "热榜", controller: UIViewController()),

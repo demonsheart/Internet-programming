@@ -28,7 +28,7 @@ class HomePageViewController: UIViewController {
         return button
     }()
     
-    let data = WMpageDataModel.pagesModel
+    let data = WMpageDataModel.default
     
     lazy var pagesVC: WMPageController = {
         let pages = WMPageController()
