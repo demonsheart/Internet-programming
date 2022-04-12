@@ -31,7 +31,7 @@ class TopNewsTableViewCell: UITableViewCell {
     lazy var topLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = UIColor("F3664D")
+        label.textColor = TNColor.red
         label.text = "置顶"
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 11)
@@ -58,6 +58,7 @@ class TopNewsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.contentView.backgroundColor = .white
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(topLabel)
         self.contentView.addSubview(sourceLabel)

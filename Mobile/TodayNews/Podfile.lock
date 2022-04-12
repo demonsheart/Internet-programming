@@ -1,6 +1,9 @@
 PODS:
   - Alamofire (5.5.0)
   - MJRefresh (3.7.5)
+  - RTRootNavigationController (0.8.0):
+    - RTRootNavigationController/Core (= 0.8.0)
+  - RTRootNavigationController/Core (0.8.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -17,6 +20,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.5)
   - MJRefresh
+  - RTRootNavigationController
   - RxCocoa (= 6.5.0)
   - RxSwift (= 6.5.0)
   - SDWebImage (~> 5.0)
@@ -28,6 +32,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - MJRefresh
+    - RTRootNavigationController
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -39,6 +44,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  RTRootNavigationController: 36c6301870f0467f89d69f4286795340b537d473
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
@@ -47,6 +53,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
   WMPageController: 4c7f2c636675a71aea5eecf8fdc07a0ce86954e3
 
-PODFILE CHECKSUM: 265cc6ddcdba28df71279a0e42624b4bfe311bc6
+PODFILE CHECKSUM: ac395ffcb8037ca5a2816fc4e8b9f7eab4280e11
 
 COCOAPODS: 1.11.2

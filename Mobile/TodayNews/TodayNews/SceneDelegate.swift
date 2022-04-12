@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import RTRootNavigationController
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, RTNavigationItemCustomizable {
 
     var window: UIWindow?
 
@@ -25,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // make tabBarController
         let myTabBar = UITabBarController()
         myTabBar.tabBar.backgroundColor = UIColor.white
-        myTabBar.tabBar.tintColor = UIColor("F3664D")
+        myTabBar.tabBar.tintColor = TNColor.red
         
         // fix ios15 bar
         if #available(iOS 15.0, *) {
@@ -35,10 +36,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         // tabBarItems
-        let homePageViewController = UINavigationController(rootViewController: HomePageViewController())
+        let homePageViewController = RTRootNavigationController(rootViewController: HomePageViewController())
         homePageViewController.tabBarItem = UITabBarItem(title: "首页", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
         
-        let personalViewController = UINavigationController(rootViewController: PersonalPageViewController())
+        let personalViewController = RTRootNavigationController(rootViewController: PersonalPageViewController())
         personalViewController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         
         

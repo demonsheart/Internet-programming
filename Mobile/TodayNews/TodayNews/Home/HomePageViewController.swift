@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import WMPageController
+import RTRootNavigationController
 
 class HomePageViewController: UIViewController {
     
@@ -49,7 +50,7 @@ class HomePageViewController: UIViewController {
         pages.titleSizeNormal = 15
         pages.titleSizeSelected = 15
         pages.menuViewStyle = .line
-        pages.titleColorSelected = UIColor("F3664D")
+        pages.titleColorSelected = TNColor.red
         pages.dataSource = self
         pages.delegate = self
         pages.selectIndex = 1
@@ -60,7 +61,7 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.fixBarTintColor = UIColor("F3664D")
+        self.navigationController?.navigationBar.fixBarTintColor = TNColor.red
         self.navigationController?.navigationBar.addSubview(searchBar)
         searchBar.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

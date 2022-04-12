@@ -69,6 +69,7 @@ class RightPicNewsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.contentView.backgroundColor = .white
         
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in

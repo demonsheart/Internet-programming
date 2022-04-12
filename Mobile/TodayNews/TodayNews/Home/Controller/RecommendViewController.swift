@@ -69,27 +69,27 @@ extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TopNews", for: indexPath) as! TopNewsTableViewCell
-                cell.selectionStyle = .none
+//                cell.selectionStyle = .none
                 cell.data = model.topNews[indexPath.row]
                 return cell
             case 1:
                 if let data = model.getData(index: indexPath.row) as? BigPicNewsModel {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "BigPicNews", for: indexPath) as! BigPicNewsTableViewCell
-                    cell.selectionStyle = .none
+//                    cell.selectionStyle = .none
                     cell.data = data
                     return cell
                 }
                 
                 if let data = model.getData(index: indexPath.row) as? ThreePicNewsModel {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "ThreePicNews", for: indexPath) as! ThreePicNewsTableViewCell
-                    cell.selectionStyle = .none
+//                    cell.selectionStyle = .none
                     cell.data = data
                     return cell
                 }
                 
                 if let data = model.getData(index: indexPath.row) as? RightPicNewsModel {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "RightPicNews", for: indexPath) as! RightPicNewsTableViewCell
-                    cell.selectionStyle = .none
+//                    cell.selectionStyle = .none
                     cell.data = data
                     return cell
                 }
@@ -104,6 +104,10 @@ extension RecommendViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print(indexPath)
+        
+        let detail = NewsDetailViewController()
+        detail.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(detail, animated: true)
     }
     
     // MARK: - Footer

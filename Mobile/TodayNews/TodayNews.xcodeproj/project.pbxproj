@@ -31,6 +31,9 @@
 		9481E15D2803D2930081CAC2 /* ThreePicNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481E15C2803D2930081CAC2 /* ThreePicNewsModel.swift */; };
 		9481E15F2803D46D0081CAC2 /* RightPicNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481E15E2803D46D0081CAC2 /* RightPicNewsModel.swift */; };
 		9481E1612803DAF60081CAC2 /* RecommendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481E1602803DAF60081CAC2 /* RecommendViewModel.swift */; };
+		94C0DB4A2805691500E1D01C /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DB492805691500E1D01C /* NewsDetailViewController.swift */; };
+		94C0DBAE280576DF00E1D01C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBAD280576DF00E1D01C /* Config.swift */; };
+		94C0DBB12805793A00E1D01C /* TNBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,9 @@
 		9481E15C2803D2930081CAC2 /* ThreePicNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreePicNewsModel.swift; sourceTree = "<group>"; };
 		9481E15E2803D46D0081CAC2 /* RightPicNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightPicNewsModel.swift; sourceTree = "<group>"; };
 		9481E1602803DAF60081CAC2 /* RecommendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewModel.swift; sourceTree = "<group>"; };
+		94C0DB492805691500E1D01C /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		94C0DBAD280576DF00E1D01C /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNBaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 		9481DF94280279370081CAC2 /* TodayNews */ = {
 			isa = PBXGroup;
 			children = (
+				94C0DBAF2805790D00E1D01C /* Config */,
 				9481DFB82802C9910081CAC2 /* SharedViews */,
 				9481DFAF28028A050081CAC2 /* Person */,
 				9481DFAC2802885C0081CAC2 /* Home */,
@@ -177,8 +184,18 @@
 				9481E0EE2803B6E60081CAC2 /* BigPicNewsTableViewCell.swift */,
 				9481E0F02803B6FB0081CAC2 /* ThreePicNewsTableViewCell.swift */,
 				9481E0F22803B7120081CAC2 /* RightPicNewsTableViewCell.swift */,
+				94C0DB492805691500E1D01C /* NewsDetailViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		94C0DBAF2805790D00E1D01C /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				94C0DBAD280576DF00E1D01C /* Config.swift */,
+				94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		A87256719BF0A93F04D9BF5F /* Frameworks */ = {
@@ -318,9 +335,11 @@
 				9481DFBA2802CB3F0081CAC2 /* TopImageBtn.swift in Sources */,
 				9481DF98280279370081CAC2 /* SceneDelegate.swift in Sources */,
 				9481E1592803BF1E0081CAC2 /* TopNewsModel.swift in Sources */,
+				94C0DB4A2805691500E1D01C /* NewsDetailViewController.swift in Sources */,
 				9481E15F2803D46D0081CAC2 /* RightPicNewsModel.swift in Sources */,
 				9481DFB328028B980081CAC2 /* UIColor+Ext.swift in Sources */,
 				9481E15B2803CD3C0081CAC2 /* BigPicNewsModel.swift in Sources */,
+				94C0DBB12805793A00E1D01C /* TNBaseViewController.swift in Sources */,
 				9481DFB128028A260081CAC2 /* PersonalPageViewController.swift in Sources */,
 				9481E083280318310081CAC2 /* WMpageDataModel.swift in Sources */,
 				9481E0F32803B7120081CAC2 /* RightPicNewsTableViewCell.swift in Sources */,
@@ -329,6 +348,7 @@
 				9481E0ED2803B6A90081CAC2 /* TopNewsTableViewCell.swift in Sources */,
 				9481E1572803B82A0081CAC2 /* Zoom+Ext.swift in Sources */,
 				9481E0EF2803B6E60081CAC2 /* BigPicNewsTableViewCell.swift in Sources */,
+				94C0DBAE280576DF00E1D01C /* Config.swift in Sources */,
 				9481E0F12803B6FB0081CAC2 /* ThreePicNewsTableViewCell.swift in Sources */,
 				9481DFB5280290070081CAC2 /* UINavigationbar+Ext.swift in Sources */,
 				9481E08628031A4B0081CAC2 /* RecommendViewController.swift in Sources */,
