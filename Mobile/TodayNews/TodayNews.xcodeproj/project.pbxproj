@@ -133,7 +133,6 @@
 		9481DFAC2802885C0081CAC2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				94C0DBB42805B9A000E1D01C /* Xibs */,
 				9481E0EB2803B5B10081CAC2 /* View */,
 				9481E08428031A080081CAC2 /* Controller */,
 				9481E0812803181D0081CAC2 /* Model */,
@@ -200,13 +199,6 @@
 				94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */,
 			);
 			path = Config;
-			sourceTree = "<group>";
-		};
-		94C0DBB42805B9A000E1D01C /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Xibs;
 			sourceTree = "<group>";
 		};
 		A87256719BF0A93F04D9BF5F /* Frameworks */ = {
