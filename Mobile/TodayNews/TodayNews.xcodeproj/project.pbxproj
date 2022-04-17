@@ -35,9 +35,11 @@
 		94C0DBAE280576DF00E1D01C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBAD280576DF00E1D01C /* Config.swift */; };
 		94C0DBB12805793A00E1D01C /* TNBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */; };
 		94C0DBB32805B1D400E1D01C /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBB22805B1D400E1D01C /* NewsDetailModel.swift */; };
-		94DBD53F280BF762002A8B61 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD53E280BF762002A8B61 /* LoginViewModel.swift */; };
+		94DBD53F280BF762002A8B61 /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD53E280BF762002A8B61 /* UserConfig.swift */; };
 		94DBD541280C03F6002A8B61 /* UnLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD540280C03F6002A8B61 /* UnLoginTableViewCell.swift */; };
 		94DBD544280C09CC002A8B61 /* PersonalMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */; };
+		94DBD54C280C2768002A8B61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD54A280C2768002A8B61 /* LoginViewController.swift */; };
+		94DBD54D280C2768002A8B61 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94DBD54B280C2768002A8B61 /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,9 +75,11 @@
 		94C0DBAD280576DF00E1D01C /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNBaseViewController.swift; sourceTree = "<group>"; };
 		94C0DBB22805B1D400E1D01C /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
-		94DBD53E280BF762002A8B61 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		94DBD53E280BF762002A8B61 /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
 		94DBD540280C03F6002A8B61 /* UnLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnLoginTableViewCell.swift; sourceTree = "<group>"; };
 		94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalMessageTableViewCell.swift; sourceTree = "<group>"; };
+		94DBD54A280C2768002A8B61 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		94DBD54B280C2768002A8B61 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +155,8 @@
 		9481DFAF28028A050081CAC2 /* Person */ = {
 			isa = PBXGroup;
 			children = (
+				94DBD545280C2025002A8B61 /* Login */,
 				9481DFB028028A260081CAC2 /* PersonalPageViewController.swift */,
-				94DBD53E280BF762002A8B61 /* LoginViewModel.swift */,
 				94DBD540280C03F6002A8B61 /* UnLoginTableViewCell.swift */,
 				94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */,
 			);
@@ -216,6 +220,16 @@
 				94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		94DBD545280C2025002A8B61 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				94DBD53E280BF762002A8B61 /* UserConfig.swift */,
+				94DBD54A280C2768002A8B61 /* LoginViewController.swift */,
+				94DBD54B280C2768002A8B61 /* LoginViewController.xib */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		A87256719BF0A93F04D9BF5F /* Frameworks */ = {
@@ -297,6 +311,7 @@
 			files = (
 				9481DFA2280279380081CAC2 /* LaunchScreen.storyboard in Resources */,
 				9481DF9F280279380081CAC2 /* Assets.xcassets in Resources */,
+				94DBD54D280C2768002A8B61 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,10 +369,11 @@
 				9481DF96280279370081CAC2 /* AppDelegate.swift in Sources */,
 				9481DFBA2802CB3F0081CAC2 /* TopImageBtn.swift in Sources */,
 				9481DF98280279370081CAC2 /* SceneDelegate.swift in Sources */,
+				94DBD54C280C2768002A8B61 /* LoginViewController.swift in Sources */,
 				9481E1592803BF1E0081CAC2 /* TopNewsModel.swift in Sources */,
 				94C0DB4A2805691500E1D01C /* NewsDetailViewController.swift in Sources */,
 				9481E15F2803D46D0081CAC2 /* RightPicNewsModel.swift in Sources */,
-				94DBD53F280BF762002A8B61 /* LoginViewModel.swift in Sources */,
+				94DBD53F280BF762002A8B61 /* UserConfig.swift in Sources */,
 				94DBD544280C09CC002A8B61 /* PersonalMessageTableViewCell.swift in Sources */,
 				9481DFB328028B980081CAC2 /* UIColor+Ext.swift in Sources */,
 				9481E15B2803CD3C0081CAC2 /* BigPicNewsModel.swift in Sources */,

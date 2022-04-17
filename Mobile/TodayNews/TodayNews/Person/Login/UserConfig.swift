@@ -1,5 +1,5 @@
 //
-//  LoginViewModel.swift
+//  UserConfig.swift
 //  TodayNews
 //
 //  Created by herongjin on 2022/4/17.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-class LoginViewModel {
+class UserConfig {
     
-    static var shared = LoginViewModel()
+    static var shared = UserConfig()
     
     private let userDefault = UserDefaults.standard
     
@@ -23,17 +23,19 @@ class LoginViewModel {
     }
     
     init() {
+        
     }
     
-    func login(account: String, password: String) -> Bool {
-        if account == "demo" && password == "demodemo" {
+    func login(account: String, password: String, completion: @escaping (Bool) -> Void) {
+        if account == "demodemo" && password == "demodemo" {
             isLogin = true
-            return true
+            completion(true)
+        } else {
+            completion(false)
         }
-        return false
     }
     
     func logout() {
-        
+        isLogin = false
     }
 }

@@ -7,8 +7,12 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class PersonalPageViewController: UIViewController {
+class PersonalPageViewController: TNBaseViewController {
+    
+    var disposeBag = DisposeBag()
     
     lazy var tableView: UITableView = {
         let table = UITableView()
@@ -20,6 +24,13 @@ class PersonalPageViewController: UIViewController {
         table.separatorStyle = .none
         table.backgroundColor = TNColor.bgGray
         table.allowsSelection = false
+        UserDefaults.standard.rx.observe(String.self, "LoginState")
+            .skip(1)
+            .subscribe(onNext: { [weak table] _ in
+                table?.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
         
         return table
     }()
@@ -53,10 +64,6 @@ class PersonalPageViewController: UIViewController {
     @objc func scanTapped() {
         
     }
-    
-    func jumpToLogin() {
-        print("jumpToLogin")
-    }
 }
 
 extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource {
@@ -72,8 +79,8 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            if LoginViewModel.shared.isLogin {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Logined", for: indexPath) as! PersonalMessageTableViewCell
+            if UserConfig.shared.isLogin {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Loggined", for: indexPath) as! PersonalMessageTableViewCell
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "UnLogin", for: indexPath) as! UnLoginTableViewCell
@@ -91,7 +98,7 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            if LoginViewModel.shared.isLogin {
+            if UserConfig.shared.isLogin {
                 return 100
             } else {
                 return 150

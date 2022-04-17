@@ -13,4 +13,10 @@ class TNBaseViewController: UIViewController {
         item.tintColor = TNColor.iconGray
         return item
     }
+    
+    func jumpToLogin() {
+        self.present(LoginViewController(), animated: true) {
+            
+        }
+    }
 }
