@@ -58,7 +58,9 @@ class PersonalPageViewController: TNBaseViewController {
     }
     
     @objc func settingTapped() {
-        
+        let settingVC = SettingViewController()
+        settingVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(settingVC, animated: true)
     }
     
     @objc func scanTapped() {
@@ -99,7 +101,7 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if UserConfig.shared.isLogin {
-                return 100
+                return 80
             } else {
                 return 150
             }

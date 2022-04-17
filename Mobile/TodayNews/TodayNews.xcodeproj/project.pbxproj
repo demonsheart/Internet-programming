@@ -40,6 +40,7 @@
 		94DBD544280C09CC002A8B61 /* PersonalMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */; };
 		94DBD54C280C2768002A8B61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD54A280C2768002A8B61 /* LoginViewController.swift */; };
 		94DBD54D280C2768002A8B61 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94DBD54B280C2768002A8B61 /* LoginViewController.xib */; };
+		94DBD550280C550D002A8B61 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD54F280C550D002A8B61 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalMessageTableViewCell.swift; sourceTree = "<group>"; };
 		94DBD54A280C2768002A8B61 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		94DBD54B280C2768002A8B61 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		94DBD54F280C550D002A8B61 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 				9481DFB028028A260081CAC2 /* PersonalPageViewController.swift */,
 				94DBD540280C03F6002A8B61 /* UnLoginTableViewCell.swift */,
 				94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */,
+				94DBD54F280C550D002A8B61 /* SettingViewController.swift */,
 			);
 			path = Person;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				9481DF96280279370081CAC2 /* AppDelegate.swift in Sources */,
 				9481DFBA2802CB3F0081CAC2 /* TopImageBtn.swift in Sources */,
 				9481DF98280279370081CAC2 /* SceneDelegate.swift in Sources */,
+				94DBD550280C550D002A8B61 /* SettingViewController.swift in Sources */,
 				94DBD54C280C2768002A8B61 /* LoginViewController.swift in Sources */,
 				9481E1592803BF1E0081CAC2 /* TopNewsModel.swift in Sources */,
 				94C0DB4A2805691500E1D01C /* NewsDetailViewController.swift in Sources */,

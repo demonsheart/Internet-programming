@@ -35,7 +35,8 @@ class UserConfig {
         }
     }
     
-    func logout() {
+    func logout(completion: @escaping (Bool) -> Void) {
         isLogin = false
+        completion(true)
     }
 }

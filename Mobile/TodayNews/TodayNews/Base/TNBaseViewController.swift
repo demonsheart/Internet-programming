@@ -15,8 +15,6 @@ class TNBaseViewController: UIViewController {
     }
     
     func jumpToLogin() {
-        self.present(LoginViewController(), animated: true) {
-            
-        }
+        self.present(LoginViewController(), animated: true) {}
     }
 }
