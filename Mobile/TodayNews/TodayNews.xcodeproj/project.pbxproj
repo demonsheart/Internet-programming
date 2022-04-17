@@ -35,6 +35,9 @@
 		94C0DBAE280576DF00E1D01C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBAD280576DF00E1D01C /* Config.swift */; };
 		94C0DBB12805793A00E1D01C /* TNBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */; };
 		94C0DBB32805B1D400E1D01C /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C0DBB22805B1D400E1D01C /* NewsDetailModel.swift */; };
+		94DBD53F280BF762002A8B61 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD53E280BF762002A8B61 /* LoginViewModel.swift */; };
+		94DBD541280C03F6002A8B61 /* UnLoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD540280C03F6002A8B61 /* UnLoginTableViewCell.swift */; };
+		94DBD544280C09CC002A8B61 /* PersonalMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +73,9 @@
 		94C0DBAD280576DF00E1D01C /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TNBaseViewController.swift; sourceTree = "<group>"; };
 		94C0DBB22805B1D400E1D01C /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
+		94DBD53E280BF762002A8B61 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		94DBD540280C03F6002A8B61 /* UnLoginTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnLoginTableViewCell.swift; sourceTree = "<group>"; };
+		94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalMessageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,7 @@
 		9481DF94280279370081CAC2 /* TodayNews */ = {
 			isa = PBXGroup;
 			children = (
+				94DBD542280C0723002A8B61 /* Base */,
 				94C0DBAF2805790D00E1D01C /* Config */,
 				9481DFB82802C9910081CAC2 /* SharedViews */,
 				9481DFAF28028A050081CAC2 /* Person */,
@@ -145,6 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				9481DFB028028A260081CAC2 /* PersonalPageViewController.swift */,
+				94DBD53E280BF762002A8B61 /* LoginViewModel.swift */,
+				94DBD540280C03F6002A8B61 /* UnLoginTableViewCell.swift */,
+				94DBD543280C09CC002A8B61 /* PersonalMessageTableViewCell.swift */,
 			);
 			path = Person;
 			sourceTree = "<group>";
@@ -196,9 +206,16 @@
 			isa = PBXGroup;
 			children = (
 				94C0DBAD280576DF00E1D01C /* Config.swift */,
-				94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		94DBD542280C0723002A8B61 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				94C0DBB02805793A00E1D01C /* TNBaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		A87256719BF0A93F04D9BF5F /* Frameworks */ = {
@@ -340,6 +357,8 @@
 				9481E1592803BF1E0081CAC2 /* TopNewsModel.swift in Sources */,
 				94C0DB4A2805691500E1D01C /* NewsDetailViewController.swift in Sources */,
 				9481E15F2803D46D0081CAC2 /* RightPicNewsModel.swift in Sources */,
+				94DBD53F280BF762002A8B61 /* LoginViewModel.swift in Sources */,
+				94DBD544280C09CC002A8B61 /* PersonalMessageTableViewCell.swift in Sources */,
 				9481DFB328028B980081CAC2 /* UIColor+Ext.swift in Sources */,
 				9481E15B2803CD3C0081CAC2 /* BigPicNewsModel.swift in Sources */,
 				94C0DBB12805793A00E1D01C /* TNBaseViewController.swift in Sources */,
@@ -354,6 +373,7 @@
 				94C0DBAE280576DF00E1D01C /* Config.swift in Sources */,
 				9481E0F12803B6FB0081CAC2 /* ThreePicNewsTableViewCell.swift in Sources */,
 				9481DFB5280290070081CAC2 /* UINavigationbar+Ext.swift in Sources */,
+				94DBD541280C03F6002A8B61 /* UnLoginTableViewCell.swift in Sources */,
 				94C0DBB32805B1D400E1D01C /* NewsDetailModel.swift in Sources */,
 				9481E08628031A4B0081CAC2 /* RecommendViewController.swift in Sources */,
 				9481E0EA28031B780081CAC2 /* String+Ext.swift in Sources */,
