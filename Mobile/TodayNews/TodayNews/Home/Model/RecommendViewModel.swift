@@ -11,11 +11,15 @@ protocol RandomNews {
 }
 
 class RecommendViewModel {
-    var topNews = TopNewsModel.default
+    var topNews: [TopNewsModel] = TopNewsModel.randomGetTopNews()
     
     var bigNews = BigPicNewsModel.default
     var threesPicNews = ThreePicNewsModel.default
     var rightPicNews = RightPicNewsModel.default
+    
+    func changeData() {
+        topNews = TopNewsModel.randomGetTopNews()
+    }
     
     func getData(index: Int) -> RandomNews? {
         let total = bigNews.count + threesPicNews.count + rightPicNews.count

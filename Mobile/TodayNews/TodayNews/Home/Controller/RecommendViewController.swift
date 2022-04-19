@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import MJRefresh
 
-class RecommendViewController: UIViewController {
+class RecommendViewController: TNBaseViewController {
     
     let model = RecommendViewModel()
     
@@ -29,9 +29,10 @@ class RecommendViewController: UIViewController {
         table.estimatedRowHeight = 80
         
         MJRefreshConfig.default.languageCode = "zh-Hans"
-        table.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+        table.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             sleep(1)
             // TODO: request data
+            self?.model.changeData()
             table.reloadData()
             table.mj_header?.endRefreshing()
         })
@@ -41,10 +42,16 @@ class RecommendViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.configAlertForConnect()
+        
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+    }
+    
+    override func reconnectAction() {
+        self.tableView.mj_header?.beginRefreshing()
     }
 }
 

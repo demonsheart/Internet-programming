@@ -29,13 +29,14 @@ class PersonalPageViewController: TNBaseViewController {
             })
             .disposed(by: disposeBag)
         
-        
         return table
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         super.configAlertForLogout()
+        super.configAlertForConnect()
+        
         self.navigationController?.navigationBar.fixBarTintColor = TNColor.bgGray
         self.view.backgroundColor = TNColor.bgGray
         settingTopButton()

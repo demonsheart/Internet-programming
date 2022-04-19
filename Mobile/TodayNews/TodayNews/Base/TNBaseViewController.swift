@@ -30,7 +30,23 @@ class TNBaseViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    func configAlertForConnect() {
+        UserDefaults.standard.rx.observe(Bool.self, "isConnected")
+            .skip(1)
+            .subscribe(onNext: { [weak self] isConnected in
+                guard let isConnected = isConnected else { return }
+                if !isConnected {
+                    self?.showAlert(alertText: "提示信息", alertMessage: "您已离线")
+                } else {
+                    self?.reconnectAction()
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
     func jumpToLogin() {
         self.present(LoginViewController(), animated: true) {}
     }
+    
+    func reconnectAction() {}
 }

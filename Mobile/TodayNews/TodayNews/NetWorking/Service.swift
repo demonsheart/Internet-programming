@@ -14,7 +14,11 @@ let session = URLSession.shared
 protocol ServiceProtocol {
     func login(account: String, password: String, completion: @escaping (Bool) -> Void)
     func heartbeatForLogin(completion: @escaping (Bool) -> Void)
-    func heartbeatForConnnect(completion: @escaping (Bool) -> Void)
+//    func heartbeatForConnnect(completion: @escaping (Bool) -> Void)
+    func startHeartbeat()
+    func stopHeartbeat()
+    
+    var isConnnected: Bool { get }
 }
 
 class Service {
@@ -24,10 +28,24 @@ class Service {
         "User-Agent": "HRJ",
     ]
     static let domain = "http://127.0.0.1:60035/"
-    private init() { }
+    
+    private var heartbeatTimer: Timer?
+    
+    private init() {
+        UserDefaults.standard.set(true, forKey: "isConnected")
+    }
 }
 
 extension Service: ServiceProtocol {
+    
+    var isConnnected: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: "isConnected")
+        }
+        set(value) {
+            UserDefaults.standard.set(value, forKey: "isConnected")
+        }
+    }
     
     func login(account: String, password: String, completion: @escaping (Bool) -> Void) {
         let params: [String: String] = [
@@ -85,9 +103,8 @@ extension Service: ServiceProtocol {
                         guard let json = json else { completion(false); return }
                         let success = json["success"].boolValue
                         completion(success)
-                    case .failure(let err):
-                        print(err)
-                        completion(false)
+                    case .failure(_):
+                        print("=======已断开连接，尝试重连=======")
                 }
             }
     }
@@ -101,10 +118,30 @@ extension Service: ServiceProtocol {
                         guard let json = json else { completion(false); return }
                         let success = json["success"].boolValue
                         completion(success)
-                    case .failure(let err):
-                        print(err)
+                    case .failure(_):
+                        print("=======已断开连接，尝试重连=======")
                         completion(false)
                 }
             }
+    }
+    
+    func startHeartbeat() {
+        stopHeartbeat()
+        
+        heartbeatTimer = Timer(timeInterval: 5, repeats: true, block: { [weak self] timer in
+            self?.heartbeatForConnnect { success in
+                UserDefaults.standard.set(success, forKey: "isConnected")
+                
+            }
+        })
+        
+        RunLoop.current.add(heartbeatTimer!, forMode: .default)
+        heartbeatTimer!.fire()
+    }
+    
+    func stopHeartbeat() {
+        guard let timer = heartbeatTimer else { return }
+        timer.invalidate()
+        heartbeatTimer = nil
     }
 }

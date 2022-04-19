@@ -51,11 +51,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, RTNavigationItemCustomi
         window.rootViewController = myTabBar
         self.window = window
         window.makeKeyAndVisible()
-        
-        // heartbeart
-        if UserConfig.shared.isLogin {
-            UserConfig.shared.startHeartbeatForLogin()
-        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -68,6 +63,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, RTNavigationItemCustomi
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+//        print("sceneDidBecomeActive")
+        Service.shared.startHeartbeat()
+        
+        // heartbeart
+        if UserConfig.shared.isLogin {
+            UserConfig.shared.startHeartbeatForLogin()
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -84,6 +87,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, RTNavigationItemCustomi
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        
+//        print("sceneDidEnterBackground")
+        Service.shared.stopHeartbeat()
+        UserConfig.shared.startHeartbeatForLogin()
     }
 
 
