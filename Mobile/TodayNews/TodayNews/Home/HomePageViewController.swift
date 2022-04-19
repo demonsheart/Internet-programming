@@ -10,7 +10,7 @@ import SnapKit
 import WMPageController
 import RTRootNavigationController
 
-class HomePageViewController: UIViewController {
+class HomePageViewController: TNBaseViewController {
     
     lazy var searchBar = FakeSearchBar()
     
@@ -60,6 +60,7 @@ class HomePageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.configAlertForLogout()
         
         self.navigationController?.navigationBar.fixBarTintColor = TNColor.red
         self.navigationController?.navigationBar.addSubview(searchBar)

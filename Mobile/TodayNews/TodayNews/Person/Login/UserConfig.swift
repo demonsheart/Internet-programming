@@ -13,6 +13,8 @@ class UserConfig {
     
     private let userDefault = UserDefaults.standard
     
+    private var heartbeatForLoginTimer: Timer?
+    
     var isLogin: Bool {
         get {
             userDefault.bool(forKey: "LoginState")
@@ -26,17 +28,33 @@ class UserConfig {
         
     }
     
-    func login(account: String, password: String, completion: @escaping (Bool) -> Void) {
-        if account == "demodemo" && password == "demodemo" {
-            isLogin = true
-            completion(true)
-        } else {
-            completion(false)
-        }
+    func startHeartbeatForLogin() {
+        stopHeartbeatForLogin()
+        
+        heartbeatForLoginTimer = Timer(timeInterval: 5, repeats: true, block: { timer in
+             Service.shared.heartbeatForLogin { success in
+                if !success {
+                    UserDefaults.standard.set(false, forKey: "LoginState")
+                    UserDefaults.standard.set("", forKey: "token")
+                    timer.invalidate()
+                }
+            }
+        })
+        
+        RunLoop.current.add(heartbeatForLoginTimer!, forMode: .default)
+        heartbeatForLoginTimer!.fire()
+    }
+    
+    func stopHeartbeatForLogin() {
+        guard let timer = heartbeatForLoginTimer else { return }
+        timer.invalidate()
+        heartbeatForLoginTimer = nil
     }
     
     func logout(completion: @escaping (Bool) -> Void) {
         isLogin = false
+        UserDefaults.standard.set("", forKey: "token")
         completion(true)
     }
+    
 }

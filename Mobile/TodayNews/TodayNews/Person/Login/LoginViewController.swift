@@ -27,6 +27,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        accountTextField.text = UserDefaults.standard.string(forKey: "account")
+        
         let accountValidate = accountTextField.rx.text.orEmpty
             .map{ $0.count >= minimalUsernameLength }
             .share(replay: 1)
@@ -53,7 +55,7 @@ class LoginViewController: UIViewController {
             let account = accountTextField.text,
             let password = passwordTextField.text
         else { return }
-        user.login(account: account, password: password) { [weak self] isLogin in
+        Service.shared.login(account: account, password: password) { [weak self] isLogin in
             if isLogin {
                 self?.dismiss(animated: true, completion: nil)
             } else {

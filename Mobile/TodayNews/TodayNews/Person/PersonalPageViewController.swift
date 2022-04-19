@@ -12,8 +12,6 @@ import RxCocoa
 
 class PersonalPageViewController: TNBaseViewController {
     
-    var disposeBag = DisposeBag()
-    
     lazy var tableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -24,7 +22,7 @@ class PersonalPageViewController: TNBaseViewController {
         table.separatorStyle = .none
         table.backgroundColor = TNColor.bgGray
         table.allowsSelection = false
-        UserDefaults.standard.rx.observe(String.self, "LoginState")
+        UserDefaults.standard.rx.observe(Bool.self, "LoginState")
             .skip(1)
             .subscribe(onNext: { [weak table] _ in
                 table?.reloadData()
@@ -37,6 +35,7 @@ class PersonalPageViewController: TNBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.configAlertForLogout()
         self.navigationController?.navigationBar.fixBarTintColor = TNColor.bgGray
         self.view.backgroundColor = TNColor.bgGray
         settingTopButton()

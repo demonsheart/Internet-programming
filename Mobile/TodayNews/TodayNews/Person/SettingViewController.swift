@@ -29,6 +29,13 @@ class SettingViewController: TNBaseViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        UserDefaults.standard.rx.observe(Bool.self, "LoginState")
+            .skip(1)
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -55,14 +62,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        UserConfig.shared.logout { [weak self] isLogout in
-            if isLogout {
-                self?.navigationController?.popViewController(animated: true)
-            } else {
-                //
-            }
-        }
-        
+        UserConfig.shared.logout { _ in }
     }
     
 }

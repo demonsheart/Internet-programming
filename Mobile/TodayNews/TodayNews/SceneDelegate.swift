@@ -52,6 +52,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, RTNavigationItemCustomi
         self.window = window
         window.makeKeyAndVisible()
         
+        // heartbeart
+        if UserConfig.shared.isLogin {
+            UserConfig.shared.startHeartbeatForLogin()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
