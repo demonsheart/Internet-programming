@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 public class SendFileServer implements Runnable {
 
     // 服务器监听端口
-    private static final int MONITOR_PORT = 12345;
+    private static final int MONITOR_PORT = 22222;
     private final Socket socket;
 
     public SendFileServer(Socket socket) {

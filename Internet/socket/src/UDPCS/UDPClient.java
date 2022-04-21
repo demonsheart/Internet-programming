@@ -1,14 +1,12 @@
 package UDPCS;
 
 import java.net.*;
-import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class UDPClient {
     public static void main(String args[]) throws Exception
     {
-
         Scanner scanner = new Scanner(System.in);
         DatagramSocket clientSocket = new DatagramSocket();
         InetAddress address = InetAddress.getByName("localhost");
@@ -27,7 +25,7 @@ public class UDPClient {
             // 准备并发送数据包
             sendData = sentence.getBytes(StandardCharsets.UTF_8);
             DatagramPacket sendPacket =
-                    new DatagramPacket(sendData, sendData.length, address, 6666);
+                    new DatagramPacket(sendData, sendData.length, address, 55555);
             clientSocket.send(sendPacket);
 
             // 接收数据包

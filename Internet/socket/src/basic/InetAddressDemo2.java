@@ -7,8 +7,8 @@ public class InetAddressDemo2 {
 //        String host = "www.csdn.net";
         String host = "www.baidu.com";
 
-        //获取网站www.csdn.net的IP地址
-        InetAddress addresses [] = InetAddress.getAllByName(host);
+        //获取网站的IP地址
+        InetAddress[] addresses = InetAddress.getAllByName(host);
 
         for (InetAddress addr : addresses) {
             System.out.println(addr.getHostAddress());

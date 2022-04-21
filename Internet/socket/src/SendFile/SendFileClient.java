@@ -15,8 +15,8 @@ import java.net.Socket;
 public class SendFileClient {
 
     private static final String SERVERIP = "127.0.0.1";
-    private static final int SERVER_PORT = 12345;
-    private static final int CLIENT_PORT = 54321;
+    private static final int SERVER_PORT = 22222;
+    private static final int CLIENT_PORT = 33333;
     private static final String DIR = "src/data/";
 
     public static void main(String[] args) {

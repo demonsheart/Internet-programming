@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 public class UDPServer {
     public static void main(String[] args) throws Exception {
         // UDP 端口监听
-        DatagramSocket serverSocket = new DatagramSocket(6666);
+        DatagramSocket serverSocket = new DatagramSocket(30034);
 
         byte[] receiveData = new byte[1024];
         byte[] sendData;

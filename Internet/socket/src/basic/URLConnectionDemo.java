@@ -6,7 +6,6 @@ import java.io.InputStream ;
 
 public class URLConnectionDemo {
 
-
     public static void main(String[] args) throws Exception{
         URL url = new URL("https://www.szu.edu.cn") ;
         //使用URLConnection建立url连接
