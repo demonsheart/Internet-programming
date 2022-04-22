@@ -13,8 +13,8 @@ protocol FakeSearchDataSource {
 }
 
 // 处理点击代理
-protocol FakeSearchDelegate {
-    // TODO: 处理点击代理
+protocol FakeSearchDelegate: AnyObject {
+    func didSelectCellAt(keyword: String)
 }
 
 /// 左边含搜索标识的bar 内部是滚动的一个collectionView
@@ -24,6 +24,8 @@ class FakeSearchBar: UIControl {
     var isAutoScroll = true
     private var timer: Timer?
     var size = CGSize(width: 0, height: 0) // 依靠layoutSubView计算
+    
+    weak var delegate: FakeSearchDelegate?
     
     var newsArr: [String]? {
         didSet {
@@ -195,7 +197,9 @@ extension FakeSearchBar: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = (self.newsArr?.count)! > 1 ? (indexPath.item - 1) : 0
-        print("------>\(row)")
+        if let keyword = newsArr?[row] {
+            delegate?.didSelectCellAt(keyword: keyword)
+        }
     }
 }
 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		50FE5A548C902BF8992C9AC9 /* Pods_TodayNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D36367B1BC174FEA81D2EC /* Pods_TodayNews.framework */; };
+		945071922812D8560051F154 /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945071902812D8560051F154 /* SearchPageViewController.swift */; };
+		945071932812D8560051F154 /* SearchPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945071912812D8560051F154 /* SearchPageViewController.xib */; };
 		9481DF96280279370081CAC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481DF95280279370081CAC2 /* AppDelegate.swift */; };
 		9481DF98280279370081CAC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9481DF97280279370081CAC2 /* SceneDelegate.swift */; };
 		9481DF9F280279380081CAC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9481DF9E280279380081CAC2 /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 		3F871F85C30BD9F89491990B /* Pods-TodayNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayNews.release.xcconfig"; path = "Target Support Files/Pods-TodayNews/Pods-TodayNews.release.xcconfig"; sourceTree = "<group>"; };
 		76D36367B1BC174FEA81D2EC /* Pods_TodayNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodayNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0E76B10CD05A89447CD6A9 /* Pods-TodayNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodayNews.debug.xcconfig"; path = "Target Support Files/Pods-TodayNews/Pods-TodayNews.debug.xcconfig"; sourceTree = "<group>"; };
+		945071902812D8560051F154 /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
+		945071912812D8560051F154 /* SearchPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPageViewController.xib; sourceTree = "<group>"; };
 		9481DF92280279370081CAC2 /* TodayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9481DF95280279370081CAC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9481DF97280279370081CAC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 				9481E0F02803B6FB0081CAC2 /* ThreePicNewsTableViewCell.swift */,
 				9481E0F22803B7120081CAC2 /* RightPicNewsTableViewCell.swift */,
 				94C0DB492805691500E1D01C /* NewsDetailViewController.swift */,
+				945071902812D8560051F154 /* SearchPageViewController.swift */,
+				945071912812D8560051F154 /* SearchPageViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -329,6 +335,7 @@
 				9481DFA2280279380081CAC2 /* LaunchScreen.storyboard in Resources */,
 				9481DF9F280279380081CAC2 /* Assets.xcassets in Resources */,
 				94DBD54D280C2768002A8B61 /* LoginViewController.xib in Resources */,
+				945071932812D8560051F154 /* SearchPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +394,7 @@
 				9481DFBA2802CB3F0081CAC2 /* TopImageBtn.swift in Sources */,
 				9481DF98280279370081CAC2 /* SceneDelegate.swift in Sources */,
 				94DBD550280C550D002A8B61 /* SettingViewController.swift in Sources */,
+				945071922812D8560051F154 /* SearchPageViewController.swift in Sources */,
 				94DBD54C280C2768002A8B61 /* LoginViewController.swift in Sources */,
 				9481E1592803BF1E0081CAC2 /* TopNewsModel.swift in Sources */,
 				94C0DB4A2805691500E1D01C /* NewsDetailViewController.swift in Sources */,

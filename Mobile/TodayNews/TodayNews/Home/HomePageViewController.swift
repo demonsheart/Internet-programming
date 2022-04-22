@@ -64,6 +64,7 @@ class HomePageViewController: TNBaseViewController {
         
         self.navigationController?.navigationBar.fixBarTintColor = TNColor.red
         self.navigationController?.navigationBar.addSubview(searchBar)
+        searchBar.delegate = self
         searchBar.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.height.equalTo(35)
@@ -118,4 +119,16 @@ extension HomePageViewController: WMPageControllerDelegate, WMPageControllerData
     func pageController(_ pageController: WMPageController, didEnter viewController: UIViewController, withInfo info: [AnyHashable : Any]) {
         
     }
+}
+
+extension HomePageViewController: FakeSearchDelegate {
+    
+    func didSelectCellAt(keyword: String) {
+        print(keyword)
+        let vc = SearchPageViewController()
+        vc.placeholder = keyword
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

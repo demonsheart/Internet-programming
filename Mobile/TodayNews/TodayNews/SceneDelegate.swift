@@ -64,13 +64,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, RTNavigationItemCustomi
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         
-//        print("sceneDidBecomeActive")
-        Service.shared.startHeartbeat()
-        
-        // heartbeart
-        if UserConfig.shared.isLogin {
-            UserConfig.shared.startHeartbeatForLogin()
-        }
+////        print("sceneDidBecomeActive")
+//        Service.shared.startHeartbeat()
+//
+//        // heartbeart
+//        if UserConfig.shared.isLogin {
+//            UserConfig.shared.startHeartbeatForLogin()
+//        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -89,8 +89,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, RTNavigationItemCustomi
         // to restore the scene back to its current state.
         
 //        print("sceneDidEnterBackground")
-        Service.shared.stopHeartbeat()
-        UserConfig.shared.startHeartbeatForLogin()
+//        Service.shared.stopHeartbeat()
+//        UserConfig.shared.startHeartbeatForLogin()
     }
 
 
