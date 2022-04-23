@@ -45,6 +45,8 @@
 		94DBD54C280C2768002A8B61 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD54A280C2768002A8B61 /* LoginViewController.swift */; };
 		94DBD54D280C2768002A8B61 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94DBD54B280C2768002A8B61 /* LoginViewController.xib */; };
 		94DBD550280C550D002A8B61 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DBD54F280C550D002A8B61 /* SettingViewController.swift */; };
+		94E140992813D0EF00653227 /* PersonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E140972813D0EF00653227 /* PersonTableViewCell.swift */; };
+		94E1409A2813D0EF00653227 /* PersonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94E140982813D0EF00653227 /* PersonTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		94DBD54A280C2768002A8B61 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		94DBD54B280C2768002A8B61 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		94DBD54F280C550D002A8B61 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		94E140972813D0EF00653227 /* PersonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTableViewCell.swift; sourceTree = "<group>"; };
+		94E140982813D0EF00653227 /* PersonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				9481E0EC2803B6A90081CAC2 /* TopNewsTableViewCell.swift */,
+				94E140972813D0EF00653227 /* PersonTableViewCell.swift */,
+				94E140982813D0EF00653227 /* PersonTableViewCell.xib */,
 				9481E0EE2803B6E60081CAC2 /* BigPicNewsTableViewCell.swift */,
 				9481E0F02803B6FB0081CAC2 /* ThreePicNewsTableViewCell.swift */,
 				9481E0F22803B7120081CAC2 /* RightPicNewsTableViewCell.swift */,
@@ -336,6 +342,7 @@
 				9481DF9F280279380081CAC2 /* Assets.xcassets in Resources */,
 				94DBD54D280C2768002A8B61 /* LoginViewController.xib in Resources */,
 				945071932812D8560051F154 /* SearchPageViewController.xib in Resources */,
+				94E1409A2813D0EF00653227 /* PersonTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +401,7 @@
 				9481DFBA2802CB3F0081CAC2 /* TopImageBtn.swift in Sources */,
 				9481DF98280279370081CAC2 /* SceneDelegate.swift in Sources */,
 				94DBD550280C550D002A8B61 /* SettingViewController.swift in Sources */,
+				94E140992813D0EF00653227 /* PersonTableViewCell.swift in Sources */,
 				945071922812D8560051F154 /* SearchPageViewController.swift in Sources */,
 				94DBD54C280C2768002A8B61 /* LoginViewController.swift in Sources */,
 				9481E1592803BF1E0081CAC2 /* TopNewsModel.swift in Sources */,
