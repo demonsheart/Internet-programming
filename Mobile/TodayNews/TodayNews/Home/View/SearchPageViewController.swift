@@ -11,11 +11,14 @@ import RxCocoa
 import RxRelay
 import Contacts
 
-class SearchPageViewController: TNBaseViewController, UITextFieldDelegate {
+class SearchPageViewController: TNBaseViewController, UITextFieldDelegate, UITableViewDelegate {
     
     var placeholder = ""
     
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var tableView: UITableView!
+    
+    let viewModel = SearchViewModel()
     
     @IBAction func goBack(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -25,10 +28,18 @@ class SearchPageViewController: TNBaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textField.placeholder = placeholder
         textField.delegate = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        //        startSearchContactsByName()
-        //        startSearchContactsByNumber()
-        getAllContacts()
+        textField.rx.text.orEmpty
+                    .bind(to: viewModel.searchOB).disposed(by: disposeBag)
+        
+        viewModel.searchData
+            .drive(tableView.rx.items(cellIdentifier: "cell")) { _, model, cell in
+                cell.selectionStyle = .none
+                cell.imageView?.image = UIImage(named: model.avatar)
+                cell.textLabel?.text = model.name
+                cell.detailTextLabel?.text = model.mobile
+        }.disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,74 +51,109 @@ class SearchPageViewController: TNBaseViewController, UITextFieldDelegate {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+}
+
+extension SearchPageViewController {
     
-    private func startSearchContactsByName() {
-        let store = CNContactStore()
-        let predicate = CNContact.predicateForContacts(matchingName: "Appleseed")
-        let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey] as [CNKeyDescriptor]
-        do {
-            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
-            print("Fetched contacts: \(contacts)")
-        } catch {
-            print("Failed to fetch contact, error: \(error)")
-            // Handle the error
+    class Person {
+        var avatar = "person.fill"
+        var name: String
+        var mobile: String
+        
+        init(name: String, mobile: String) {
+            self.name = name
+            self.mobile = mobile
         }
     }
     
-    private func startSearchContactsByNumber() {
-        let store = CNContactStore()
-        let predicate = CNContact.predicateForContacts(matching: CNPhoneNumber(stringValue: "(555) 564-8583"))
-        let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey] as [CNKeyDescriptor]
-        do {
-            let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
-            print("Fetched contacts: \(contacts)")
-        } catch {
-            print("Failed to fetch contact, error: \(error)")
-            // Handle the error
-        }
-    }
-    
-    private func getAllContacts() {
-        // 验证授权
-        // 1. 判断授权
-        let status = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
-        // 2. 如果授权没有请求,需要请求
-        if status != .authorized {
-            print("授权失败")
-            return
-        }
+    class SearchViewModel {
+        //1、创建一个序列
+        let searchOB = BehaviorSubject(value: "")
         
-        // 获取所有联系人
-        // 1.创建联系人仓库对象
-        let contactStore = CNContactStore()
+        lazy var searchData: Driver<[Person]> = {
+            return self.searchOB.asObserver()
+                .throttle(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance)//设置300毫秒发送一次消息
+                .distinctUntilChanged()//搜索框内容改变才发送消息
+                .flatMap(requestPerson)
+                .asDriver(onErrorJustReturn: [])
+        }()
         
-        // 2, 使用一个方法, 遍历所有联系人
-        // 作用, 根据筛选的条件, 遍历所有的联系人
-        // 值获取这个参数里面提供的key对应的值, 其他的字段属性, 都不获取
-        let request = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor])
-        
-        do {
-            // 遍历联系人
-            // 注意, 这种遍历, 类似于数组的遍历
-            // 每执行一次block, 只会传递过来一个联系人对象
-            // 而联系人对象里面的值得获取, 是根据上面 CNContactFetchRequest, 参数指定的key来的, 没写的key, 统统不获取
-            try contactStore.enumerateContacts(with: request) { (contact: CNContact, stop) in
-                //
-                let givenName = contact.givenName
-                print(givenName)
-                // 遍历电话号码
-                let phoneNums = contact.phoneNumbers
-                // 每个电话号码, 包括标签和值
-                for phoneNum in phoneNums {
-                    let label = phoneNum.label
-                    let value = phoneNum.value
-                    print(label, value.stringValue)
-                }
+        func requestPerson(_ keyword: String) -> Observable<[Person]> {
+            if keyword == "联系人" {
+                return getAllContacts()
+            } else if keyword.starts(with: "") {
+                
+            } else if keyword.starts(with: "") {
+                
             }
-        } catch {
             
-            print(error)
-            return
+            return Observable<[Person]>.just([])
+        }
+        
+        func startSearchContactsByName(_ name: String) {
+            let store = CNContactStore()
+            let predicate = CNContact.predicateForContacts(matchingName: name)
+            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey] as [CNKeyDescriptor]
+            do {
+                let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
+                print("Fetched contacts: \(contacts)")
+            } catch {
+                print("Failed to fetch contact, error: \(error)")
+                // Handle the error
+            }
+        }
+        
+        func startSearchContactsByNumber(_ number: String) {
+            let store = CNContactStore()
+            let predicate = CNContact.predicateForContacts(matching: CNPhoneNumber(stringValue: number))
+            let keysToFetch = [CNContactGivenNameKey, CNContactFamilyNameKey] as [CNKeyDescriptor]
+            do {
+                let contacts = try store.unifiedContacts(matching: predicate, keysToFetch: keysToFetch)
+                print("Fetched contacts: \(contacts)")
+            } catch {
+                print("Failed to fetch contact, error: \(error)")
+                // Handle the error
+            }
+        }
+        
+        func getAllContacts() -> Observable<[Person]> {
+            let status = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
+            if status != .authorized {
+                print("授权失败")
+                return Observable<[Person]>.just([])
+            }
+            
+            let contactStore = CNContactStore()
+            let request = CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey] as [CNKeyDescriptor])
+            var persons = [Person]()
+            
+            do {
+                try contactStore.enumerateContacts(with: request) { (contact: CNContact, stop) in
+                    let fullName = contact.givenName + contact.familyName
+                    
+                    let phoneNums = contact.phoneNumbers
+                    let validTypes = [
+//                        CNLabelPhoneNumberiPhone,
+                        CNLabelPhoneNumberMobile,
+//                        CNLabelPhoneNumberMain
+                    ]
+                    
+                    let numbers = phoneNums.compactMap { phoneNumber -> String? in
+                        guard let label = phoneNumber.label, validTypes.contains(label) else { return nil }
+                        return phoneNumber.value.stringValue
+                    }
+                    if numbers.isEmpty {
+                        persons.append(Person(name: fullName, mobile: "-"))
+                    } else {
+                        persons.append(Person(name: fullName, mobile: numbers[0]))
+                    }
+                }
+            } catch {
+                print(error)
+                return Observable<[Person]>.just([])
+            }
+            
+            return Observable<[Person]>.just(persons)
         }
     }
     

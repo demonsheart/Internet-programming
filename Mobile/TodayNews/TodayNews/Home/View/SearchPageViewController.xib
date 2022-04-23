@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchPageViewController" customModule="TodayNews" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="iLJ-iz-xkc" id="Sat-ge-lRL"/>
                 <outlet property="textField" destination="Ahh-d9-BiT" id="2tc-ok-cJf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,7 +40,10 @@
                         <action selector="goBack:" destination="-1" eventType="touchUpInside" id="XD0-5w-Rel"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-d9-BiT">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iLJ-iz-xkc">
+                    <rect key="frame" x="20" y="86" width="374" height="776"/>
+                </tableView>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ahh-d9-BiT">
                     <rect key="frame" x="50" y="44" width="300" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="gJc-qt-Pds"/>
@@ -52,12 +56,16 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="Ahh-d9-BiT" firstAttribute="centerY" secondItem="T1z-v4-CqA" secondAttribute="centerY" id="BLy-M9-j10"/>
+                <constraint firstItem="iLJ-iz-xkc" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="BaL-qD-sAc"/>
                 <constraint firstItem="T1z-v4-CqA" firstAttribute="leading" secondItem="Ahh-d9-BiT" secondAttribute="trailing" constant="15" id="FAl-Ga-vDM"/>
                 <constraint firstItem="Ahh-d9-BiT" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="IJS-CB-e0W"/>
+                <constraint firstItem="iLJ-iz-xkc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="J3s-eK-xCT"/>
                 <constraint firstItem="V0e-9P-OM4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="QbJ-Fz-S7f"/>
                 <constraint firstItem="V0e-9P-OM4" firstAttribute="centerY" secondItem="Ahh-d9-BiT" secondAttribute="centerY" id="S7j-7G-qLV"/>
+                <constraint firstItem="iLJ-iz-xkc" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="WfI-26-Xrg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="T1z-v4-CqA" secondAttribute="trailing" constant="18" id="XVU-b3-02f"/>
                 <constraint firstItem="Ahh-d9-BiT" firstAttribute="leading" secondItem="V0e-9P-OM4" secondAttribute="trailing" constant="10" id="wpu-nE-Xje"/>
+                <constraint firstItem="iLJ-iz-xkc" firstAttribute="top" secondItem="Ahh-d9-BiT" secondAttribute="bottom" constant="8" id="zwc-N2-wy4"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="107.8125"/>
         </view>
