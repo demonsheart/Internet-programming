@@ -87,7 +87,7 @@ extension SearchPageViewController {
         }()
         
         func requestPerson(_ keyword: String) -> Observable<[Person]> {
-            if keyword == "联系人" {
+            if keyword == "联系人" || keyword == "联系人：" || keyword == "电话" || keyword == "电话：" {
                 return getAllContacts()
             } else if keyword.starts(with: "联系人：") {
                 let key = keyword.deletingPrefix("联系人：")
