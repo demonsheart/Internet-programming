@@ -11,7 +11,7 @@ import RxCocoa
 import RxRelay
 import CryptoKit
 
-private let minimalUsernameLength = 5
+private let minimalUsernameLength = 8
 private let minimalPasswordLength = 8
 
 class LoginViewController: UIViewController {
@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
             .share(replay: 1)
         
         let passwordValidate = passwordTextField.rx.text.orEmpty
-            .map{ $0.count >= minimalPasswordLength && $0.isAlphanumeric }
+            .map{ $0.count >= minimalPasswordLength }
             .share(replay: 1)
         
         let everythingValidate = Observable.combineLatest(accountValidate, passwordValidate) { $0 && $1 }
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
             if ok {
                 self?.errMessageLabel.text = ""
             } else {
-                self?.errMessageLabel.text = "请检查账号和密码，必须都为字母或数字"
+                self?.errMessageLabel.text = "请检查账号必须为字母或数字组合，账号密码长度不小于8"
             }
         })
         .disposed(by: disposeBag)
