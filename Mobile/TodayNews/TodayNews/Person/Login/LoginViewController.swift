@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxRelay
+import CryptoKit
 
 private let minimalUsernameLength = 5
 private let minimalPasswordLength = 8
@@ -53,8 +54,9 @@ class LoginViewController: UIViewController {
     func login() {
         guard
             let account = accountTextField.text,
-            let password = passwordTextField.text
+            var password = passwordTextField.text
         else { return }
+        password = md5Hash(password)
         Service.shared.login(account: account, password: password) { [weak self] isLogin in
             if isLogin {
                 self?.dismiss(animated: true, completion: nil)
@@ -62,6 +64,10 @@ class LoginViewController: UIViewController {
                 self?.errMessageLabel.isHidden = false
             }
         }
+    }
+    
+    func md5Hash(_ source: String) -> String {
+        return Insecure.MD5.hash(data: source.data(using: .utf8)!).map { String(format: "%02hhx", $0) }.joined()
     }
 
     @IBAction func cancelTap(_ sender: UIButton) {
