@@ -28,14 +28,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.errMessageLabel.isHidden = false
+        
         accountTextField.text = UserDefaults.standard.string(forKey: "account")
         
         let accountValidate = accountTextField.rx.text.orEmpty
-            .map{ $0.count >= minimalUsernameLength }
+            .map{ $0.count >= minimalUsernameLength && $0.isAlphanumeric }
             .share(replay: 1)
         
         let passwordValidate = passwordTextField.rx.text.orEmpty
-            .map{ $0.count >= minimalPasswordLength }
+            .map{ $0.count >= minimalPasswordLength && $0.isAlphanumeric }
             .share(replay: 1)
         
         let everythingValidate = Observable.combineLatest(accountValidate, passwordValidate) { $0 && $1 }
@@ -44,6 +46,16 @@ class LoginViewController: UIViewController {
         everythingValidate
             .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
+        
+        everythingValidate.asObservable().subscribe(onNext: { [weak self] ok in
+            if ok {
+                self?.errMessageLabel.text = ""
+            } else {
+                self?.errMessageLabel.text = "请检查账号和密码，必须都为字母或数字"
+            }
+        })
+        .disposed(by: disposeBag)
+
         
         loginButton.rx.tap
             .subscribe(onNext: { [weak self] _ in self?.login() })
@@ -61,7 +73,8 @@ class LoginViewController: UIViewController {
             if isLogin {
                 self?.dismiss(animated: true, completion: nil)
             } else {
-                self?.errMessageLabel.isHidden = false
+//                self?.errMessageLabel.isHidden = false
+                self?.errMessageLabel.text = "登录失败"
             }
         }
     }
