@@ -1,0 +1,7 @@
+gcc hello.c -o hello && ./hello
+
+gcc childCallExtCmd.c -o childCallExtCmd && ./childCallExtCmd
+
+gcc fork.c -o fork && ./fork
+
+gcc makeSingleChild.c -o makeSingleChild && ./makeSingleChild
