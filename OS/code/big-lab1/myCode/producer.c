@@ -9,6 +9,7 @@
 #include <semaphore.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 #define BUF_SIZE 4096
 #define LINE_SIZE 256
