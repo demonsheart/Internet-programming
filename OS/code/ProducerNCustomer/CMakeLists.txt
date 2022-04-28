@@ -3,4 +3,4 @@ project(ProducerNCustomer C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(ProducerNCustomer main.c shm_com_sem.h)
+add_executable(ProducerNCustomer main.c customer.c)
