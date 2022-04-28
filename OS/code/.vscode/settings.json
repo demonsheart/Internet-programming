@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.art": "html",
+    "*.vue": "html",
+    "__mutex_base": "c",
+    "cstdlib": "c",
+    "locale": "c",
+    "ostream": "c",
+    "new": "c"
+  }
+}
