@@ -85,7 +85,7 @@ void *get_line(void *id)
         sem_post(mutex);
         sem_post(empty);
 
-        // fixme: 一下判断永远不生效
+        // fixme: 以下判断不生效 字符集问题待解决
         if (strcmp(shm_buf, "quit") == 0)
         {
             printf("thread %d quit", no);
