@@ -36,11 +36,16 @@ public class NFA {
     }
 
     // 等NFA构造完成 需要识别字符串再调用
-    public void initTransitionsMap() {
+    private void initTransitionsMap() {
         transitionsMap = new HashMap<>();
         for (Transition t : transitions) {
             transitionsMap.put(Map.entry(t.from, t.symbol), t.to);
         }
+    }
+
+    public boolean scan(String str) {
+        // TODO 扫描字符串是否属于本NFA
+        return false;
     }
 
     public void initStates(int size) {
@@ -49,10 +54,12 @@ public class NFA {
     }
 
     public void print() {
-        // TODO print
+        // 状态由数字转换成大写字母(超过26个状态会异常字符) E->epsilon
         for (Transition t : transitions) {
-            System.out.println("(" + t.from + ", " + t.symbol +
-                    ", " + t.to + ")");
+            char from = (char) (t.from + 'A');
+            char to = (char) (t.to + 'A');
+            String symbol = t.symbol == 'E' ? "epsilon" : String.valueOf(t.symbol);
+            System.out.println("(" + from + ", " + symbol + ") = " + to);
         }
     }
 
@@ -79,10 +86,10 @@ public class NFA {
         int otherSize = other.states.size();
 
         NFA result = new NFA(thisSize + otherSize - 1);
-        for (Transition t: this.transitions) {
+        for (Transition t : this.transitions) {
             result.transitions.add(new Transition(t.from, t.to, t.symbol));
         }
-        for (Transition t: other.transitions) {
+        for (Transition t : other.transitions) {
             result.transitions.add(new Transition(t.from + thisSize - 1, t.to + thisSize - 1, t.symbol));
         }
         result.final_state = thisSize + otherSize - 2;
