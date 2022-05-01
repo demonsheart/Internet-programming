@@ -49,7 +49,11 @@ public class NFA {
     }
 
     public void print() {
-        // TODO: print
+        // TODO print
+        for (Transition t : transitions) {
+            System.out.println("(" + t.from + ", " + t.symbol +
+                    ", " + t.to + ")");
+        }
     }
 
     // Thompson方法中的 *
