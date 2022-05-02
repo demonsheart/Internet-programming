@@ -16,15 +16,21 @@ public class RegularExpression {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (line.equals("quit")) {
-                break;
-            }
+        System.out.println("Enter a regex:");
 
-            RegularExpression re = new RegularExpression();
-            NFA nfa = re.generateNFA(line);
-            nfa.print();
+
+        String line = scanner.nextLine();
+        RegularExpression re = new RegularExpression();
+        NFA nfa = re.generateNFA(line);
+        nfa.print();
+
+        System.out.println("Enter a string to recognize(':q' to quit):");
+        while (scanner.hasNextLine()) {
+            System.out.println("Enter a string to recognize(':q' to quit):");
+
+            line = scanner.nextLine();
+            if (line.equals(":q")) { break; }
+            System.out.println(nfa.scan(line) ? "Yes" : "No");
         }
     }
 

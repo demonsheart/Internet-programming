@@ -1,8 +1,6 @@
 package REToNFA;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 // 默认字母表 a-z E代表Epsilon
 // 默认初始状态是0 状态集是 [0, final_state] 终止状态只有一个
@@ -10,8 +8,11 @@ public class NFA {
     public ArrayList<Integer> states;
     public ArrayList<Transition> transitions;
 
-    // transitions的哈希表 用于字符串识别时加速
-    public HashMap<Map.Entry<Integer, Character>, Integer> transitionsMap;
+    // transitions的哈希表
+    private HashMap<Map.Entry<Integer, Character>, Integer> transitionsMap;
+
+    // Matrix
+    private char[][] Matrix;
     public int final_state;
 
     public NFA() {
@@ -43,12 +44,79 @@ public class NFA {
         }
     }
 
-    public boolean scan(String str) {
-        // TODO 扫描字符串是否属于本NFA
-        return false;
+    private void initMatrix() {
+        int stateNum = states.size();
+        Matrix = new char[stateNum][stateNum];
+
+        for (int i = 0; i < stateNum; i++) {
+            for (int j = 0; j < stateNum; j++) {
+                Matrix[i][j] = '-'; // 不可达
+            }
+        }
+
+        for (Transition t : transitions) {
+            Matrix[t.from][t.to] = t.symbol;
+        }
     }
 
-    public void initStates(int size) {
+    public boolean scan(String str) {
+        initTransitionsMap();
+        initMatrix();
+        Set<Integer> currentSet = new HashSet<>();
+        currentSet.add(0);
+        currentSet = epsClosure(currentSet);
+
+        for (char ch : str.toCharArray()) {
+            // 状态转移
+            currentSet = transToNextStates(currentSet, ch);
+            // 空迁移
+            currentSet = epsClosure(currentSet);
+        }
+
+        // 最终做判断
+        return currentSet.contains(final_state);
+    }
+
+    // 读入字符 进行状态转移
+    private Set<Integer> transToNextStates(Set<Integer> set, char ch) {
+        Set<Integer> result = new HashSet<>();
+        for (Integer curState : set) {
+            Integer nextState;
+            if ((nextState = transitionsMap.get(Map.entry(curState, ch))) != null) {
+                result.add(nextState);
+            }
+        }
+        return result;
+    }
+
+    // 对集合进行空转移 得到拓展结果集
+    private Set<Integer> epsClosure(Set<Integer> set) {
+        // 初始化变量
+        boolean[] visited = new boolean[states.size()];
+        Queue<Integer> queue = new LinkedList<Integer>();
+        Set<Integer> result = new HashSet<>();
+
+        for(Integer state : set) { // 对集合中的每个状态进行空迁移 用BFS
+            queue.add(state);
+
+            while (!queue.isEmpty()) {
+                Integer curState = queue.peek(); // 取队首访问
+                queue.poll();
+                result.add(curState);
+                visited[curState] = true;
+
+                for (int nextState = 0; nextState < states.size(); nextState++) {
+                    if(Matrix[curState][nextState] == 'E' && !visited[nextState]) {
+                        queue.add(nextState);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private void initStates(int size) {
         for (int i = 0; i < size; i++)
             this.states.add(i);
     }
