@@ -5,8 +5,8 @@ import java.util.Stack;
 
 public class RegularExpression {
 
-    private Stack<NFA> nfaStack;
-    private Stack<Character> operatorStack;
+    private final Stack<NFA> nfaStack;
+    private final Stack<Character> operatorStack;
 
     public RegularExpression() {
         nfaStack = new Stack<>();
