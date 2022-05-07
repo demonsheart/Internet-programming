@@ -16,6 +16,9 @@
 		9474F309282663F30047FA1B /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F308282663F30047FA1B /* Config.swift */; };
 		9474F30C28266B6A0047FA1B /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F30B28266B6A0047FA1B /* HomePageViewController.swift */; };
 		9474F30F28266BA60047FA1B /* PersonalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F30E28266BA60047FA1B /* PersonalPageViewController.swift */; };
+		9474F312282672A30047FA1B /* MonthPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F311282672A30047FA1B /* MonthPageViewController.swift */; };
+		9474F315282672E30047FA1B /* QuadrantsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F314282672E30047FA1B /* QuadrantsPageViewController.swift */; };
+		9474F317282673100047FA1B /* PunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F316282673100047FA1B /* PunchPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		9474F308282663F30047FA1B /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		9474F30B28266B6A0047FA1B /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		9474F30E28266BA60047FA1B /* PersonalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalPageViewController.swift; sourceTree = "<group>"; };
+		9474F311282672A30047FA1B /* MonthPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPageViewController.swift; sourceTree = "<group>"; };
+		9474F314282672E30047FA1B /* QuadrantsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrantsPageViewController.swift; sourceTree = "<group>"; };
+		9474F316282673100047FA1B /* PunchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchPageViewController.swift; sourceTree = "<group>"; };
 		B4F3BC5EC4DAD04FF995AB05 /* Pods-MyTodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTodoList.debug.xcconfig"; path = "Target Support Files/Pods-MyTodoList/Pods-MyTodoList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +82,8 @@
 		9474F2E5282661850047FA1B /* MyTodoList */ = {
 			isa = PBXGroup;
 			children = (
+				9474F313282672CA0047FA1B /* Quadrants */,
+				9474F310282672620047FA1B /* Month */,
 				9474F30D28266B7F0047FA1B /* Person */,
 				9474F30A28266B490047FA1B /* Home */,
 				9474F307282663DE0047FA1B /* Config */,
@@ -85,6 +93,7 @@
 				9474F2EF282661870047FA1B /* Assets.xcassets */,
 				9474F2F1282661870047FA1B /* LaunchScreen.storyboard */,
 				9474F2F4282661870047FA1B /* Info.plist */,
+				9474F316282673100047FA1B /* PunchPageViewController.swift */,
 			);
 			path = MyTodoList;
 			sourceTree = "<group>";
@@ -119,6 +128,22 @@
 				9474F30E28266BA60047FA1B /* PersonalPageViewController.swift */,
 			);
 			path = Person;
+			sourceTree = "<group>";
+		};
+		9474F310282672620047FA1B /* Month */ = {
+			isa = PBXGroup;
+			children = (
+				9474F311282672A30047FA1B /* MonthPageViewController.swift */,
+			);
+			path = Month;
+			sourceTree = "<group>";
+		};
+		9474F313282672CA0047FA1B /* Quadrants */ = {
+			isa = PBXGroup;
+			children = (
+				9474F314282672E30047FA1B /* QuadrantsPageViewController.swift */,
+			);
+			path = Quadrants;
 			sourceTree = "<group>";
 		};
 		C79B962C4648A1495B392370 /* Frameworks */ = {
@@ -244,11 +269,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9474F2E7282661850047FA1B /* AppDelegate.swift in Sources */,
+				9474F315282672E30047FA1B /* QuadrantsPageViewController.swift in Sources */,
 				9474F309282663F30047FA1B /* Config.swift in Sources */,
+				9474F312282672A30047FA1B /* MonthPageViewController.swift in Sources */,
 				9474F3062826632F0047FA1B /* Extensions.swift in Sources */,
 				9474F30C28266B6A0047FA1B /* HomePageViewController.swift in Sources */,
 				9474F30F28266BA60047FA1B /* PersonalPageViewController.swift in Sources */,
 				9474F2E9282661850047FA1B /* SceneDelegate.swift in Sources */,
+				9474F317282673100047FA1B /* PunchPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

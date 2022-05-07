@@ -25,26 +25,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // make tabBarController
         let myTabBar = UITabBarController()
-        myTabBar.tabBar.backgroundColor = UIColor.white
         myTabBar.tabBar.tintColor = TDLColor.iconBlue
         
         // fix ios15 bar
         if #available(iOS 15.0, *) {
             let barAppearance = UITabBarAppearance()
             barAppearance.configureWithDefaultBackground()
+            barAppearance.backgroundColor = TDLColor.bgGreen
             UITabBar.appearance().scrollEdgeAppearance = barAppearance
         }
         
         // tabBarItems
         let homePageViewController = RTRootNavigationController(rootViewController: HomePageViewController())
-        homePageViewController.tabBarItem = UITabBarItem(title: "首页", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        homePageViewController.tabBarItem = UITabBarItem(title: "今天", image: UIImage(systemName: "checklist"), selectedImage: UIImage(systemName: "checklist"))
+        
+        let monthViewController = RTRootNavigationController(rootViewController: MonthPageViewController())
+        monthViewController.tabBarItem = UITabBarItem(title: "月视图", image: UIImage(systemName: "calendar"), selectedImage: UIImage(systemName: "calendar"))
+        
+        let quadrantPageViewController = RTRootNavigationController(rootViewController: QuadrantsPageViewController())
+        quadrantPageViewController.tabBarItem = UITabBarItem(title: "四象限", image: UIImage(systemName: "rectangle.grid.2x2"), selectedImage: UIImage(systemName: "rectangle.grid.2x2"))
+        
+        let punchPageViewController = RTRootNavigationController(rootViewController: PunchPageViewController())
+        punchPageViewController.tabBarItem = UITabBarItem(title: "打卡", image: UIImage(systemName: "clock.badge.checkmark"), selectedImage: UIImage(systemName: "clock.badge.checkmark"))
         
         let personalViewController = RTRootNavigationController(rootViewController: PersonalPageViewController())
         personalViewController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         
         
         // add to tabbar
-        myTabBar.viewControllers = [homePageViewController, personalViewController]
+        myTabBar.viewControllers = [homePageViewController, monthViewController, quadrantPageViewController, punchPageViewController, personalViewController]
         
         myTabBar.selectedIndex = 0
         

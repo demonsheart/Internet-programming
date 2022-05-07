@@ -1,5 +1,5 @@
 //
-//  HomePageViewController.swift
+//  PunchPageViewController.swift
 //  MyTodoList
 //
 //  Created by aicoin on 2022/5/7.
@@ -7,13 +7,12 @@
 
 import UIKit
 
-class HomePageViewController: UIViewController {
+class PunchPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = TDLColor.bgGreen
     }
     
 
