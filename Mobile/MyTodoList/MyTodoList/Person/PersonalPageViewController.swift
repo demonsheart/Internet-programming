@@ -6,25 +6,97 @@
 //
 
 import UIKit
+import SnapKit
+import RxCocoa
+import RxSwift
+import SDWebImage
 
-class PersonalPageViewController: UIViewController {
-
+class PersonalPageViewController: BaseViewController {
+    
+    lazy var tableView: UITableView = {
+        let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.delegate = self
+        table.dataSource = self
+        table.register(AvatarTableViewCell.self, forCellReuseIdentifier: "Avatar")
+        table.separatorStyle = .none
+        table.backgroundColor = TDLColor.bgGreen
+        table.allowsSelection = false
+        
+        UserDefaults.standard.rx.observe(Bool.self, "LoginState")
+            .skip(1)
+            .subscribe(onNext: { [weak table] _ in
+                table?.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        return table
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = TDLColor.bgGreen
+        self.navigationController?.navigationBar.fixBarTintColor = TDLColor.bgGreen
+        self.title = "个人"
+        
+        self.view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+    }
 
-        // Do any additional setup after loading the view.
-        self.view.backgroundColor = .cyan
+    // MARK: 修复uitableviewwrapperview 导致的偏移 观察得到值35
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let inset = UIEdgeInsets(top: -35, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = inset
+        tableView.scrollIndicatorInsets = inset
     }
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
     }
-    */
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 {
+            return 5
+        }
+        
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Avatar", for: indexPath) as! AvatarTableViewCell
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 150
+        }
+        return 40
+    }
+    
+    // MARK: - Footer
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return .leastNonzeroMagnitude
+        } else if section == 1 {
+            return 50
+        } else {
+            return 20
+        }
+    }
 
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
 }

@@ -9,6 +9,7 @@ import UIKit
 
 struct TDLColor {
     static let iconBlue = UIColor("4D64F5")
+    static let iconGray = UIColor("2A2A2A")
     static let bgGreen = UIColor("D1EDF3")
     static let highPriority = UIColor("F3664D")
     static let middlePriority = UIColor("FDDF5A")

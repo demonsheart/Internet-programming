@@ -27,12 +27,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let myTabBar = UITabBarController()
         myTabBar.tabBar.tintColor = TDLColor.iconBlue
         
-        // fix ios15 bar
         if #available(iOS 15.0, *) {
             let barAppearance = UITabBarAppearance()
             barAppearance.configureWithDefaultBackground()
             barAppearance.backgroundColor = TDLColor.bgGreen
             UITabBar.appearance().scrollEdgeAppearance = barAppearance
+            
+//            UITableView.appearance().sectionHeaderTopPadding = .leastNonzeroMagnitude
         }
         
         // tabBarItems
@@ -55,7 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // add to tabbar
         myTabBar.viewControllers = [homePageViewController, monthViewController, quadrantPageViewController, punchPageViewController, personalViewController]
         
-        myTabBar.selectedIndex = 0
+        myTabBar.selectedIndex = 4 // 0
         
         window.rootViewController = myTabBar
         self.window = window
