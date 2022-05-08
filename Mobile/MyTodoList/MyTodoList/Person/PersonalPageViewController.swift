@@ -18,10 +18,11 @@ class PersonalPageViewController: BaseViewController {
         table.delegate = self
         table.dataSource = self
         table.register(AvatarTableViewCell.self, forCellReuseIdentifier: "Avatar")
+        table.register(QuitLoginTableViewCell.self, forCellReuseIdentifier: "Quit")
         table.register(UINib(nibName: "CommonTableViewCell", bundle: nil), forCellReuseIdentifier: "Common")
         table.separatorStyle = .none
         table.backgroundColor = TDLColor.bgGreen
-//        table.allowsSelection = false
+        //        table.allowsSelection = false
         
         UserDefaults.standard.rx.observe(Bool.self, "LoginState")
             .skip(1)
@@ -45,7 +46,7 @@ class PersonalPageViewController: BaseViewController {
         }
         
     }
-
+    
     // MARK: 修复uitableviewwrapperview 导致的偏移 观察得到值35
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -59,7 +60,11 @@ class PersonalPageViewController: BaseViewController {
 extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        if UserConfig.shared.isLogin {
+            return 3
+        } else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,6 +86,10 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "Common", for: indexPath) as! CommonTableViewCell
             cell.type = CommonTableViewCell.CommonCellType.allCases[indexPath.row]
             return cell
+        } else if indexPath.section == 2 {
+            // 退出登录按钮
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Quit", for: indexPath) as! QuitLoginTableViewCell
+            return cell
         }
         return UITableViewCell()
     }
@@ -98,6 +107,11 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
             // TODO: 跳转相应的page
             print(cell.type.rawValue)
         }
+        
+        if let _ = tableView.cellForRow(at: indexPath) as? QuitLoginTableViewCell {
+            // TODO: 退出登录
+            print("退出登录")
+        }
     }
     
     // MARK: - Footer
@@ -105,14 +119,40 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
         if section == 0 {
             return .leastNonzeroMagnitude
         } else if section == 1 {
-            return 50
+            return 100
         } else {
             return 20
         }
     }
-
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
     
+}
+
+extension PersonalPageViewController {
+    class QuitLoginTableViewCell: UITableViewCell {
+        lazy var titleLabel: UILabel = {
+            let label = UILabel()
+            label.textAlignment = .center
+            label.numberOfLines = 1
+            label.font = .systemFont(ofSize: 15)
+            label.textColor = UIColor(named: "textRed")
+            label.text = "退出登录"
+            return label
+        }()
+        
+        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+            super.init(style: style, reuseIdentifier: reuseIdentifier)
+            self.contentView.addSubview(titleLabel)
+            titleLabel.snp.makeConstraints { make in
+                make.center.equalToSuperview()
+            }
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
 }

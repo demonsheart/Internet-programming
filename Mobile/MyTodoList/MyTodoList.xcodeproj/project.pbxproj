@@ -23,6 +23,8 @@
 		9474F31F2826A77A0047FA1B /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F31E2826A77A0047FA1B /* AvatarTableViewCell.swift */; };
 		9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F320282757FD0047FA1B /* CommonTableViewCell.swift */; };
 		9474F323282757FD0047FA1B /* CommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9474F321282757FD0047FA1B /* CommonTableViewCell.xib */; };
+		9474F325282803820047FA1B /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F324282803820047FA1B /* UserConfig.swift */; };
+		9474F328282803CE0047FA1B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F327282803CE0047FA1B /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		9474F31E2826A77A0047FA1B /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
 		9474F320282757FD0047FA1B /* CommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
 		9474F321282757FD0047FA1B /* CommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTableViewCell.xib; sourceTree = "<group>"; };
+		9474F324282803820047FA1B /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
+		9474F327282803CE0047FA1B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B4F3BC5EC4DAD04FF995AB05 /* Pods-MyTodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTodoList.debug.xcconfig"; path = "Target Support Files/Pods-MyTodoList/Pods-MyTodoList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +94,7 @@
 		9474F2E5282661850047FA1B /* MyTodoList */ = {
 			isa = PBXGroup;
 			children = (
+				9474F326282803BD0047FA1B /* NetWork */,
 				9474F31A2826A5320047FA1B /* Base */,
 				9474F313282672CA0047FA1B /* Quadrants */,
 				9474F310282672620047FA1B /* Month */,
@@ -161,6 +166,7 @@
 		9474F31828269EC90047FA1B /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				9474F324282803820047FA1B /* UserConfig.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -188,6 +194,14 @@
 				9474F321282757FD0047FA1B /* CommonTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9474F326282803BD0047FA1B /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				9474F327282803CE0047FA1B /* Service.swift */,
+			);
+			path = NetWork;
 			sourceTree = "<group>";
 		};
 		C79B962C4648A1495B392370 /* Frameworks */ = {
@@ -314,7 +328,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */,
+				9474F328282803CE0047FA1B /* Service.swift in Sources */,
 				9474F2E7282661850047FA1B /* AppDelegate.swift in Sources */,
+				9474F325282803820047FA1B /* UserConfig.swift in Sources */,
 				9474F315282672E30047FA1B /* QuadrantsPageViewController.swift in Sources */,
 				9474F309282663F30047FA1B /* Config.swift in Sources */,
 				9474F31F2826A77A0047FA1B /* AvatarTableViewCell.swift in Sources */,
