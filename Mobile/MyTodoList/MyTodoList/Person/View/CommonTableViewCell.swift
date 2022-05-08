@@ -32,6 +32,10 @@ class CommonTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
     func configUI() {
         title.text = type.rawValue
         switch type {

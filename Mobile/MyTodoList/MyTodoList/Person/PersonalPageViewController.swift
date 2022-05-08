@@ -21,7 +21,7 @@ class PersonalPageViewController: BaseViewController {
         table.register(UINib(nibName: "CommonTableViewCell", bundle: nil), forCellReuseIdentifier: "Common")
         table.separatorStyle = .none
         table.backgroundColor = TDLColor.bgGreen
-        table.allowsSelection = false
+//        table.allowsSelection = false
         
         UserDefaults.standard.rx.observe(Bool.self, "LoginState")
             .skip(1)
@@ -90,6 +90,14 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
             return 150
         }
         return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? CommonTableViewCell {
+            // TODO: 跳转相应的page
+            print(cell.type.rawValue)
+        }
     }
     
     // MARK: - Footer
