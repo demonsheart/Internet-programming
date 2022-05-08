@@ -18,6 +18,7 @@ class PersonalPageViewController: BaseViewController {
         table.delegate = self
         table.dataSource = self
         table.register(AvatarTableViewCell.self, forCellReuseIdentifier: "Avatar")
+        table.register(UINib(nibName: "CommonTableViewCell", bundle: nil), forCellReuseIdentifier: "Common")
         table.separatorStyle = .none
         table.backgroundColor = TDLColor.bgGreen
         table.allowsSelection = false
@@ -63,7 +64,7 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
-            return 5
+            return CommonTableViewCell.CommonCellType.allCases.count
         }
         
         return 1
@@ -72,6 +73,13 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Avatar", for: indexPath) as! AvatarTableViewCell
+            cell.tapCallBack = {
+                // TODO: 未登录则登录 已登陆则跳转详情
+            }
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Common", for: indexPath) as! CommonTableViewCell
+            cell.type = CommonTableViewCell.CommonCellType.allCases[indexPath.row]
             return cell
         }
         return UITableViewCell()
@@ -81,7 +89,7 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.section == 0 {
             return 150
         }
-        return 40
+        return 50
     }
     
     // MARK: - Footer

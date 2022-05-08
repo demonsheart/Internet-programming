@@ -30,6 +30,11 @@ class AvatarTableViewCell: UITableViewCell {
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 16)
         label.text = "登录"
+        
+        label.isUserInteractionEnabled = true
+        let ges = UITapGestureRecognizer(target: self, action: #selector(tapAvatar))
+        ges.numberOfTapsRequired = 1
+        label.addGestureRecognizer(ges)
         return label
     }()
     
@@ -63,6 +68,7 @@ class AvatarTableViewCell: UITableViewCell {
     }
     
     @objc func tapAvatar() {
+        print("djsk")
         tapCallBack?()
     }
 

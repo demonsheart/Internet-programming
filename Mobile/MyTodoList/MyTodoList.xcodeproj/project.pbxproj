@@ -21,6 +21,8 @@
 		9474F317282673100047FA1B /* PunchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F316282673100047FA1B /* PunchPageViewController.swift */; };
 		9474F31C2826A5420047FA1B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F31B2826A5420047FA1B /* BaseViewController.swift */; };
 		9474F31F2826A77A0047FA1B /* AvatarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F31E2826A77A0047FA1B /* AvatarTableViewCell.swift */; };
+		9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F320282757FD0047FA1B /* CommonTableViewCell.swift */; };
+		9474F323282757FD0047FA1B /* CommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9474F321282757FD0047FA1B /* CommonTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		9474F316282673100047FA1B /* PunchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunchPageViewController.swift; sourceTree = "<group>"; };
 		9474F31B2826A5420047FA1B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9474F31E2826A77A0047FA1B /* AvatarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarTableViewCell.swift; sourceTree = "<group>"; };
+		9474F320282757FD0047FA1B /* CommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
+		9474F321282757FD0047FA1B /* CommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTableViewCell.xib; sourceTree = "<group>"; };
 		B4F3BC5EC4DAD04FF995AB05 /* Pods-MyTodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTodoList.debug.xcconfig"; path = "Target Support Files/Pods-MyTodoList/Pods-MyTodoList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				9474F31E2826A77A0047FA1B /* AvatarTableViewCell.swift */,
+				9474F320282757FD0047FA1B /* CommonTableViewCell.swift */,
+				9474F321282757FD0047FA1B /* CommonTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -253,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9474F2F3282661870047FA1B /* LaunchScreen.storyboard in Resources */,
+				9474F323282757FD0047FA1B /* CommonTableViewCell.xib in Resources */,
 				9474F2F0282661870047FA1B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */,
 				9474F2E7282661850047FA1B /* AppDelegate.swift in Sources */,
 				9474F315282672E30047FA1B /* QuadrantsPageViewController.swift in Sources */,
 				9474F309282663F30047FA1B /* Config.swift in Sources */,
