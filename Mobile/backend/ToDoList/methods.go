@@ -55,9 +55,9 @@ func Heartbeat(c *gin.Context) {
 	}
 
 	// 如果携带token && account 则是检测挤号心跳包
-	var userMessage Users
+	var userMessage UsersAuth
 	var re *gorm.DB
-	re = db.Model(Users{}).
+	re = db.Model(UsersAuth{}).
 		Where("account = ?", params.Account).
 		First(&userMessage)
 
@@ -89,9 +89,9 @@ func Login(c *gin.Context) {
 	}
 
 	// find user
-	var userMessage Users
+	var userMessage UsersAuth
 	var re *gorm.DB
-	re = db.Model(Users{}).
+	re = db.Table("users_auth").
 		Where("account = ? AND password = ?", params.Account, params.Password).
 		First(&userMessage)
 
@@ -102,12 +102,13 @@ func Login(c *gin.Context) {
 
 	// update token
 	newToken := String(50)
-	res := db.Model(Users{}).
+	res := db.Table("users_auth").
 		Where("account = ? AND password = ?", params.Account, params.Password).
 		Update("token", newToken)
 
 	if res.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": res.Error.Error()})
+		return
 	}
 
 	// return res
@@ -122,14 +123,100 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	var cus Users
-	if err := c.ShouldBindJSON(&cus); err != nil {
+	var params RegisterParams
+	if err := c.ShouldBindJSON(&params); err != nil {
 		c.JSON(200, gin.H{"success": false, "error": err.Error()})
 		return
 	}
-	if err := db.Create(&cus).Error; err != nil {
+
+	userAuth := UsersAuth{Account: params.Account, Password: params.Password}
+	userMess := UsersMess{Account: params.Account, Nick: params.Nick}
+
+	if err := db.Table("users_auth").Create(&userAuth).Error; err != nil {
 		c.JSON(200, gin.H{"success": false, "error": err.Error()})
 		return
 	}
+
+	if err := db.Table("users_mess").Create(&userMess).Error; err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err.Error()})
+		return
+	}
+
 	c.JSON(200, gin.H{"success": true, "error": ""})
+}
+
+func ChangeUserMess(c *gin.Context) {
+	if err := MyHeaderValidate(c); err != nil {
+		c.AbortWithStatus(404)
+		return
+	}
+
+	var mess UsersMess
+	if err := c.ShouldBindJSON(&mess); err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err.Error()})
+		return
+	}
+
+	// 验证token值是否合法
+	// find user
+	var userMessage UsersAuth
+	var re *gorm.DB
+	re = db.Table("users_auth").
+		Where("account = ? AND token = ?", mess.Account, mess.Token).
+		First(&userMessage)
+	if re.Error != nil {
+		c.JSON(200, gin.H{"success": false, "error": "Auth fault"})
+		return
+	}
+
+	// 更新信息表
+	var res *gorm.DB
+	res = db.Table("users_mess").Updates(mess)
+	if res.Error != nil {
+		c.JSON(200, gin.H{"success": false, "error": res.Error.Error()})
+		return
+	}
+	if res.RowsAffected == 0 {
+		c.JSON(200, gin.H{"success": false, "error": "Affected 0 rows!"})
+	} else {
+		c.JSON(200, gin.H{"success": true, "error": ""})
+	}
+}
+
+func ResetPassWord(c *gin.Context) {
+	if err := MyHeaderValidate(c); err != nil {
+		c.AbortWithStatus(404)
+		return
+	}
+
+	var params ResetPassWordParams
+	if err := c.ShouldBindJSON(&params); err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err.Error()})
+		return
+	}
+
+	// 验证旧密码
+	var user UsersAuth
+	var re *gorm.DB
+	re = db.Table("users_auth").
+		Where("account = ? AND password = ?", params.Account, params.Password).
+		First(&user)
+
+	if re.Error != nil {
+		c.JSON(200, gin.H{"success": false, "error": re.Error.Error()})
+		return
+	}
+
+	// 更新密码和token
+	user.Password = params.NewPassword
+	user.Token = String(50)
+
+	var res *gorm.DB
+	res = db.Table("users_auth").Updates(user)
+	if res.Error != nil {
+		c.JSON(200, gin.H{"success": false, "error": res.Error.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"success": true, "token": user.Token, "error": ""})
 }

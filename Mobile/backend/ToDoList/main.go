@@ -18,7 +18,7 @@ func main() {
 	password := "52Swift66@"
 	host := "127.0.0.1"
 	port := 3306
-	Dbname := "today_news"
+	Dbname := "todolist"
 	timeout := "10s"
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local&timeout=%s", username, password, host, port, Dbname, timeout)
@@ -34,9 +34,11 @@ func main() {
 	}
 
 	// methods
-	r.POST("/login", Login)         // 登录
-	r.POST("/register", Register)   // 注册
-	r.POST("/heartbeat", Heartbeat) // 心跳机制
+	r.POST("/login", Login)                   // 登录
+	r.POST("/register", Register)             // 注册
+	r.POST("/changeUserMess", ChangeUserMess) // 修改信息
+	r.POST("/resetPassWord", ResetPassWord)   // 重置密码
+	r.POST("/heartbeat", Heartbeat)           // 心跳机制
 
 	_ = r.Run(":60035")
 }
