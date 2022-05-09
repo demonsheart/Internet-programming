@@ -68,7 +68,7 @@ extension Service: ServiceProtocol {
                             UserDefaults.standard.set(true, forKey: "LoginState")
                             
                             // 开启心跳定时器
-                            UserConfig.shared.startHeartbeatForLogin()
+//                            UserConfig.shared.startHeartbeatForLogin()
                             
                             completion(true)
                         } else {

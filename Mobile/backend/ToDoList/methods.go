@@ -57,7 +57,7 @@ func Heartbeat(c *gin.Context) {
 	// 如果携带token && account 则是检测挤号心跳包
 	var userMessage UsersAuth
 	var re *gorm.DB
-	re = db.Model(UsersAuth{}).
+	re = db.Table("users_auth").
 		Where("account = ?", params.Account).
 		First(&userMessage)
 

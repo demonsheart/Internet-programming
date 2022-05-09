@@ -22,7 +22,6 @@ class PersonalPageViewController: BaseViewController {
         table.register(UINib(nibName: "CommonTableViewCell", bundle: nil), forCellReuseIdentifier: "Common")
         table.separatorStyle = .none
         table.backgroundColor = TDLColor.bgGreen
-        //        table.allowsSelection = false
         
         UserDefaults.standard.rx.observe(Bool.self, "LoginState")
             .skip(1)
@@ -114,8 +113,9 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
         }
         
         if let _ = tableView.cellForRow(at: indexPath) as? QuitLoginTableViewCell {
-            // TODO: 退出登录
-            print("退出登录")
+            UserConfig.shared.logout { ok in
+                if ok { tableView.reloadData() }
+            }
         }
     }
     
