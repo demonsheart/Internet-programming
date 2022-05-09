@@ -100,4 +100,8 @@ class LoginViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func registerTap(_ sender: UIButton) {
+        print("register")
+//        self.present(, animated: true)
+    }
 }
