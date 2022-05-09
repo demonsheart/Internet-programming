@@ -43,7 +43,9 @@ class LoginViewController: UIViewController {
             .map{ $0.count >= minimalPasswordLength }
             .share(replay: 1)
         
-        let everythingValidate = Observable.combineLatest(accountValidate, passwordValidate) { $0 && $1 }
+        let checkRelay = BehaviorRelay(value: false)
+        
+        let everythingValidate = Observable.combineLatest(accountValidate, passwordValidate, checkRelay) { $0 && $1 && $2 }
             .share(replay: 1)
         
         accountValidate.asObservable().skip(1).subscribe { [weak self] ok in
@@ -66,6 +68,7 @@ class LoginViewController: UIViewController {
                 } else {
                     self?.checkBox.tintColor = .lightGray
                 }
+                checkRelay.accept(self?.checkBox.isSelected ?? false)
             }).disposed(by: disposeBag)
         
         loginButton.rx.tap
@@ -84,7 +87,6 @@ class LoginViewController: UIViewController {
             if isLogin {
                 self?.dismiss(animated: true, completion: nil)
             } else {
-                //                self?.errMessageLabel.isHidden = false
                 self?.errMessageLabel.text = "登录失败"
             }
         }
