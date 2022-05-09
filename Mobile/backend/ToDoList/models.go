@@ -98,8 +98,8 @@ type LoginParams struct {
 
 type RegisterParams struct {
 	Email    string `json:"email" binding:"required"`
+	Code     string `json:"code" binding:"required"`
 	Password string `json:"password" binding:"required"`
-	Nick     string `json:"nick" binding:"required"`
 }
 
 type ResetPassWordParams struct {

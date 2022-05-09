@@ -3,13 +3,16 @@ package main
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
+	"github.com/jordan-wright/email"
 	"gorm.io/gorm"
 	"math/rand"
 	"net/http"
+	"net/mail"
+	"net/smtp"
 	"time"
 )
 
-// 产生随机数
+// 产生随机字符串
 const charset = "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 var seededRand *rand.Rand = rand.New(
@@ -25,6 +28,12 @@ func StringWithCharset(length int, charset string) string {
 
 func String(length int) string {
 	return StringWithCharset(length, charset)
+}
+
+// EmailValid 验证
+func EmailValid(email string) bool {
+	_, err := mail.ParseAddress(email)
+	return err == nil
 }
 
 func MyHeaderValidate(c *gin.Context) error {
@@ -59,7 +68,7 @@ func Heartbeat(c *gin.Context) {
 	var re *gorm.DB
 	re = db.Table("users_auth").
 		Where("email = ?", params.Email).
-		First(&userMessage)
+		Take(&userMessage)
 
 	if re.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": re.Error.Error()})
@@ -93,7 +102,7 @@ func Login(c *gin.Context) {
 	var re *gorm.DB
 	re = db.Table("users_auth").
 		Where("email = ? AND password = ?", params.Email, params.Password).
-		First(&userMessage)
+		Take(&userMessage)
 
 	if re.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": re.Error.Error()})
@@ -130,8 +139,27 @@ func Register(c *gin.Context) {
 	}
 
 	userAuth := UsersAuth{Email: params.Email, Password: params.Password}
-	userMess := UsersMess{Email: params.Email, Nick: params.Nick}
+	userMess := UsersMess{Email: params.Email, Nick: "nick"} // 默认填充 nick
 
+	// 验证验证码
+	if value, ok := email2code.Load(params.Email); !ok || params.Code != value {
+		c.JSON(200, gin.H{"success": false, "error": "Code Auth fault"})
+		return
+	}
+
+	// 查看是否被注册过
+	var userAu UsersAuth
+	result := db.Table("users_auth").Where("email = ?", params.Email).Limit(1).Find(&userAu)
+	if err := result.Error; err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err.Error()})
+		return
+	}
+	if result.RowsAffected != 0 { // 已注册 error = -1表示
+		c.JSON(200, gin.H{"success": false, "error": -1})
+		return
+	}
+
+	// 创建账号
 	if err := db.Table("users_auth").Create(&userAuth).Error; err != nil {
 		c.JSON(200, gin.H{"success": false, "error": err.Error()})
 		return
@@ -163,7 +191,7 @@ func ChangeUserMess(c *gin.Context) {
 	var re *gorm.DB
 	re = db.Table("users_auth").
 		Where("email = ? AND token = ?", mess.Email, mess.Token).
-		First(&userMessage)
+		Take(&userMessage)
 	if re.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": "Auth fault"})
 		return
@@ -201,14 +229,14 @@ func GetUserMess(c *gin.Context) {
 	var re *gorm.DB
 	re = db.Table("users_auth").
 		Where("email = ? AND token = ?", mess.Email, mess.Token).
-		First(&userAuth)
+		Take(&userAuth)
 	if re.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": "Auth fault"})
 		return
 	}
 
 	// 获取用户信息
-	if err := db.Table("users_mess").Where("email = ?", mess.Email).First(&mess).Error; err != nil {
+	if err := db.Table("users_mess").Where("email = ?", mess.Email).Take(&mess).Error; err != nil {
 		c.JSON(200, gin.H{"success": false, "error": "No record"})
 		return
 	}
@@ -233,7 +261,7 @@ func ResetPassWord(c *gin.Context) {
 	var re *gorm.DB
 	re = db.Table("users_auth").
 		Where("email = ? AND password = ?", params.Email, params.Password).
-		First(&user)
+		Take(&user)
 
 	if re.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": re.Error.Error()})
@@ -252,4 +280,51 @@ func ResetPassWord(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{"success": true, "token": user.Token, "error": ""})
+}
+
+func SendAuthCode(c *gin.Context) {
+	if err := MyHeaderValidate(c); err != nil {
+		c.AbortWithStatus(404)
+		return
+	}
+
+	// 参数
+	type paramsForCode struct {
+		Email string `json:"email" binding:"required"`
+	}
+	var params paramsForCode
+	if err := c.ShouldBindJSON(&params); err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err.Error()})
+		return
+	}
+
+	// 邮箱验证
+	if !EmailValid(params.Email) {
+		c.JSON(200, gin.H{"success": false, "error": "Invalid email"})
+		return
+	}
+
+	// 发送email 随机验证码
+	code := String(6)
+	e := email.NewEmail()
+	//设置发送方的邮箱
+	e.From = "hrj<a2509875617@163.com>"
+	// 设置接收方的邮箱
+	e.To = []string{params.Email}
+	//设置主题
+	e.Subject = "注册验证码"
+	//设置文件发送的内容
+	e.Text = []byte("您的注册验证码为： " + code)
+	//设置服务器相关的配置
+	err := e.Send("smtp.163.com:25", smtp.PlainAuth("", "a2509875617@163.com", "HTKBUHMYFGRKKRTF", "smtp.163.com"))
+	if err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err})
+		return
+	}
+
+	// 保存验证码
+	email2code.Store(params.Email, code)
+	//fmt.Println(email2code.Load(params.Email))
+
+	c.JSON(200, gin.H{"success": true, "error": ""})
 }

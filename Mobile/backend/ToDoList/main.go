@@ -9,10 +9,12 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"net/smtp"
+	"sync"
 )
 
 var db *gorm.DB
 var err error
+var email2code sync.Map // 保存临时验证码键值对
 
 func main() {
 
@@ -36,13 +38,14 @@ func main() {
 	}
 
 	// methods
-	r.POST("/login", Login) // 登录
-	//r.POST("/register", Register)             // 注册
+	r.POST("/login", Login)                   // 登录
+	r.POST("/sentAuthCode", SendAuthCode)     // 获取验证码
+	r.POST("/register", Register)             // 注册
 	r.POST("/changeUserMess", ChangeUserMess) // 修改信息
 	r.POST("/getUserMess", GetUserMess)       // 获取信息
 	//r.POST("/resetPassWord", ResetPassWord)   // 重置密码
 	r.POST("/heartbeat", Heartbeat) // 心跳机制
-	r.GET("/sendTest", SendEmailTest)
+	//r.GET("/sendTest", SendEmailTest)
 
 	_ = r.Run(":60035")
 }
