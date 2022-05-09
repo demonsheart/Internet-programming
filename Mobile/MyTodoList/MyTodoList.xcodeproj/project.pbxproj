@@ -25,6 +25,8 @@
 		9474F323282757FD0047FA1B /* CommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9474F321282757FD0047FA1B /* CommonTableViewCell.xib */; };
 		9474F325282803820047FA1B /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F324282803820047FA1B /* UserConfig.swift */; };
 		9474F328282803CE0047FA1B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F327282803CE0047FA1B /* Service.swift */; };
+		9474F32B2828A3560047FA1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F3292828A3550047FA1B /* LoginViewController.swift */; };
+		9474F32C2828A3560047FA1B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9474F32A2828A3550047FA1B /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		9474F321282757FD0047FA1B /* CommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTableViewCell.xib; sourceTree = "<group>"; };
 		9474F324282803820047FA1B /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
 		9474F327282803CE0047FA1B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		9474F3292828A3550047FA1B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9474F32A2828A3550047FA1B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		B4F3BC5EC4DAD04FF995AB05 /* Pods-MyTodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTodoList.debug.xcconfig"; path = "Target Support Files/Pods-MyTodoList/Pods-MyTodoList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -167,6 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				9474F324282803820047FA1B /* UserConfig.swift */,
+				9474F3292828A3550047FA1B /* LoginViewController.swift */,
+				9474F32A2828A3550047FA1B /* LoginViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9474F32C2828A3560047FA1B /* LoginViewController.xib in Resources */,
 				9474F2F3282661870047FA1B /* LaunchScreen.storyboard in Resources */,
 				9474F323282757FD0047FA1B /* CommonTableViewCell.xib in Resources */,
 				9474F2F0282661870047FA1B /* Assets.xcassets in Resources */,
@@ -330,6 +337,7 @@
 				9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */,
 				9474F328282803CE0047FA1B /* Service.swift in Sources */,
 				9474F2E7282661850047FA1B /* AppDelegate.swift in Sources */,
+				9474F32B2828A3560047FA1B /* LoginViewController.swift in Sources */,
 				9474F325282803820047FA1B /* UserConfig.swift in Sources */,
 				9474F315282672E30047FA1B /* QuadrantsPageViewController.swift in Sources */,
 				9474F309282663F30047FA1B /* Config.swift in Sources */,

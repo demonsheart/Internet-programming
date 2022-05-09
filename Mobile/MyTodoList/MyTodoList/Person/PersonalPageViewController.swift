@@ -78,8 +78,13 @@ extension PersonalPageViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Avatar", for: indexPath) as! AvatarTableViewCell
-            cell.tapCallBack = {
+            cell.tapCallBack = { [weak self] in
                 // TODO: 未登录则登录 已登陆则跳转详情
+                if !UserConfig.shared.isLogin {
+                    self?.present(LoginViewController(), animated: true)
+                } else {
+                    
+                }
             }
             return cell
         } else if indexPath.section == 1 {

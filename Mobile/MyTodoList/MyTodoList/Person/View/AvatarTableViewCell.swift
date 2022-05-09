@@ -68,7 +68,6 @@ class AvatarTableViewCell: UITableViewCell {
     }
     
     @objc func tapAvatar() {
-        print("djsk")
         tapCallBack?()
     }
 
