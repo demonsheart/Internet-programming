@@ -49,7 +49,7 @@ func Heartbeat(c *gin.Context) {
 
 	var params HeartbeatParams
 	if err := c.ShouldBindJSON(&params); err != nil {
-		// 不携带token && account 是普通网络监测心跳包
+		// 不携带token && email 是普通网络监测心跳包
 		c.JSON(200, gin.H{"success": true, "error": ""})
 		return
 	}
@@ -58,7 +58,7 @@ func Heartbeat(c *gin.Context) {
 	var userMessage UsersAuth
 	var re *gorm.DB
 	re = db.Table("users_auth").
-		Where("account = ?", params.Account).
+		Where("email = ?", params.Email).
 		First(&userMessage)
 
 	if re.Error != nil {
@@ -92,7 +92,7 @@ func Login(c *gin.Context) {
 	var userMessage UsersAuth
 	var re *gorm.DB
 	re = db.Table("users_auth").
-		Where("account = ? AND password = ?", params.Account, params.Password).
+		Where("email = ? AND password = ?", params.Email, params.Password).
 		First(&userMessage)
 
 	if re.Error != nil {
@@ -103,7 +103,7 @@ func Login(c *gin.Context) {
 	// update token
 	newToken := String(50)
 	res := db.Table("users_auth").
-		Where("account = ? AND password = ?", params.Account, params.Password).
+		Where("email = ? AND password = ?", params.Email, params.Password).
 		Update("token", newToken)
 
 	if res.Error != nil {
@@ -129,8 +129,8 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	userAuth := UsersAuth{Account: params.Account, Password: params.Password}
-	userMess := UsersMess{Account: params.Account, Nick: params.Nick}
+	userAuth := UsersAuth{Email: params.Email, Password: params.Password}
+	userMess := UsersMess{Email: params.Email, Nick: params.Nick}
 
 	if err := db.Table("users_auth").Create(&userAuth).Error; err != nil {
 		c.JSON(200, gin.H{"success": false, "error": err.Error()})
@@ -162,7 +162,7 @@ func ChangeUserMess(c *gin.Context) {
 	var userMessage UsersAuth
 	var re *gorm.DB
 	re = db.Table("users_auth").
-		Where("account = ? AND token = ?", mess.Account, mess.Token).
+		Where("email = ? AND token = ?", mess.Email, mess.Token).
 		First(&userMessage)
 	if re.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": "Auth fault"})
@@ -200,7 +200,7 @@ func GetUserMess(c *gin.Context) {
 	var userAuth UsersAuth
 	var re *gorm.DB
 	re = db.Table("users_auth").
-		Where("account = ? AND token = ?", mess.Account, mess.Token).
+		Where("email = ? AND token = ?", mess.Email, mess.Token).
 		First(&userAuth)
 	if re.Error != nil {
 		c.JSON(200, gin.H{"success": false, "error": "Auth fault"})
@@ -208,7 +208,7 @@ func GetUserMess(c *gin.Context) {
 	}
 
 	// 获取用户信息
-	if err := db.Table("users_mess").Where("account = ?", mess.Account).First(&mess).Error; err != nil {
+	if err := db.Table("users_mess").Where("email = ?", mess.Email).First(&mess).Error; err != nil {
 		c.JSON(200, gin.H{"success": false, "error": "No record"})
 		return
 	}
@@ -232,7 +232,7 @@ func ResetPassWord(c *gin.Context) {
 	var user UsersAuth
 	var re *gorm.DB
 	re = db.Table("users_auth").
-		Where("account = ? AND password = ?", params.Account, params.Password).
+		Where("email = ? AND password = ?", params.Email, params.Password).
 		First(&user)
 
 	if re.Error != nil {

@@ -1,10 +1,11 @@
-module TodayNews
+module ToDoList
 
 go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/validator/v10 v10.4.1
+	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
 	gorm.io/driver/mysql v1.3.3
 	gorm.io/gorm v1.23.4
 )

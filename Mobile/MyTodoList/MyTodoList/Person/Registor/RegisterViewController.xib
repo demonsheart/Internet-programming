@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="MyTodoList" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="MyTodoList" customModuleProvider="target">
             <connections>
                 <outlet property="checkBox" destination="4Ww-G5-Zrt" id="nD7-Gz-Q2j"/>
                 <outlet property="emailTextField" destination="Dg0-7j-ibn" id="aOS-Wz-osi"/>
@@ -43,8 +43,8 @@
                         <action selector="registerTap:" destination="-1" eventType="touchUpInside" id="iZH-m8-TiY"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邮箱登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rez-J6-MO5">
-                    <rect key="frame" x="144.5" y="131" width="125.5" height="37"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号密码登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rez-J6-MO5">
+                    <rect key="frame" x="113" y="131" width="188" height="37"/>
                     <fontDescription key="fontDescription" type="system" pointSize="31"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -54,8 +54,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入邮箱"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="邮箱"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入账号/手机号/邮箱"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="账号/手机号/邮箱"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
                             <color key="value" name="textRed"/>
                         </userDefinedRuntimeAttribute>
@@ -149,7 +149,7 @@
                     </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邮箱或密码错误" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuP-d5-zjW">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号或密码错误" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuP-d5-zjW">
                     <rect key="frame" x="50" y="355.5" width="314" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.92156862750000001" green="0.25882352939999997" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

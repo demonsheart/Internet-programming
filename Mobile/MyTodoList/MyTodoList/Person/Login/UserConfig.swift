@@ -15,21 +15,21 @@ class UserConfig {
     
     private var heartbeatForLoginTimer: Timer?
     
+    var email: String {
+        get {
+            userDefault.string(forKey: "Email") ?? ""
+        }
+        set(value) {
+            userDefault.set(value, forKey: "Email")
+        }
+    }
+    
     var isLogin: Bool {
         get {
             userDefault.bool(forKey: "LoginState")
         }
         set(value) {
             userDefault.set(value, forKey: "LoginState")
-        }
-    }
-    
-    var account: String {
-        get {
-            userDefault.string(forKey: "Account") ?? ""
-        }
-        set(value) {
-            userDefault.set(value, forKey: "Account")
         }
     }
     
@@ -66,15 +66,6 @@ class UserConfig {
         }
         set(value) {
             userDefault.set(value, forKey: "Phone")
-        }
-    }
-    
-    var email: String {
-        get {
-            userDefault.string(forKey: "Email") ?? ""
-        }
-        set(value) {
-            userDefault.set(value, forKey: "Email")
         }
     }
     

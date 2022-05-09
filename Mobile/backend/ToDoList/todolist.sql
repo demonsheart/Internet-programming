@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 08/05/2022 16:59:28
+ Date: 09/05/2022 23:19:59
 */
 
 SET NAMES utf8mb4;
@@ -23,18 +23,19 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `users_auth`;
 CREATE TABLE `users_auth` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique_account` (`account`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `unique_account` (`email`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of users_auth
 -- ----------------------------
 BEGIN;
-INSERT INTO `users_auth` (`id`, `account`, `password`, `token`) VALUES (1, 'demodemo', 'C514C91E4ED341F263E458D44B3BB0A7', 'GIHH1o3hDbeNgrUiAKeXOdk1yTjQSBFCiv86P50bIBZd6ba2tl');
+INSERT INTO `users_auth` (`id`, `email`, `password`, `token`) VALUES (1, '2509875617@qq.com', 'C514C91E4ED341F263E458D44B3BB0A7', 'ebLFe1dqOAUSt8JO6Wl1y0Lsd1jN0TMMBxOjY1Vku3Xa6jkXmV');
+INSERT INTO `users_auth` (`id`, `email`, `password`, `token`) VALUES (6, 'a2509875617@gmail.com', 'C514C91E4ED341F263E458D44B3BB0A7', 'xu1NKTaA24Z8enbwNr4PFJU6xUpxn9luzeYT2i279wPuKiP6mV');
 COMMIT;
 
 -- ----------------------------
@@ -42,20 +43,20 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `users_mess`;
 CREATE TABLE `users_mess` (
-  `account` varchar(50) NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `nick` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `phone` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`account`),
-  CONSTRAINT `fk_account` FOREIGN KEY (`account`) REFERENCES `users_auth` (`account`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`email`) USING BTREE,
+  CONSTRAINT `fk_email` FOREIGN KEY (`email`) REFERENCES `users_auth` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of users_mess
 -- ----------------------------
 BEGIN;
-INSERT INTO `users_mess` (`account`, `nick`, `avatar`, `phone`, `email`) VALUES ('demodemo', 'demo', 'https://img1.baidu.com/it/u=3794642170,1888722368&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=563', '88888888', '88888888@qq.com');
+INSERT INTO `users_mess` (`email`, `nick`, `avatar`, `phone`) VALUES ('2509875617@qq.com', 'miaomiao', 'https://img1.baidu.com/it/u=3794642170,1888722368&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=563', '9999999');
+INSERT INTO `users_mess` (`email`, `nick`, `avatar`, `phone`) VALUES ('a2509875617@gmail.com', 'giao', 'https://img1.baidu.com/it/u=3794642170,1888722368&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=563', '7777777');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -12,7 +12,7 @@ import Alamofire
 let session = URLSession.shared
 
 protocol ServiceProtocol {
-    func login(account: String, password: String, completion: @escaping (Bool) -> Void)
+    func login(email: String, password: String, completion: @escaping (Bool) -> Void)
     func heartbeatForLogin(completion: @escaping (Bool) -> Void)
     func getUserMess(completion: @escaping (Bool) -> Void)
 //    func heartbeatForConnnect(completion: @escaping (Bool) -> Void)
@@ -50,14 +50,14 @@ extension Service: ServiceProtocol {
     
     var userParams: [String : Any] {
         return [
-            "account": UserConfig.shared.account,
+            "email": UserConfig.shared.email,
             "token": UserConfig.shared.token
         ]
     }
     
-    func login(account: String, password: String, completion: @escaping (Bool) -> Void) {
+    func login(email: String, password: String, completion: @escaping (Bool) -> Void) {
         let params: [String: String] = [
-            "account": account,
+            "email": email,
             "password": password
         ]
         
@@ -72,7 +72,7 @@ extension Service: ServiceProtocol {
                             let token = json["data"]["token"].stringValue
                             print(token)
                             UserConfig.shared.token = token
-                            UserConfig.shared.account = account
+                            UserConfig.shared.email = email
                             UserConfig.shared.isLogin = true
                             
                             // 开启心跳定时器

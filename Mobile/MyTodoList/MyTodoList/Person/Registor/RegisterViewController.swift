@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  TodayNews
 //
 //  Created by herongjin on 2022/4/17.
@@ -15,7 +15,7 @@ import SkyFloatingLabelTextField
 private let minimalUsernameLength = 8
 private let minimalPasswordLength = 8
 
-class LoginViewController: UIViewController {
+class RegisterViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
@@ -49,7 +49,7 @@ class LoginViewController: UIViewController {
             .share(replay: 1)
         
         emailValidate.asObservable().skip(1).subscribe { [weak self] ok in
-            self?.emailTextField.errorMessage = ok ? "" : "长度大于\(minimalUsernameLength)且必须为合法邮箱"
+            self?.emailTextField.errorMessage = ok ? "" : "长度大于\(minimalUsernameLength)且必须为数字或字母组合"
         }.disposed(by: disposeBag)
         
         passwordValidate.asObservable().skip(1).subscribe { [weak self] ok in
@@ -102,6 +102,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func registerTap(_ sender: UIButton) {
         print("register")
-        self.present(RegisterViewController(), animated: true)
+//        self.present(, animated: true)
     }
 }

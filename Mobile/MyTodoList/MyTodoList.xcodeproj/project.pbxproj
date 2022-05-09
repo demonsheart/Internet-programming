@@ -27,6 +27,8 @@
 		9474F328282803CE0047FA1B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F327282803CE0047FA1B /* Service.swift */; };
 		9474F32B2828A3560047FA1B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9474F3292828A3550047FA1B /* LoginViewController.swift */; };
 		9474F32C2828A3560047FA1B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9474F32A2828A3550047FA1B /* LoginViewController.xib */; };
+		9494B717282953590066BE5B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9494B715282953590066BE5B /* RegisterViewController.swift */; };
+		9494B718282953590066BE5B /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9494B716282953590066BE5B /* RegisterViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		9474F327282803CE0047FA1B /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		9474F3292828A3550047FA1B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9474F32A2828A3550047FA1B /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		9494B715282953590066BE5B /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		9494B716282953590066BE5B /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		B4F3BC5EC4DAD04FF995AB05 /* Pods-MyTodoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTodoList.debug.xcconfig"; path = "Target Support Files/Pods-MyTodoList/Pods-MyTodoList.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +184,8 @@
 		9474F31928269ED30047FA1B /* Registor */ = {
 			isa = PBXGroup;
 			children = (
+				9494B715282953590066BE5B /* RegisterViewController.swift */,
+				9494B716282953590066BE5B /* RegisterViewController.xib */,
 			);
 			path = Registor;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9474F32C2828A3560047FA1B /* LoginViewController.xib in Resources */,
+				9494B718282953590066BE5B /* RegisterViewController.xib in Resources */,
 				9474F2F3282661870047FA1B /* LaunchScreen.storyboard in Resources */,
 				9474F323282757FD0047FA1B /* CommonTableViewCell.xib in Resources */,
 				9474F2F0282661870047FA1B /* Assets.xcassets in Resources */,
@@ -345,6 +352,7 @@
 				9474F312282672A30047FA1B /* MonthPageViewController.swift in Sources */,
 				9474F3062826632F0047FA1B /* Extensions.swift in Sources */,
 				9474F31C2826A5420047FA1B /* BaseViewController.swift in Sources */,
+				9494B717282953590066BE5B /* RegisterViewController.swift in Sources */,
 				9474F30C28266B6A0047FA1B /* HomePageViewController.swift in Sources */,
 				9474F30F28266BA60047FA1B /* PersonalPageViewController.swift in Sources */,
 				9474F2E9282661850047FA1B /* SceneDelegate.swift in Sources */,

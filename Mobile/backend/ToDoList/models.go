@@ -77,34 +77,33 @@ type UsersAuth struct {
 	// old key need to define as pointer type so that we can know if is set by nil.
 	OldKeyValue *int   `gorm:"-" json:"old_key_value,omitempty"`
 	ID          int    `gorm:"column:id;primaryKey;unique" json:"-"`
-	Account     string `gorm:"column:account" json:"account" binding:"required"`
+	Email       string `gorm:"column:email" json:"email" binding:"required"`
 	Password    string `gorm:"column:password" json:"password" binding:"required"`
 	Token       string `gorm:"column:token" json:"token"`
 }
 
 // UsersMess 表
 type UsersMess struct {
-	Account string `gorm:"column:account;primaryKey" json:"account" binding:"required"`
-	Nick    string `gorm:"column:nick" json:"nick"`
-	Avatar  string `gorm:"column:avatar" json:"avatar"`
-	Phone   string `gorm:"column:phone" json:"phone"`
-	Email   string `gorm:"column:email" json:"email"`
-	Token   string `gorm:"-" json:"token" binding:"required"` // 获取、修改信息验证用
+	Email  string `gorm:"column:email;primaryKey" json:"email" binding:"required"`
+	Nick   string `gorm:"column:nick" json:"nick"`
+	Avatar string `gorm:"column:avatar" json:"avatar"`
+	Phone  string `gorm:"column:phone" json:"phone"`
+	Token  string `gorm:"-" json:"token" binding:"required"` // 获取、修改信息验证用
 }
 
 type LoginParams struct {
-	Account  string `json:"account" binding:"required"`
+	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
 type RegisterParams struct {
-	Account  string `json:"account" binding:"required"`
+	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 	Nick     string `json:"nick" binding:"required"`
 }
 
 type ResetPassWordParams struct {
-	Account     string `json:"account" binding:"required"`
+	Email       string `json:"email" binding:"required"`
 	Password    string `json:"password" binding:"required"`
 	NewPassword string `json:"new_password" binding:"required"`
 	//Token       string `gorm:"-" json:"token" binding:"required"` // 验证用
@@ -112,6 +111,6 @@ type ResetPassWordParams struct {
 
 // HeartbeatParams 一般而言 token应携带了登录的账号密码信息 但这里没实现 故也需要一个account确定用户
 type HeartbeatParams struct {
-	Account string `json:"account" binding:"required"`
-	Token   string `json:"token" binding:"required"`
+	Email string `json:"email" binding:"required"`
+	Token string `json:"token" binding:"required"`
 }
