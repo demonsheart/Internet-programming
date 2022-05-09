@@ -89,7 +89,7 @@ type UsersMess struct {
 	Avatar  string `gorm:"column:avatar" json:"avatar"`
 	Phone   string `gorm:"column:phone" json:"phone"`
 	Email   string `gorm:"column:email" json:"email"`
-	Token   string `gorm:"-" json:"token" binding:"required"` // 修改信息验证用
+	Token   string `gorm:"-" json:"token" binding:"required"` // 获取、修改信息验证用
 }
 
 type LoginParams struct {

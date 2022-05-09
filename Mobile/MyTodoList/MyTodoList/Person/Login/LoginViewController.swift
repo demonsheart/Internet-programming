@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         self.errMessageLabel.isHidden = false
         self.errMessageLabel.text = ""
         
-        accountTextField.text = UserDefaults.standard.string(forKey: "account")
+        accountTextField.text = UserConfig.shared.account
         
         let accountValidate = accountTextField.rx.text.orEmpty
             .map{ $0.count >= minimalUsernameLength && $0.isAlphanumeric }

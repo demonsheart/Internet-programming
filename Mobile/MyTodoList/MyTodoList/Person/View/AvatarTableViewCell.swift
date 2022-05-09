@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class AvatarTableViewCell: UITableViewCell {
     
     // 未登录则登录 已登陆则跳转详情
     var tapCallBack: (() -> Void)?
     
+    var disposeBag = DisposeBag()
+    
     lazy var imgView: UIImageView = {
         let view = UIImageView()
-        view.sd_setImage(with: URL(string: ""), placeholderImage: UIImage(named: "default_avatar"))
-//        view.contentMode = .scaleToFill
         view.isUserInteractionEnabled = true
         
         let ges = UITapGestureRecognizer(target: self, action: #selector(tapAvatar))
@@ -29,7 +31,6 @@ class AvatarTableViewCell: UITableViewCell {
         label.textAlignment = .center
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 16)
-        label.text = "登录"
         
         label.isUserInteractionEnabled = true
         let ges = UITapGestureRecognizer(target: self, action: #selector(tapAvatar))
@@ -52,6 +53,12 @@ class AvatarTableViewCell: UITableViewCell {
             make.centerX.equalToSuperview()
             make.top.equalTo(imgView.snp.bottom).offset(10)
         }
+        
+        UserDefaults.standard.rx.observe(Bool.self, "LoginState")
+            .subscribe(onNext: { [weak self] ok in
+                self?.updateUserMess(ok ?? false)
+            })
+            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -70,5 +77,19 @@ class AvatarTableViewCell: UITableViewCell {
     @objc func tapAvatar() {
         tapCallBack?()
     }
-
+    
+    func updateUserMess(_ ok: Bool) {
+        if ok {
+            Service.shared.getUserMess { [weak self] success in
+                if success {
+                    self?.imgView.sd_setImage(with: URL(string: UserConfig.shared.avatar), placeholderImage: UIImage(named: "default_avatar"))
+                    self?.nameLabel.text = UserConfig.shared.nick
+                }
+            }
+        } else {
+            imgView.image = UIImage(named: "default_avatar")
+            nameLabel.text = "请登录"
+        }
+    }
+    
 }

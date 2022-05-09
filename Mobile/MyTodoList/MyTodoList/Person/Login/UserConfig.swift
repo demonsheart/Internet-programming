@@ -24,6 +24,60 @@ class UserConfig {
         }
     }
     
+    var account: String {
+        get {
+            userDefault.string(forKey: "Account") ?? ""
+        }
+        set(value) {
+            userDefault.set(value, forKey: "Account")
+        }
+    }
+    
+    var token: String {
+        get {
+            userDefault.string(forKey: "Token") ?? ""
+        }
+        set(value) {
+            userDefault.set(value, forKey: "Token")
+        }
+    }
+    
+    var avatar: String {
+        get {
+            userDefault.string(forKey: "Avatar") ?? ""
+        }
+        set(value) {
+            userDefault.set(value, forKey: "Avatar")
+        }
+    }
+    
+    var nick: String {
+        get {
+            userDefault.string(forKey: "Nick") ?? ""
+        }
+        set(value) {
+            userDefault.set(value, forKey: "Nick")
+        }
+    }
+    
+    var phone: String {
+        get {
+            userDefault.string(forKey: "Phone") ?? ""
+        }
+        set(value) {
+            userDefault.set(value, forKey: "Phone")
+        }
+    }
+    
+    var email: String {
+        get {
+            userDefault.string(forKey: "Email") ?? ""
+        }
+        set(value) {
+            userDefault.set(value, forKey: "Email")
+        }
+    }
+    
     init() {
         
     }
@@ -31,11 +85,11 @@ class UserConfig {
     func startHeartbeatForLogin() {
         stopHeartbeatForLogin()
         
-        heartbeatForLoginTimer = Timer(timeInterval: 5, repeats: true, block: { timer in
+        heartbeatForLoginTimer = Timer(timeInterval: 10, repeats: true, block: { timer in
              Service.shared.heartbeatForLogin { success in
                 if !success {
-                    UserDefaults.standard.set(false, forKey: "LoginState")
-                    UserDefaults.standard.set("", forKey: "token")
+                    UserConfig.shared.isLogin = false
+                    UserConfig.shared.token = ""
                     timer.invalidate()
                 }
             }
@@ -53,7 +107,7 @@ class UserConfig {
     
     func logout(completion: @escaping (Bool) -> Void) {
         isLogin = false
-        UserDefaults.standard.set("", forKey: "token")
+        token = ""
         completion(true)
     }
     

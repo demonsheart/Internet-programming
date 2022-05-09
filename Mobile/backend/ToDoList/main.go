@@ -37,6 +37,7 @@ func main() {
 	r.POST("/login", Login)                   // 登录
 	r.POST("/register", Register)             // 注册
 	r.POST("/changeUserMess", ChangeUserMess) // 修改信息
+	r.POST("/getUserMess", GetUserMess)       // 获取信息
 	r.POST("/resetPassWord", ResetPassWord)   // 重置密码
 	r.POST("/heartbeat", Heartbeat)           // 心跳机制
 

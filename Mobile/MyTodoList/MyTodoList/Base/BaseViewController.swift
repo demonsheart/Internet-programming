@@ -16,4 +16,21 @@ class BaseViewController: UIViewController {
         item.tintColor = TDLColor.iconGray
         return item
     }
+    
+    func configAlertForLogout() {
+        UserDefaults.standard.rx.observe(Bool.self, "LoginState")
+            .skip(1)
+            .subscribe(onNext: { [weak self] loginState in
+                guard let loginState = loginState else { return }
+                if !loginState {
+                    self?.showAlert(alertText: "提示信息", alertMessage: "您已退出登录")
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configAlertForLogout()
+    }
 }

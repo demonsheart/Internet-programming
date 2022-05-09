@@ -183,6 +183,39 @@ func ChangeUserMess(c *gin.Context) {
 	}
 }
 
+func GetUserMess(c *gin.Context) {
+	if err := MyHeaderValidate(c); err != nil {
+		c.AbortWithStatus(404)
+		return
+	}
+
+	var mess UsersMess
+	if err := c.ShouldBindJSON(&mess); err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err.Error()})
+		return
+	}
+
+	// 验证token值是否合法
+	// find user
+	var userAuth UsersAuth
+	var re *gorm.DB
+	re = db.Table("users_auth").
+		Where("account = ? AND token = ?", mess.Account, mess.Token).
+		First(&userAuth)
+	if re.Error != nil {
+		c.JSON(200, gin.H{"success": false, "error": "Auth fault"})
+		return
+	}
+
+	// 获取用户信息
+	if err := db.Table("users_mess").Where("account = ?", mess.Account).First(&mess).Error; err != nil {
+		c.JSON(200, gin.H{"success": false, "error": "No record"})
+		return
+	}
+	mess.Token = ""
+	c.JSON(200, gin.H{"success": true, "data": mess})
+}
+
 func ResetPassWord(c *gin.Context) {
 	if err := MyHeaderValidate(c); err != nil {
 		c.AbortWithStatus(404)
