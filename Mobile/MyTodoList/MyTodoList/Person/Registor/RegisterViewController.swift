@@ -11,6 +11,7 @@ import RxCocoa
 import RxRelay
 import CryptoKit
 import SkyFloatingLabelTextField
+import Toaster
 
 private let minimalUsernameLength = 8
 private let minimalPasswordLength = 8
@@ -117,8 +118,16 @@ class RegisterViewController: UIViewController {
     }
     
     private func sendCode() {
-        print("发送验证码")
-        // TODO: send code
+        guard let email = emailTextField.text else { return }
+        Service.shared.sendCode(email: email) { [weak self] (ok, err) in
+            if ok {
+                Toast(text: "验证码发送成功").show()
+            } else {
+                if err == -1 {
+                    self?.emailTextField.errorMessage = "邮箱已被注册"
+                }
+            }
+        }
     }
     
     private func configCountDown() {

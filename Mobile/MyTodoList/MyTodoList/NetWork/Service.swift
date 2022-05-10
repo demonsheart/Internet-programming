@@ -15,9 +15,10 @@ protocol ServiceProtocol {
     func login(email: String, password: String, completion: @escaping (Bool) -> Void)
     func heartbeatForLogin(completion: @escaping (Bool) -> Void)
     func getUserMess(completion: @escaping (Bool) -> Void)
-//    func heartbeatForConnnect(completion: @escaping (Bool) -> Void)
-//    func startHeartbeat()
-//    func stopHeartbeat()
+    func sendCode(email: String, completion: @escaping (Bool, Int) -> Void)
+    //    func heartbeatForConnnect(completion: @escaping (Bool) -> Void)
+    //    func startHeartbeat()
+    //    func stopHeartbeat()
     
     var isConnnected: Bool { get }
 }
@@ -64,27 +65,27 @@ extension Service: ServiceProtocol {
         AF.request(Service.domain + "login", method: .post, parameters: JSON(params), encoder: JSONParameterEncoder.default, headers: Service.defaultHeaders)
             .responseData { response in
                 switch response.result {
-                    case .success(let value):
-                        let json = try? JSON(data: value)
-                        guard let json = json else { completion(false); return }
-                        let success = json["success"].boolValue
-                        if success {
-                            let token = json["data"]["token"].stringValue
-                            print(token)
-                            UserConfig.shared.token = token
-                            UserConfig.shared.email = email
-                            UserConfig.shared.isLogin = true
-                            
-                            // 开启心跳定时器
-                            UserConfig.shared.startHeartbeatForLogin()
-                            
-                            completion(true)
-                        } else {
-                            completion(false)
-                        }
-                    case .failure(let err):
-                        print(err)
+                case .success(let value):
+                    let json = try? JSON(data: value)
+                    guard let json = json else { completion(false); return }
+                    let success = json["success"].boolValue
+                    if success {
+                        let token = json["data"]["token"].stringValue
+                        print(token)
+                        UserConfig.shared.token = token
+                        UserConfig.shared.email = email
+                        UserConfig.shared.isLogin = true
+                        
+                        // 开启心跳定时器
+                        UserConfig.shared.startHeartbeatForLogin()
+                        
+                        completion(true)
+                    } else {
                         completion(false)
+                    }
+                case .failure(let err):
+                    print(err)
+                    completion(false)
                 }
             }
     }
@@ -93,20 +94,20 @@ extension Service: ServiceProtocol {
         AF.request(Service.domain + "getUserMess", method: .post, parameters: JSON(userParams), encoder: JSONParameterEncoder.default, headers: Service.defaultHeaders)
             .responseData { response in
                 switch response.result {
-                    case .success(let value):
-                        let json = try? JSON(data: value)
-                        guard let json = json else { completion(false); return }
-                        let success = json["success"].boolValue
-                        if success {
-                            let data = json["data"]
-                            UserConfig.shared.avatar = data["avatar"].stringValue
-                            UserConfig.shared.nick = data["nick"].stringValue
-                            UserConfig.shared.phone = data["phone"].stringValue
-                            UserConfig.shared.email = data["email"].stringValue
-                        }
-                        completion(success)
-                    case .failure(_):
-                        print("=======已断开连接，尝试重连=======")
+                case .success(let value):
+                    let json = try? JSON(data: value)
+                    guard let json = json else { completion(false); return }
+                    let success = json["success"].boolValue
+                    if success {
+                        let data = json["data"]
+                        UserConfig.shared.avatar = data["avatar"].stringValue
+                        UserConfig.shared.nick = data["nick"].stringValue
+                        UserConfig.shared.phone = data["phone"].stringValue
+                        UserConfig.shared.email = data["email"].stringValue
+                    }
+                    completion(success)
+                case .failure(_):
+                    print("=======已断开连接，尝试重连=======")
                 }
             }
     }
@@ -115,13 +116,33 @@ extension Service: ServiceProtocol {
         AF.request(Service.domain + "heartbeat", method: .post, parameters: JSON(userParams), encoder: JSONParameterEncoder.default, headers: Service.defaultHeaders)
             .responseData { response in
                 switch response.result {
-                    case .success(let value):
-                        let json = try? JSON(data: value)
-                        guard let json = json else { completion(false); return }
-                        let success = json["success"].boolValue
-                        completion(success)
-                    case .failure(_):
-                        print("=======已断开连接，尝试重连=======")
+                case .success(let value):
+                    let json = try? JSON(data: value)
+                    guard let json = json else { completion(false); return }
+                    let success = json["success"].boolValue
+                    completion(success)
+                case .failure(_):
+                    print("=======已断开连接，尝试重连=======")
+                }
+            }
+    }
+    
+    func sendCode(email: String, completion: @escaping (Bool, Int) -> Void) { // int = -1 代表已被注册
+        let params: [String: String] = [
+            "email": email
+        ]
+        
+        AF.request(Service.domain + "sentAuthCode", method: .post, parameters: JSON(params), encoder: JSONParameterEncoder.default, headers: Service.defaultHeaders)
+            .responseData { response in
+                switch response.result {
+                case .success(let value):
+                    let json = try? JSON(data: value)
+                    guard let json = json else { completion(false, 0); return }
+                    let success = json["success"].boolValue
+                    let err = json["error"].stringValue
+                    completion(success, err == "-1" ? -1 : 0)
+                case .failure(_):
+                    completion(false, 0)
                 }
             }
     }

@@ -17,4 +17,5 @@ target 'MyTodoList' do
   pod "RTRootNavigationController"
   pod 'IQKeyboardManagerSwift'
   pod 'SkyFloatingLabelTextField', '~> 3.0'
+  pod 'Toaster'
 end

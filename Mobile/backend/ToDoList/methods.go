@@ -143,22 +143,22 @@ func Register(c *gin.Context) {
 
 	// 验证验证码
 	if value, ok := email2code.Load(params.Email); !ok || params.Code != value {
-		// 验证错误 error = -2
-		c.JSON(200, gin.H{"success": false, "error": "-2"})
-		return
-	}
-
-	// 查看是否被注册过
-	var userAu UsersAuth
-	result := db.Table("users_auth").Where("email = ?", params.Email).Limit(1).Find(&userAu)
-	if err := result.Error; err != nil {
-		c.JSON(200, gin.H{"success": false, "error": err.Error()})
-		return
-	}
-	if result.RowsAffected != 0 { // 已注册 error = -1表示
+		// 验证错误 error = -1
 		c.JSON(200, gin.H{"success": false, "error": "-1"})
 		return
 	}
+
+	// 查看是否被注册过 由验证码接口验证
+	//var userAu UsersAuth
+	//result := db.Table("users_auth").Where("email = ?", params.Email).Limit(1).Find(&userAu)
+	//if err := result.Error; err != nil {
+	//	c.JSON(200, gin.H{"success": false, "error": err.Error()})
+	//	return
+	//}
+	//if result.RowsAffected != 0 { // 已注册 error = -2表示
+	//	c.JSON(200, gin.H{"success": false, "error": "-2"})
+	//	return
+	//}
 
 	// 创建账号
 	if err := db.Table("users_auth").Create(&userAuth).Error; err != nil {
@@ -302,6 +302,18 @@ func SendAuthCode(c *gin.Context) {
 	// 邮箱验证
 	if !EmailValid(params.Email) {
 		c.JSON(200, gin.H{"success": false, "error": "Invalid email"})
+		return
+	}
+
+	// 查看是否被注册过
+	var userAu UsersAuth
+	result := db.Table("users_auth").Where("email = ?", params.Email).Limit(1).Find(&userAu)
+	if err := result.Error; err != nil {
+		c.JSON(200, gin.H{"success": false, "error": err.Error()})
+		return
+	}
+	if result.RowsAffected != 0 { // 已注册 error = -1表示
+		c.JSON(200, gin.H{"success": false, "error": "-1"})
 		return
 	}
 

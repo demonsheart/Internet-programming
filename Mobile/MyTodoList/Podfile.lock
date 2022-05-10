@@ -17,6 +17,7 @@ PODS:
   - SkyFloatingLabelTextField (3.8.0)
   - SnapKit (5.0.1)
   - SwiftyJSON (4.3.0)
+  - Toaster (2.3.0)
   - WMPageController (2.4.3)
 
 DEPENDENCIES:
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - SkyFloatingLabelTextField (~> 3.0)
   - SnapKit (~> 5.0.0)
   - SwiftyJSON (~> 4.0)
+  - Toaster
   - WMPageController (~> 2.4.0)
 
 SPEC REPOS:
@@ -45,6 +47,7 @@ SPEC REPOS:
     - SkyFloatingLabelTextField
     - SnapKit
     - SwiftyJSON
+    - Toaster
     - WMPageController
 
 SPEC CHECKSUMS:
@@ -59,8 +62,9 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
   WMPageController: 4c7f2c636675a71aea5eecf8fdc07a0ce86954e3
 
-PODFILE CHECKSUM: 36cebe22d1e263b594274a63478d677a8d31cbb4
+PODFILE CHECKSUM: 3f7608ce435d59d9a53952603939a2004134cb28
 
 COCOAPODS: 1.11.0
