@@ -14,10 +14,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="MyTodoList" customModuleProvider="target">
             <connections>
                 <outlet property="checkBox" destination="4Ww-G5-Zrt" id="nD7-Gz-Q2j"/>
+                <outlet property="codeTextField" destination="xdT-nQ-g86" id="oGY-Ro-ewI"/>
                 <outlet property="emailTextField" destination="Dg0-7j-ibn" id="aOS-Wz-osi"/>
-                <outlet property="errMessageLabel" destination="IuP-d5-zjW" id="2Vx-H7-9Ks"/>
-                <outlet property="loginButton" destination="KJb-OV-nFQ" id="XX9-M9-gTL"/>
-                <outlet property="passwordTextField" destination="GyD-zP-TWZ" id="gfM-zr-KVI"/>
+                <outlet property="password2TextField" destination="GyD-zP-TWZ" id="Wdj-V6-YEl"/>
+                <outlet property="passwordTextField" destination="gKm-Vb-zrC" id="qjN-F4-i7M"/>
+                <outlet property="registerButton" destination="KJb-OV-nFQ" id="w9g-2R-whY"/>
+                <outlet property="sendCodeButton" destination="i3h-8m-MM2" id="kBT-ga-Tbq"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -36,26 +38,26 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sq-6w-aiX">
-                    <rect key="frame" x="373" y="56" width="31" height="30"/>
+                    <rect key="frame" x="342" y="56" width="62" height="30"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="注册"/>
+                    <state key="normal" title="遇到问题"/>
                     <connections>
-                        <action selector="registerTap:" destination="-1" eventType="touchUpInside" id="iZH-m8-TiY"/>
+                        <action selector="problemTap:" destination="-1" eventType="touchUpInside" id="aJy-vX-kcv"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号密码登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rez-J6-MO5">
-                    <rect key="frame" x="113" y="131" width="188" height="37"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邮箱注册" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rez-J6-MO5">
+                    <rect key="frame" x="144.5" y="131" width="125.5" height="37"/>
                     <fontDescription key="fontDescription" type="system" pointSize="31"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dg0-7j-ibn" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="204" width="304" height="37"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dg0-7j-ibn" userLabel="邮箱" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                    <rect key="frame" x="55" y="204" width="304" height="40.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入账号/手机号/邮箱"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="账号/手机号/邮箱"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入邮箱"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="邮箱"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
                             <color key="value" name="textRed"/>
                         </userDefinedRuntimeAttribute>
@@ -73,13 +75,13 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GyD-zP-TWZ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="270" width="304" height="36.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GyD-zP-TWZ" userLabel="确认密码" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                    <rect key="frame" x="55" y="415.5" width="304" height="40.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入密码"/>
-                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="密码"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请确认密码"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="确认密码"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
                             <color key="value" name="textRed"/>
                         </userDefinedRuntimeAttribute>
@@ -98,13 +100,14 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJb-OV-nFQ">
-                    <rect key="frame" x="110" y="387.5" width="194" height="31"/>
+                    <rect key="frame" x="110" y="501" width="194" height="31"/>
                     <color key="tintColor" name="iconBlue"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="登录"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="立即注册"/>
+                    <buttonConfiguration key="configuration" style="filled" title="立即注册"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-m1-R8G">
-                    <rect key="frame" x="86" y="322.5" width="206" height="14.5"/>
+                    <rect key="frame" x="86" y="472" width="206" height="14.5"/>
                     <attributedString key="attributedText">
                         <fragment content="已阅读并同意“">
                             <attributes>
@@ -149,14 +152,8 @@
                     </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号或密码错误" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuP-d5-zjW">
-                    <rect key="frame" x="50" y="355.5" width="314" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" red="0.92156862750000001" green="0.25882352939999997" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ww-G5-Zrt">
-                    <rect key="frame" x="61" y="320" width="20" height="20"/>
+                    <rect key="frame" x="61" y="469.5" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Erz-Lg-UK7"/>
                         <constraint firstAttribute="width" constant="20" id="fIl-na-uUQ"/>
@@ -168,43 +165,114 @@
                     </state>
                     <state key="selected" image="checkmark.square.fill" catalog="system"/>
                 </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gKm-Vb-zrC" userLabel="密码" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                    <rect key="frame" x="55" y="345" width="304" height="40.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入密码"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="密码"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                            <color key="value" name="textRed"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                            <color key="value" name="iconBlue"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                            <color key="value" name="AccentColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" name="iconBlue"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                            <color key="value" name="AccentColor"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdT-nQ-g86" userLabel="验证码" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                    <rect key="frame" x="55" y="274.5" width="304" height="40.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入验证码"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="title" value="验证码"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
+                            <color key="value" name="textRed"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                            <color key="value" name="iconBlue"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                            <color key="value" name="AccentColor"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                            <color key="value" name="iconBlue"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                            <color key="value" name="AccentColor"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3h-8m-MM2">
+                    <rect key="frame" x="249" y="280" width="120" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="8gN-rE-m9W"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="nHH-hK-mnu"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="获取验证码"/>
+                    <buttonConfiguration key="configuration" style="plain" title="获取验证码">
+                        <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                    </buttonConfiguration>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="xdT-nQ-g86" firstAttribute="top" secondItem="Dg0-7j-ibn" secondAttribute="bottom" constant="30" id="2t6-t2-6U0"/>
                 <constraint firstItem="4Ww-G5-Zrt" firstAttribute="centerY" secondItem="LKe-m1-R8G" secondAttribute="centerY" id="63M-eP-eHC"/>
                 <constraint firstItem="7sq-6w-aiX" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-10" id="6WX-AI-4K6"/>
                 <constraint firstItem="Rez-J6-MO5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="87" id="6e8-of-SIo"/>
                 <constraint firstItem="Dg0-7j-ibn" firstAttribute="top" secondItem="Rez-J6-MO5" secondAttribute="bottom" constant="36" id="6jG-6M-NhL"/>
                 <constraint firstItem="7sq-6w-aiX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="6wZ-h0-A9t"/>
-                <constraint firstItem="IuP-d5-zjW" firstAttribute="centerX" secondItem="KJb-OV-nFQ" secondAttribute="centerX" id="7Jy-a6-elg"/>
-                <constraint firstItem="KJb-OV-nFQ" firstAttribute="top" secondItem="GyD-zP-TWZ" secondAttribute="bottom" constant="81" id="9ga-Pt-wMh"/>
+                <constraint firstItem="KJb-OV-nFQ" firstAttribute="top" secondItem="LKe-m1-R8G" secondAttribute="bottom" constant="14.5" id="9ga-Pt-wMh"/>
+                <constraint firstItem="Dg0-7j-ibn" firstAttribute="trailing" secondItem="xdT-nQ-g86" secondAttribute="trailing" id="BLU-x8-yOa"/>
                 <constraint firstItem="Dg0-7j-ibn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="55" id="Fst-Kv-BUo"/>
                 <constraint firstItem="LKe-m1-R8G" firstAttribute="top" secondItem="GyD-zP-TWZ" secondAttribute="bottom" constant="16" id="GYA-9q-qnb"/>
                 <constraint firstItem="Dg0-7j-ibn" firstAttribute="leading" secondItem="GyD-zP-TWZ" secondAttribute="leading" id="In9-Ae-8JY"/>
+                <constraint firstItem="xdT-nQ-g86" firstAttribute="leading" secondItem="gKm-Vb-zrC" secondAttribute="leading" id="JKI-E0-Jf2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Dg0-7j-ibn" secondAttribute="trailing" constant="55" id="JNr-EC-hTq"/>
                 <constraint firstItem="LKe-m1-R8G" firstAttribute="leading" secondItem="4Ww-G5-Zrt" secondAttribute="trailing" constant="5" id="Jec-QU-jBM"/>
                 <constraint firstItem="LKe-m1-R8G" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="86" id="NIb-UV-vQt"/>
+                <constraint firstItem="xdT-nQ-g86" firstAttribute="leading" secondItem="Dg0-7j-ibn" secondAttribute="leading" id="Q0r-it-ktX"/>
                 <constraint firstItem="KJb-OV-nFQ" firstAttribute="centerX" secondItem="GyD-zP-TWZ" secondAttribute="centerX" id="Q9n-nF-lVt"/>
                 <constraint firstItem="yji-PD-9az" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="QSD-0B-kGB"/>
-                <constraint firstItem="KJb-OV-nFQ" firstAttribute="top" secondItem="IuP-d5-zjW" secondAttribute="bottom" constant="14" id="RrR-aI-xoL"/>
+                <constraint firstItem="GyD-zP-TWZ" firstAttribute="top" secondItem="gKm-Vb-zrC" secondAttribute="bottom" constant="30" id="TSw-EA-iAS"/>
+                <constraint firstItem="i3h-8m-MM2" firstAttribute="bottom" secondItem="xdT-nQ-g86" secondAttribute="bottom" id="WTO-qB-JiS"/>
                 <constraint firstItem="Dg0-7j-ibn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WnX-cA-Jqs"/>
                 <constraint firstItem="KJb-OV-nFQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="110" id="YSx-gW-VUu"/>
-                <constraint firstItem="IuP-d5-zjW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="fRP-bh-HQs"/>
                 <constraint firstItem="Dg0-7j-ibn" firstAttribute="trailing" secondItem="GyD-zP-TWZ" secondAttribute="trailing" id="iEt-p3-HRz"/>
                 <constraint firstItem="Rez-J6-MO5" firstAttribute="centerX" secondItem="Dg0-7j-ibn" secondAttribute="centerX" id="lrR-Nm-cDW"/>
+                <constraint firstItem="i3h-8m-MM2" firstAttribute="trailing" secondItem="xdT-nQ-g86" secondAttribute="trailing" constant="10" id="mtz-xn-3mS"/>
+                <constraint firstItem="gKm-Vb-zrC" firstAttribute="top" secondItem="xdT-nQ-g86" secondAttribute="bottom" constant="30" id="nQ6-tj-ebk"/>
                 <constraint firstItem="yji-PD-9az" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="pP8-BV-2DZ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IuP-d5-zjW" secondAttribute="trailing" constant="50" id="sS5-Ps-wlf"/>
-                <constraint firstItem="GyD-zP-TWZ" firstAttribute="top" secondItem="Dg0-7j-ibn" secondAttribute="bottom" constant="29" id="zIK-M2-3o2"/>
+                <constraint firstItem="Dg0-7j-ibn" firstAttribute="trailing" secondItem="gKm-Vb-zrC" secondAttribute="trailing" id="xnp-NW-rH2"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="152.00892857142856"/>
         </view>
     </objects>
     <designables>
         <designable name="Dg0-7j-ibn">
-            <size key="intrinsicContentSize" width="304" height="36.833984375"/>
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
         </designable>
         <designable name="GyD-zP-TWZ">
-            <size key="intrinsicContentSize" width="304" height="36.833984375"/>
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
+        </designable>
+        <designable name="gKm-Vb-zrC">
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
+        </designable>
+        <designable name="xdT-nQ-g86">
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
         </designable>
     </designables>
     <resources>

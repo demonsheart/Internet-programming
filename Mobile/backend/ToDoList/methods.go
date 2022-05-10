@@ -316,6 +316,7 @@ func SendAuthCode(c *gin.Context) {
 	//设置文件发送的内容
 	e.Text = []byte("您的注册验证码为： " + code)
 	//设置服务器相关的配置
+	// TODO 保护授权码 用配置注入
 	err := e.Send("smtp.163.com:25", smtp.PlainAuth("", "a2509875617@163.com", "HTKBUHMYFGRKKRTF", "smtp.163.com"))
 	if err != nil {
 		c.JSON(200, gin.H{"success": false, "error": err})
