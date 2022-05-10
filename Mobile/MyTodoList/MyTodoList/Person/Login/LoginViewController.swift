@@ -101,7 +101,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func registerTap(_ sender: UIButton) {
-        print("register")
         self.present(RegisterViewController(), animated: true)
     }
 }

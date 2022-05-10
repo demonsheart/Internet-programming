@@ -33,34 +33,48 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configCountDown()
-        let checkRelay = BehaviorRelay(value: false)
         
-        //        emailTextField.text = UserConfig.shared.email
-        //
-        //        let emailValidate = emailTextField.rx.text.orEmpty
-        //            .map{ $0.count >= minimalUsernameLength && $0.isEmail }
-        //            .share(replay: 1)
-        //
-        //        let passwordValidate = passwordTextField.rx.text.orEmpty
-        //            .map{ $0.count >= minimalPasswordLength }
-        //            .share(replay: 1)
-        //
-        //
-        //        let everythingValidate = Observable.combineLatest(emailValidate, passwordValidate, checkRelay) { $0 && $1 && $2 }
-        //            .share(replay: 1)
-        //
-        //        emailValidate.asObservable().skip(1).subscribe { [weak self] ok in
-        //            self?.emailTextField.errorMessage = ok ? "" : "长度大于\(minimalUsernameLength)且必须为数字或字母组合"
-        //        }.disposed(by: disposeBag)
-        //
-        //        passwordValidate.asObservable().skip(1).subscribe { [weak self] ok in
-        //            self?.passwordTextField.errorMessage = ok ? "" : "长度必须大于\(minimalPasswordLength)"
-        //        }.disposed(by: disposeBag)
-        //
-        //        everythingValidate
-        //            .bind(to: registerButton.rx.isEnabled)
-        //            .disposed(by: disposeBag)
-        //
+        // MARK: email
+        let emailValidate = emailTextField.rx.text.orEmpty
+            .map{ $0.count >= minimalUsernameLength && $0.isEmail }
+            .share(replay: 1)
+        
+        emailValidate.asObservable().skip(1).subscribe { [weak self] ok in
+            self?.emailTextField.errorMessage = ok ? "" : "长度大于\(minimalUsernameLength)且必须为合法邮箱"
+        }.disposed(by: disposeBag)
+        
+        emailValidate.bind(to: sendCodeButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        // MARK: code validate; 6lenth && isAlphanumeric
+        let codeValidate = codeTextField.rx.text.orEmpty
+            .map{ $0.count == 6 && $0.isAlphanumeric }
+            .share(replay: 1)
+        
+        codeValidate.asObservable().skip(1).subscribe { [weak self] ok in
+            self?.codeTextField.errorMessage = ok ? "" : "长度必须为6且必须为字母和数字的组合"
+        }.disposed(by: disposeBag)
+        
+        // MARK: password validate
+        let passwordValidate = passwordTextField.rx.text.orEmpty
+            .map{ $0.count >= minimalPasswordLength }
+            .share(replay: 1)
+        
+        passwordValidate.asObservable().skip(1).subscribe { [weak self] ok in
+            self?.passwordTextField.errorMessage = ok ? "" : "长度必须大于\(minimalPasswordLength)"
+        }.disposed(by: disposeBag)
+        
+        let password2Validate = password2TextField.rx.text.orEmpty
+            .map{ $0 == self.passwordTextField.text }
+            .share(replay: 1)
+        
+        password2Validate.asObservable().skip(1).subscribe { [weak self] ok in
+            self?.password2TextField.errorMessage = ok ? "" : "检查两次输入密码是否一致"
+            
+        }.disposed(by: disposeBag)
+        
+        // MARK: checkbox validate
+        let checkRelay = BehaviorRelay(value: false)
         self.checkBox.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 self?.checkBox.isSelected.toggle()
@@ -71,20 +85,40 @@ class RegisterViewController: UIViewController {
                 }
                 checkRelay.accept(self?.checkBox.isSelected ?? false)
             }).disposed(by: disposeBag)
-        //
-        //        registerButton.rx.tap
-        //            .subscribe(onNext: { [weak self] _ in self?.register() })
-        //            .disposed(by: disposeBag)
+        
+        // MARK: register enable
+        let everythingValidate = Observable.combineLatest(emailValidate, codeValidate, passwordValidate, password2Validate, checkRelay) { $0 && $1 && $2 && $3 && $4 }
+            .share(replay: 1)
+        
+        everythingValidate
+            .bind(to: registerButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        registerButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in self?.register() })
+            .disposed(by: disposeBag)
+        
+        sendCodeButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in self?.sendCode() })
+            .disposed(by: disposeBag)
         
     }
     
     func register() {
+        print("注册按钮")
+        // TODO: register
+        
         //        guard
         //            let email = emailTextField.text,
         //            var password = passwordTextField.text
         //        else { return }
         //        password = md5Hash(password)
         // 注册
+    }
+    
+    private func sendCode() {
+        print("发送验证码")
+        // TODO: send code
     }
     
     private func configCountDown() {

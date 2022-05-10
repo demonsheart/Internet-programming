@@ -143,7 +143,8 @@ func Register(c *gin.Context) {
 
 	// 验证验证码
 	if value, ok := email2code.Load(params.Email); !ok || params.Code != value {
-		c.JSON(200, gin.H{"success": false, "error": "Code Auth fault"})
+		// 验证错误 error = -2
+		c.JSON(200, gin.H{"success": false, "error": "-2"})
 		return
 	}
 
@@ -155,7 +156,7 @@ func Register(c *gin.Context) {
 		return
 	}
 	if result.RowsAffected != 0 { // 已注册 error = -1表示
-		c.JSON(200, gin.H{"success": false, "error": -1})
+		c.JSON(200, gin.H{"success": false, "error": "-1"})
 		return
 	}
 
