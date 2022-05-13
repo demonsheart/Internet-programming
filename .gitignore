@@ -22,7 +22,6 @@ out/
 *.iml
 go.sum
 .DS_Store
-data/
 result/
 Datasets/
 

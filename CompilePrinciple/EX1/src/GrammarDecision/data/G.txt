@@ -1,0 +1,70 @@
+G[S]:
+S -> ABCD;
+A -> aA;
+B -> AB;
+B -> b;
+D -> d;
+end
+
+G[S]:
+S -> aB;
+B -> bC;
+C -> c;
+C -> @;
+end
+
+G[S]:
+S -> AB;
+A -> a;
+B -> bC;
+C -> c;
+C -> @;
+end
+
+G[S]:
+S -> aAb;
+aA -> aB;
+aA -> aaA;
+B -> b;
+A -> a;
+end
+
+G[S]:
+S -> aA;
+S -> @;
+A -> aA;
+A -> aB;
+A -> a;
+B -> b;
+end
+
+G[S]:
+S -> aCd;
+aC -> B;
+aC -> aaA;
+B -> b;
+end
+
+G[S]:
+S -> aA;
+S -> @;
+A -> bAb;
+A -> a;
+end
+
+G[S]:
+S -> aA;
+A -> Ba;
+B -> b;
+end
+
+G[S]:
+S -> @;
+S -> aS;
+end
+
+G[S]:
+S -> @;
+S -> aS;
+aa -> bb;
+end
