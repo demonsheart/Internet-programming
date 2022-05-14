@@ -1,16 +1,25 @@
 package GrammarAnalysis;
 
-// 四则运算文法 硬编码
+// 四则运算文法 硬编码 递归下降法
 public class ArithmeticGrammar {
-    private char lookAhead; // ? 代表EOF
+    private char lookAhead; // # 代表EOF
     private int index;
     private String expression;
     private NaryTreeNode<String> root;
 
-    public ArithmeticGrammar(String expression) {
+    public ArithmeticGrammar() {
+        this.expression = "";
+        this.reset();
+    }
+
+    public void setExpression(String expression) {
         this.expression = expression;
+        this.reset();
+    }
+
+    private void reset() {
         this.index = 0;
-        this.lookAhead = index < expression.length() ? expression.charAt(index) : '?';
+        this.lookAhead = index < expression.length() ? expression.charAt(index) : '#';
         this.root = new NaryTreeNode<>("E");
     }
 
@@ -49,7 +58,7 @@ public class ArithmeticGrammar {
 
     private void advance() {
         index++;
-        this.lookAhead = index < expression.length() ? expression.charAt(index) : '?';
+        this.lookAhead = index < expression.length() ? expression.charAt(index) : '#';
     }
 
     /**
@@ -91,7 +100,7 @@ public class ArithmeticGrammar {
             E_prime(e_p);
         }
 
-        if (lookAhead == ')' || lookAhead == '?') { // match follow
+        if (lookAhead == ')' || lookAhead == '#') { // match follow
             // E' -> epsilon
             NaryTreeNode<String> epsilon = new NaryTreeNode<>("epsilon");
             node.addChildNode(epsilon);
@@ -137,7 +146,7 @@ public class ArithmeticGrammar {
             T_prime(t_p);
         }
 
-        if (lookAhead == '+' || lookAhead == '-' || lookAhead == '?' || lookAhead == ')') {
+        if (lookAhead == '+' || lookAhead == '-' || lookAhead == '#' || lookAhead == ')') {
             // T' -> epsilon
             NaryTreeNode<String> epsilon = new NaryTreeNode<>("epsilon");
             node.addChildNode(epsilon);
@@ -155,6 +164,7 @@ public class ArithmeticGrammar {
             // F -> (E)
             NaryTreeNode<String> l = new NaryTreeNode<>("(");
             node.addChildNode(l);
+            advance();
 
             NaryTreeNode<String> e = new NaryTreeNode<>("E");
             node.addChildNode(e);
@@ -162,6 +172,7 @@ public class ArithmeticGrammar {
 
             NaryTreeNode<String> r = new NaryTreeNode<>(")");
             node.addChildNode(r);
+            advance();
         }
         if (lookAhead == 'i') {
             // F -> i
