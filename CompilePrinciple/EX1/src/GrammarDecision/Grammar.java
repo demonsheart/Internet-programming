@@ -56,7 +56,6 @@ public class Grammar {
                         stack.push(reChildren.pop());
                     }
                 }
-//                root.initNodeType();
             }
         }
     }
