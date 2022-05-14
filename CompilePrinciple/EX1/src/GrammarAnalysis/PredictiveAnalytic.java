@@ -136,13 +136,14 @@ public class PredictiveAnalytic {
         }
         sb.append(node.getVal());
         int cSize = node.getChildren().size();
-        if (cSize != 0 && node.getChildren().get(0).getVal() != '?') {
+        boolean childIsEpsilon = cSize == 1 && node.getChildren().get(0).getVal() == '?';
+        if (cSize != 0 && !childIsEpsilon) {
             sb.append('(');
         }
         for (NaryTreeNode<Character> ch : node.getChildren()) {
             helper(ch, sb);
         }
-        if (cSize != 0 && node.getChildren().get(cSize - 1).getVal() != '?') {
+        if (cSize != 0 && !childIsEpsilon) {
             sb.append(')');
         }
     }

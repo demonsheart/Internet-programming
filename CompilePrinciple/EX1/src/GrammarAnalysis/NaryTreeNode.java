@@ -3,12 +3,16 @@ package GrammarAnalysis;
 import java.util.*;
 
 public class NaryTreeNode<T> {
-    private final T val;
+    private T val;
     private final List<NaryTreeNode<T>> children;
 
     public NaryTreeNode(T val) {
         this.val = val;
         children = new ArrayList<NaryTreeNode<T>>();
+    }
+
+    public void setVal(T val) {
+        this.val = val;
     }
 
     public NaryTreeNode(T val, List<NaryTreeNode<T>> children) {

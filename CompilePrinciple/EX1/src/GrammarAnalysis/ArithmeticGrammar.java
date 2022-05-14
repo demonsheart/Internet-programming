@@ -45,13 +45,14 @@ public class ArithmeticGrammar {
         }
         sb.append(node.getVal());
         int cSize = node.getChildren().size();
-        if (cSize != 0 && !node.getChildren().get(0).getVal().equals("epsilon")) {
+        boolean childIsEpsilon = cSize == 1 && node.getChildren().get(0).getVal().equals("epsilon");
+        if (cSize != 0 && !childIsEpsilon) {
             sb.append('(');
         }
         for (NaryTreeNode<String> str : node.getChildren()) {
             helper(str, sb);
         }
-        if (cSize != 0 && !node.getChildren().get(cSize - 1).getVal().equals("epsilon")) {
+        if (cSize != 0 && !childIsEpsilon) {
             sb.append(')');
         }
     }
@@ -87,9 +88,13 @@ public class ArithmeticGrammar {
      */
     private void E_prime(NaryTreeNode<String> node) {
         if (lookAhead == '+' || lookAhead == '-') { // match first
-            NaryTreeNode<String> a = new NaryTreeNode<>("A");
+//            NaryTreeNode<String> a = new NaryTreeNode<>("A");
+//            node.addChildNode(a);
+//            A(a);
+
+            NaryTreeNode<String> a = new NaryTreeNode<>(String.valueOf(lookAhead));
             node.addChildNode(a);
-            A(a);
+            advance();
 
             NaryTreeNode<String> t = new NaryTreeNode<>("T");
             node.addChildNode(t);
@@ -133,9 +138,13 @@ public class ArithmeticGrammar {
      */
     private void T_prime(NaryTreeNode<String> node) {
         if (lookAhead == '*' || lookAhead == '/') {
-            NaryTreeNode<String> m = new NaryTreeNode<>("M");
+//            NaryTreeNode<String> m = new NaryTreeNode<>("M");
+//            node.addChildNode(m);
+//            M(m);
+
+            NaryTreeNode<String> m = new NaryTreeNode<>(String.valueOf(lookAhead));
             node.addChildNode(m);
-            M(m);
+            advance();
 
             NaryTreeNode<String> f = new NaryTreeNode<>("F");
             node.addChildNode(f);
@@ -182,31 +191,31 @@ public class ArithmeticGrammar {
         }
     }
 
-    /**
-     * A -> +|-
-     * first(A) = {+, -}
-     * follow(A) = {(, i}
-     * @param node
-     */
-    private void A(NaryTreeNode<String> node) {
-        if (lookAhead == '+' || lookAhead == '-') {
-            NaryTreeNode<String> a = new NaryTreeNode<>(String.valueOf(lookAhead));
-            node.addChildNode(a);
-            advance();
-        }
-    }
-
-    /**
-     * M -> *|/
-     * first(A) = {*, /}
-     * follow(A) = {(, i}
-     * @param node
-     */
-    private void M(NaryTreeNode<String> node) {
-        if (lookAhead == '*' || lookAhead == '/') {
-            NaryTreeNode<String> m = new NaryTreeNode<>(String.valueOf(lookAhead));
-            node.addChildNode(m);
-            advance();
-        }
-    }
+//    /**
+//     * A -> +|-
+//     * first(A) = {+, -}
+//     * follow(A) = {(, i}
+//     * @param node
+//     */
+//    private void A(NaryTreeNode<String> node) {
+//        if (lookAhead == '+' || lookAhead == '-') {
+//            NaryTreeNode<String> a = new NaryTreeNode<>(String.valueOf(lookAhead));
+//            node.addChildNode(a);
+//            advance();
+//        }
+//    }
+//
+//    /**
+//     * M -> *|/
+//     * first(A) = {*, /}
+//     * follow(A) = {(, i}
+//     * @param node
+//     */
+//    private void M(NaryTreeNode<String> node) {
+//        if (lookAhead == '*' || lookAhead == '/') {
+//            NaryTreeNode<String> m = new NaryTreeNode<>(String.valueOf(lookAhead));
+//            node.addChildNode(m);
+//            advance();
+//        }
+//    }
 }
