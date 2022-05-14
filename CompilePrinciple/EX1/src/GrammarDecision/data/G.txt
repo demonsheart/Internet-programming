@@ -6,6 +6,21 @@ B -> b;
 D -> d;
 end
 
+G[E]:
+E -> TD;
+D -> ATD;
+D -> @;
+T -> FU;
+U -> MFU;
+U -> @;
+F -> (E);
+F -> i;
+A -> +;
+A -> -;
+M -> *;
+M -> /;
+end
+
 G[S]:
 S -> aB;
 B -> bC;

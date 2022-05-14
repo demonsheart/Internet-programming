@@ -69,7 +69,7 @@ public class Grammar {
     }
 
     // 先序遍历 递归形式
-    public void helper(NaryTreeNode<Character> node, StringBuilder sb) {
+    private void helper(NaryTreeNode<Character> node, StringBuilder sb) {
         if (node == null) {
             return;
         }

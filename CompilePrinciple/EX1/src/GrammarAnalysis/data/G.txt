@@ -5,3 +5,25 @@ B -> AB;
 B -> b;
 D -> d;
 end
+
+G[S]:
+S -> BA;
+A -> BA;
+B -> BA;
+B -> b;
+end
+
+G[E]:
+E -> TD;
+D -> ATD;
+D -> @;
+T -> FU;
+U -> MFU;
+U -> @;
+F -> (E);
+F -> i;
+A -> +;
+A -> -;
+M -> *;
+M -> /;
+end

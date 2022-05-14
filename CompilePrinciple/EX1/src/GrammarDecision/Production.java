@@ -110,11 +110,22 @@ public class Production {
         int len = str.length();
         for (int i = 0; i < len; i++) {
             char c = str.charAt(i);
-            if (c != '@' && (c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
+            if (!isValidChar(c)) {
                 return false;
             }
         }
         return true;
+    }
+
+    // MARK 字母表 有效字符
+    private boolean isValidChar(char ch) {
+        // 字母表 与 非终结符
+        if (isNonTerminator(ch)) { return true; }
+        if (ch >= 'a' && ch <= 'z' || ch == '@') { return true; }
+        if (ch == '(' || ch == ')' || ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+            return true;
+        }
+        return false;
     }
 
     public void display() {
