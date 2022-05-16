@@ -108,13 +108,22 @@ class RegisterViewController: UIViewController {
     func register() {
         print("注册按钮")
         // TODO: register
-        
-        //        guard
-        //            let email = emailTextField.text,
-        //            var password = passwordTextField.text
-        //        else { return }
-        //        password = md5Hash(password)
-        // 注册
+        guard
+            let email = emailTextField.text,
+            var password = passwordTextField.text,
+            let code = codeTextField.text
+        else { return }
+        password = md5Hash(password)
+        Service.shared.register(email: email, password: password, code: code) { [weak self] ok, err in
+            if ok {
+                Toast(text: "注册成功").show()
+                self?.dismiss(animated: true, completion: nil)
+            } else {
+                if err == -1 {
+                    self?.codeTextField.errorMessage = "验证码错误"
+                }
+            }
+        }
     }
     
     private func sendCode() {

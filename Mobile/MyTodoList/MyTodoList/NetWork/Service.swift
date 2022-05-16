@@ -16,6 +16,7 @@ protocol ServiceProtocol {
     func heartbeatForLogin(completion: @escaping (Bool) -> Void)
     func getUserMess(completion: @escaping (Bool) -> Void)
     func sendCode(email: String, completion: @escaping (Bool, Int) -> Void)
+    func register(email: String, password: String, code: String, completion: @escaping (Bool, Int) -> Void)
     //    func heartbeatForConnnect(completion: @escaping (Bool) -> Void)
     //    func startHeartbeat()
     //    func stopHeartbeat()
@@ -133,6 +134,27 @@ extension Service: ServiceProtocol {
         ]
         
         AF.request(Service.domain + "sentAuthCode", method: .post, parameters: JSON(params), encoder: JSONParameterEncoder.default, headers: Service.defaultHeaders)
+            .responseData { response in
+                switch response.result {
+                case .success(let value):
+                    let json = try? JSON(data: value)
+                    guard let json = json else { completion(false, 0); return }
+                    let success = json["success"].boolValue
+                    let err = json["error"].stringValue
+                    completion(success, err == "-1" ? -1 : 0)
+                case .failure(_):
+                    completion(false, 0)
+                }
+            }
+    }
+    
+    func register(email: String, password: String, code: String, completion: @escaping (Bool, Int) -> Void) {
+        let params: [String: String] = [
+            "email": email,
+            "code": code,
+            "password": password
+        ]
+        AF.request(Service.domain + "register", method: .post, parameters: JSON(params), encoder: JSONParameterEncoder.default, headers: Service.defaultHeaders)
             .responseData { response in
                 switch response.result {
                 case .success(let value):
