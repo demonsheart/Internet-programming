@@ -1,3 +1,4 @@
+// g++ -o schedule schedule.c -lncurses
 #include <stdio.h>
 #include <stdlib.h>
 #include <curses.h>
@@ -33,10 +34,17 @@ char _keygo()
     return c;
 }
 
+void _swap(int* a, int* b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
 //**********data************
+#define maxnum 10 // real proc num
 int time_unit = 2;
-const maxnum = 10; // max proc num
-int num = 5;       // real proc num
+int num = 5;
 PCB pcbdata[maxnum] = {
     {1000, "A", 0, 4, 4, 0, 'R'},
     {1001, "B", 1, 3, 3, 0, 'R'},
@@ -56,7 +64,7 @@ void input()
     {
         pcbdata[i].id = 1000 + i;
         printf("enter name of proc%d:", i + 1);
-        scanf("%s", &pcbdata[i].name);
+        scanf("%s", pcbdata[i].name);
         printf("enter time_start of proc%d:", i + 1);
         scanf("%d", &pcbdata[i].time_start);
         printf("enter time_need of proc%d:", i + 1);
@@ -70,7 +78,44 @@ void input()
 
 void FCFS()
 {
+    int i, j;
+    for (i = 0; i < num; i++)
+    {
+        order[i] = pcbdata[i].time_start;
+        ready[i] = i;
+    }
+
+    // sort
+    for (i = 0; i < num; i++)
+    {
+        for (j = i + 1; j < num; j++)
+        {
+            if (order[i] > order[j])
+            {
+                _swap(&order[i], &order[j]);
+                _swap(&ready[i], &ready[j]);
+            }
+        }
+    }
     
+    printf("-----FCFS-----\n");
+    int current = pcbdata[ready[0]].time_start;
+    for (i = 0; i < num; i++)
+    {
+        int no = ready[i];
+        printf("Proc%d-- %s", i + 1, pcbdata[no].name);
+        printf("time_start -- %d, time_need -- %d\n", pcbdata[no].time_start, pcbdata[no].time_need);
+        printf("Running......");
+        // _sleep(1);
+        printf("Finished\n");
+
+        current += pcbdata[no].time_need;
+        int turnaround = current - pcbdata[no].time_start; // Turnaround time
+        float weighted = turnaround / (float)pcbdata[no].time_need; // Weighted turnaround time
+        printf("Finish time -- %d, turnaround time -- %d, weighted turnaround time -- %.1f\n\n", current, turnaround, weighted);
+
+    }
+    printf("-----ALL DONE-----\n");
 }
 
 void SJF()
@@ -89,7 +134,7 @@ void MRLA()
 {
 }
 
-void main()
+int main()
 {
     int i = 0, sch = 99;
     while (sch != 0)
@@ -126,6 +171,7 @@ void main()
         }
     }
     _keygo();
+    return 0;
 }
 
 // ****************debug*************
