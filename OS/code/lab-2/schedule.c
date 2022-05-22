@@ -1,10 +1,7 @@
 // g++ -o schedule schedule.c -lncurses
 #include <stdio.h>
-#include <stdlib.h>
-#include <curses.h>
 #include <time.h>
 
-#define getpch(type) (type *)malloc(sizeof(type))
 typedef struct pcb PCB;
 struct pcb
 {
@@ -24,14 +21,6 @@ void _sleep(int n)
     goal = (clock_t)n * CLOCKS_PER_SEC + clock();
     while (goal > clock())
         ;
-}
-
-char _keygo()
-{
-    char c;
-    printf("enter any key to continue.....\n");
-    c = getch();
-    return c;
 }
 
 void _swap(int *a, int *b)
@@ -265,7 +254,7 @@ void Timeslice()
         }
         // pop head
         int head_index = index_queue[0];
-        cur_queue_num -= 1;
+        --cur_queue_num;
         for (int i = 0; i < cur_queue_num; i++)
         {
             index_queue[i] = index_queue[i + 1];
@@ -273,7 +262,7 @@ void Timeslice()
 
         // start time slice
         int step;
-        if (pcbdata[head_index].time_left >= time_unit)
+        if (pcbdata[head_index].time_left > time_unit)
         {
             step = time_unit;
             pcbdata[head_index].state = 'E';
@@ -291,7 +280,7 @@ void Timeslice()
         for (int i = 0; i < num; i++)
         {
             int no = ready[i];
-            if (pcbdata[no].state == 'R' && pcbdata[no].time_start > clock)
+            if (pcbdata[no].state == 'R' && pcbdata[no].time_start <= clock)
             {
                 // push queue
                 index_queue[cur_queue_num] = no;
@@ -304,7 +293,6 @@ void Timeslice()
             index_queue[cur_queue_num] = head_index;
             ++cur_queue_num;
         }
-        
 
         printf("Clock %d, just now had run %s, step: %d, ", clock, pcbdata[head_index].name, step);
         if (pcbdata[head_index].time_left == 0)
@@ -358,7 +346,6 @@ int main()
             break;
         }
     }
-    _keygo();
     return 0;
 }
 
