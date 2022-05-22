@@ -103,7 +103,7 @@ void FCFS()
     for (i = 0; i < num; i++)
     {
         int no = ready[i];
-        printf("Proc%d-- %s", i + 1, pcbdata[no].name);
+        printf("Proc%d-- %s ", i + 1, pcbdata[no].name);
         printf("time_start -- %d, time_need -- %d\n", pcbdata[no].time_start, pcbdata[no].time_need);
         printf("Running......");
         // _sleep(1);
@@ -120,10 +120,115 @@ void FCFS()
 
 void SJF()
 {
+    for (int i = 0; i < num; i++)
+    {
+        order[i] = pcbdata[i].time_need;
+    }
+    // sort, consider time_need && current clock
+    int maxint = 1000000;
+    for (int i = 0, clock = 0; i < num; i++)
+    {
+        int selected = 0;
+        for (int j = 0, min = maxint; j < num; j++)
+        {
+            // find min in current clock
+            if (pcbdata[j].time_start <= clock && order[j] < min)
+            {
+                selected = j;
+                min = order[j];
+            }
+        }
+        clock += order[selected];
+        ready[i] = selected;
+        order[selected] = maxint;
+    }
+    
+    printf("-----SJF-----\n");
+    int current = pcbdata[ready[0]].time_start;
+    for (int i = 0; i < num; i++)
+    {
+        int no = ready[i];
+        printf("Proc%d-- %s ", i + 1, pcbdata[no].name);
+        printf("time_start -- %d, time_need -- %d\n", pcbdata[no].time_start, pcbdata[no].time_need);
+        printf("Running......");
+        // _sleep(1);
+        printf("Finished\n");
+
+        current += pcbdata[no].time_need;
+        int turnaround = current - pcbdata[no].time_start; // Turnaround time
+        float weighted = turnaround / (float)pcbdata[no].time_need; // Weighted turnaround time
+        printf("Finish time -- %d, turnaround time -- %d, weighted turnaround time -- %.1f\n\n", current, turnaround, weighted);
+
+    }
+    printf("-----ALL DONE-----\n");
 }
 
-void HRF()
+void HRRN()
 {
+    // init data
+    num = 4;
+    PCB pcbdata2[maxnum] = {
+        {1000, "P1", 10, 8, 8, 0, 'R'},
+        {1001, "P2", 12, 12, 12, 0, 'R'},
+        {1002, "P3", 14, 4, 4, 0, 'R'},
+        {1003, "P4", 16, 6, 6, 0, 'R'},
+    };
+
+    // find min start_time
+    int clock = 0, min_start = 1000000;
+    for (int i = 0; i < num; i++)
+    {
+        if (pcbdata2[i].time_start < min_start)
+        {
+            min_start = pcbdata2[i].time_start;
+        }
+    }
+    clock = min_start;
+
+    // caculate ready
+    for (int i = 0; i < num; i++)
+    {
+        // calculate all Rp of proc(in state 'R')
+        float max_Rp = 0, cur_Rp = 0;
+        int max_Rp_index = 0;
+        for (int j = 0; j < num; j++)
+        {
+            if (pcbdata2[j].state == 'R' && pcbdata2[j].time_start <= clock)
+            {
+                // calculate Rp; Rp = (time_wait + time_need) / time_need
+                // time_wait = current - time_start
+                cur_Rp = (clock - pcbdata2[j].time_start + pcbdata2[j].time_need) / (float)pcbdata2[j].time_need;
+                if (cur_Rp > max_Rp)
+                {
+                    max_Rp = cur_Rp;
+                    max_Rp_index = j;
+                }
+            }
+        }
+        pcbdata2[max_Rp_index].state = 'F';
+        ready[i] = max_Rp_index;
+        clock += pcbdata2[max_Rp_index].time_need;
+    }
+
+    printf("-----HRRN-----\n");
+    int current = pcbdata2[ready[0]].time_start;
+    for (int i = 0; i < num; i++)
+    {
+        int no = ready[i];
+        printf("Proc%d-- %s ", i + 1, pcbdata2[no].name);
+        printf("time_start -- %d, time_need -- %d\n", pcbdata2[no].time_start, pcbdata2[no].time_need);
+        printf("Running......");
+        // _sleep(1);
+        printf("Finished\n");
+
+        current += pcbdata2[no].time_need;
+        int turnaround = current - pcbdata2[no].time_start; // Turnaround time
+        float weighted = turnaround / (float)pcbdata2[no].time_need; // Weighted turnaround time
+        printf("Finish time -- %d, turnaround time -- %d, weighted turnaround time -- %.1f\n\n", current, turnaround, weighted);
+
+    }
+    printf("-----ALL DONE-----\n");
+
 }
 
 void Timeslice()
@@ -142,7 +247,7 @@ int main()
         printf("\nselect a shcedule algorithm:\n");
         printf("(1)FCFS\n");
         printf("(2)SJF\n");
-        printf("(3)HRF\n");
+        printf("(3)HRRN\n");
         printf("(4)Timeslice\n");
         printf("(5)MRLA\n");
         printf("(0)exit\n");
@@ -157,7 +262,7 @@ int main()
             SJF();
             break;
         case 3:
-            HRF();
+            HRRN();
             break;
         case 4:
             Timeslice();
