@@ -34,7 +34,7 @@ char _keygo()
     return c;
 }
 
-void _swap(int* a, int* b)
+void _swap(int *a, int *b)
 {
     int tmp = *a;
     *a = *b;
@@ -97,7 +97,7 @@ void FCFS()
             }
         }
     }
-    
+
     printf("-----FCFS-----\n");
     int current = pcbdata[ready[0]].time_start;
     for (i = 0; i < num; i++)
@@ -110,10 +110,9 @@ void FCFS()
         printf("Finished\n");
 
         current += pcbdata[no].time_need;
-        int turnaround = current - pcbdata[no].time_start; // Turnaround time
+        int turnaround = current - pcbdata[no].time_start;          // Turnaround time
         float weighted = turnaround / (float)pcbdata[no].time_need; // Weighted turnaround time
         printf("Finish time -- %d, turnaround time -- %d, weighted turnaround time -- %.1f\n\n", current, turnaround, weighted);
-
     }
     printf("-----ALL DONE-----\n");
 }
@@ -142,7 +141,7 @@ void SJF()
         ready[i] = selected;
         order[selected] = maxint;
     }
-    
+
     printf("-----SJF-----\n");
     int current = pcbdata[ready[0]].time_start;
     for (int i = 0; i < num; i++)
@@ -155,10 +154,9 @@ void SJF()
         printf("Finished\n");
 
         current += pcbdata[no].time_need;
-        int turnaround = current - pcbdata[no].time_start; // Turnaround time
+        int turnaround = current - pcbdata[no].time_start;          // Turnaround time
         float weighted = turnaround / (float)pcbdata[no].time_need; // Weighted turnaround time
         printf("Finish time -- %d, turnaround time -- %d, weighted turnaround time -- %.1f\n\n", current, turnaround, weighted);
-
     }
     printf("-----ALL DONE-----\n");
 }
@@ -222,17 +220,102 @@ void HRRN()
         printf("Finished\n");
 
         current += pcbdata2[no].time_need;
-        int turnaround = current - pcbdata2[no].time_start; // Turnaround time
+        int turnaround = current - pcbdata2[no].time_start;          // Turnaround time
         float weighted = turnaround / (float)pcbdata2[no].time_need; // Weighted turnaround time
         printf("Finish time -- %d, turnaround time -- %d, weighted turnaround time -- %.1f\n\n", current, turnaround, weighted);
-
     }
     printf("-----ALL DONE-----\n");
-
 }
 
 void Timeslice()
 {
+    // time_unit = 2
+    // time_need = time_left + time_used
+
+    for (int i = 0; i < num; i++)
+    {
+        order[i] = pcbdata[i].time_start;
+        ready[i] = i;
+        pcbdata[i].state = 'R'; // reset data
+    }
+
+    // sort pcbdata by time_start
+    for (int i = 0; i < num; i++)
+    {
+        for (int j = i + 1; j < num; j++)
+        {
+            if (order[i] > order[j])
+            {
+                _swap(&order[i], &order[j]);
+                _swap(&ready[i], &ready[j]);
+            }
+        }
+    }
+
+    int clock = order[0];
+    int index_queue[maxnum] = {ready[0]};
+    int cur_queue_num = 1;
+    printf("-----Timeslice-----\n");
+    while (1)
+    {
+        if (cur_queue_num == 0)
+        {
+            printf("-----ALL DONE-----\n");
+            break;
+        }
+        // pop head
+        int head_index = index_queue[0];
+        cur_queue_num -= 1;
+        for (int i = 0; i < cur_queue_num; i++)
+        {
+            index_queue[i] = index_queue[i + 1];
+        }
+
+        // start time slice
+        int step;
+        if (pcbdata[head_index].time_left >= time_unit)
+        {
+            step = time_unit;
+            pcbdata[head_index].state = 'E';
+        }
+        else
+        {
+            step = pcbdata[head_index].time_left;
+            pcbdata[head_index].state = 'F';
+        }
+        pcbdata[head_index].time_used += step;
+        pcbdata[head_index].time_left -= step;
+        clock += step;
+
+        // update queue
+        for (int i = 0; i < num; i++)
+        {
+            int no = ready[i];
+            if (pcbdata[no].state == 'R' && pcbdata[no].time_start > clock)
+            {
+                // push queue
+                index_queue[cur_queue_num] = no;
+                ++cur_queue_num;
+                pcbdata[no].state = 'E';
+            }
+        }
+        if (pcbdata[head_index].state != 'F')
+        {
+            index_queue[cur_queue_num] = head_index;
+            ++cur_queue_num;
+        }
+        
+
+        printf("Clock %d, just now had run %s, step: %d, ", clock, pcbdata[head_index].name, step);
+        if (pcbdata[head_index].time_left == 0)
+        {
+            printf("%s finished\n\n", pcbdata[head_index].name);
+        }
+        else
+        {
+            printf("%s still need %d\n\n", pcbdata[head_index].name, pcbdata[head_index].time_left);
+        }
+    }
 }
 
 void MRLA()
