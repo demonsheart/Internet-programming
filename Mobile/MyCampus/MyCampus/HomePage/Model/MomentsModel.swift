@@ -7,6 +7,8 @@
 
 import Foundation
 import AVFoundation
+import UIKit
+import SwiftDate
 
 // AVAudioRecorder AVAudioPlayer
 
@@ -23,6 +25,7 @@ struct MomentTextItem: MomentItem {
 // 视频、音频后续再实现
 // https://developer.apple.com/documentation/photokit/selecting_photos_and_videos_in_ios
 struct MomentPicItem: MomentItem {
+    
 }
 
 struct MomentAudioItem: MomentItem {
@@ -47,26 +50,45 @@ struct MomentsModel {
     var owner: Owner
     var items: [MomentItem]
     
-    // 0文本 < 1语音 < 2图片 < 3视频
+    var formattedTimeStr: String {
+        guard let intStamp = TimeInterval(timeStamp) else { return "" }
+        
+        var timeText = ""
+        let date = DateInRegion(seconds: intStamp, region: Date.currentRome)
+        let current = DateInRegion(seconds: Date().timeIntervalSince1970, region: Date.currentRome)
+        let timeIntervalMinute = date.getInterval(toDate: current, component: .minute)
+        
+        if timeIntervalMinute <= 1 && timeIntervalMinute > 0 {
+            timeText = "刚刚"
+        } else if timeIntervalMinute > 1 && timeIntervalMinute < 60 {
+            timeText = String(format: "%d分钟前", Int(timeIntervalMinute))
+        } else if timeIntervalMinute >= 60 && timeIntervalMinute < 24 * 60 {
+            timeText = String(format: "%d小时前", Int(timeIntervalMinute / 60))
+        } else {
+            // 超过24小时展示时间
+            if date.compare(.isThisYear) {
+                timeText = date.toFormat("HH:mm MM/dd")
+            } else {
+                timeText = date.toFormat("HH:mm yyyy/MM/dd")
+            }
+        }
+        
+        return timeText
+    }
+    
+    // 0文本 < 1图片 < 2视频
     var modelType: Int {
         let videoCount = items.reduce(0) { partialResult, item in
             return item is MomentVideoItem ? partialResult + 1 : partialResult
         }
         if videoCount > 0 {
-            return 3
+            return 2
         }
         
         let picCount = items.reduce(0) { partialResult, item in
             return item is MomentPicItem ? partialResult + 1 : partialResult
         }
         if picCount > 0 {
-            return 2
-        }
-        
-        let voiceCount = items.reduce(0) { partialResult, item in
-            return item is MomentAudioItem ? partialResult + 1 : partialResult
-        }
-        if voiceCount > 0 {
             return 1
         }
         
@@ -74,26 +96,25 @@ struct MomentsModel {
     }
     
     var overLookHeight: CGFloat {
-        var totalHeight: CGFloat = 8 + 15 + 8 + 25 + 8 // 从下往上数 space为8
+        var totalHeight: CGFloat = 8 + 15 + 8 + 40 + 8 // 从下往上数 space为8
+        let margin: CGFloat = 8
+        let titleHeight = title.height(withConstrainedWidth: (UIScreen.main.bounds.width - 3 * margin)/2 - 2 * margin, font: .systemFont(ofSize: 14))
         switch modelType {
             case 0:
-                // 仅title 两行
-                totalHeight += 40
-            case 1:
-                // voice + title
-                totalHeight += 30 + 8 + 40
-            case 2, 3:
+                // 仅title + topSpace
+                totalHeight += titleHeight + 10
+            case 1, 2:
                 // pic/video + title
-                totalHeight += 130 + 8 + 40
+                totalHeight += 130 + margin + titleHeight
             default:
                 totalHeight = 0
         }
         
-        return totalHeight + 8 // top space
+        return totalHeight
     }
     
     static var `default`: [MomentsModel] = [
-        MomentsModel(title: "总书记的一周（4月4日-4月10日）", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "央视新闻"), items: [
+        MomentsModel(title: "总书记的一周", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "央视新闻"), items: [
             MomentTextItem(text: ""),
         ]),
         MomentsModel(title: "焦点访谈：并肩战“疫”同心守“沪”", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "央视网"), items: [
@@ -109,7 +130,7 @@ struct MomentsModel {
         MomentsModel(title: "小山村“贷”来4300万元的背后", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "人民网"), items: [
             MomentPicItem(),
         ]),
-        MomentsModel(title: "吴尊友发文解读动态清零及其四点误解", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "中国网"), items: [
+        MomentsModel(title: "吴尊友发文解读动态清零及其四点误解,据网友爆料，吴尊为了他的妻子", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "中国网"), items: [
             MomentTextItem(text: ""),
             MomentAudioItem(),
         ]),

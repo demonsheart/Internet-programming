@@ -33,10 +33,11 @@ class MomentsVC: UIViewController {
         let  margin: CGFloat = 8
         layout.minimumLineSpacing = margin
         layout.minimumInteritemSpacing = margin
-        layout.sectionInset = UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: margin, bottom: 10, right: margin)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = CPColor.bgGray
         collectionView.dataSource = self
+        collectionView.delegate = self
         
         // 注册 Cell
         collectionView.register(MomentCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
@@ -48,7 +49,9 @@ class MomentsVC: UIViewController {
 }
 
 extension MomentsVC: UICollectionViewDelegate{
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(data[indexPath.row].title)
+    }
 }
 
 extension MomentsVC: UICollectionViewDataSource{

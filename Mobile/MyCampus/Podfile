@@ -19,4 +19,6 @@ target 'MyCampus' do
   pod 'SkyFloatingLabelTextField', '~> 3.0'
   pod 'Toaster'
   pod 'Cache'
+  pod 'SwiftDate'
+  pod "MobilePlayer"
 end
