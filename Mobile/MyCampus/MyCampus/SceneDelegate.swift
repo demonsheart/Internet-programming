@@ -6,11 +6,11 @@
 //
 
 import UIKit
+import RTRootNavigationController
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,7 +19,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = ViewController()
+        
+        window.backgroundColor = UIColor.white
+        
+        // make tabBarController
+        let myTabBar = UITabBarController()
+        myTabBar.tabBar.tintColor = CPColor.red
+        
+        if #available(iOS 15.0, *) {
+            let barAppearance = UITabBarAppearance()
+            barAppearance.configureWithDefaultBackground()
+            UITabBar.appearance().scrollEdgeAppearance = barAppearance
+            
+//            UITableView.appearance().sectionHeaderTopPadding = .leastNonzeroMagnitude
+        }
+        
+        // tabBarItems
+        let homePageViewController = RTRootNavigationController(rootViewController: HomePageViewController())
+        homePageViewController.tabBarItem = UITabBarItem(title: "首页", image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill"))
+        
+        let personalViewController = RTRootNavigationController(rootViewController: PersonalPageViewController())
+        personalViewController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
+        
+        // add to tabbar
+        myTabBar.viewControllers = [homePageViewController, personalViewController]
+        
+        myTabBar.selectedIndex = 0
+        
+        window.rootViewController = myTabBar
         self.window = window
         window.makeKeyAndVisible()
     }

@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (5.5.0)
+  - Cache (6.0.0)
+  - IQKeyboardManagerSwift (6.5.10)
   - MJRefresh (3.7.5)
   - RTRootNavigationController (0.8.0):
     - RTRootNavigationController/Core (= 0.8.0)
@@ -13,46 +15,60 @@ PODS:
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
+  - SkyFloatingLabelTextField (3.8.0)
   - SnapKit (5.0.1)
   - SwiftyJSON (4.3.0)
+  - Toaster (2.3.0)
   - WMPageController (2.4.3)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5)
+  - Cache
+  - IQKeyboardManagerSwift
   - MJRefresh
   - RTRootNavigationController
   - RxCocoa (= 6.5.0)
   - RxSwift (= 6.5.0)
   - SDWebImage (~> 5.0)
+  - SkyFloatingLabelTextField (~> 3.0)
   - SnapKit (~> 5.0.0)
   - SwiftyJSON (~> 4.0)
+  - Toaster
   - WMPageController (~> 2.4.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cache
+    - IQKeyboardManagerSwift
     - MJRefresh
     - RTRootNavigationController
     - RxCocoa
     - RxRelay
     - RxSwift
     - SDWebImage
+    - SkyFloatingLabelTextField
     - SnapKit
     - SwiftyJSON
+    - Toaster
     - WMPageController
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
+  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   RTRootNavigationController: 36c6301870f0467f89d69f4286795340b537d473
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
+  SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+  Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
   WMPageController: 4c7f2c636675a71aea5eecf8fdc07a0ce86954e3
 
-PODFILE CHECKSUM: ac395ffcb8037ca5a2816fc4e8b9f7eab4280e11
+PODFILE CHECKSUM: c15f29ceae44b0c7dacd08d52d8898590faf5825
 
 COCOAPODS: 1.11.2
