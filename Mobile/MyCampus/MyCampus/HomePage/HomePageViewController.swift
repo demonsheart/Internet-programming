@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import WMPageController
 
-class HomePageViewController: UIViewController {
+class HomePageViewController: BaseViewController {
     
     lazy var publishBtn: TopImageBtn = {
         let button = TopImageBtn(image: UIImage(systemName: "plus.circle.fill"), text: "发布", color: .white)
@@ -82,7 +82,9 @@ class HomePageViewController: UIViewController {
     }
     
     @objc func publish() {
-        print("publish")
+        let vc = PublishVC()
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -18,6 +18,8 @@
 		94805A3A283B5F2A00341432 /* MomentsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94805A39283B5F2A00341432 /* MomentsModel.swift */; };
 		94805A3C283B834B00341432 /* WaterFallFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94805A3B283B834B00341432 /* WaterFallFlowLayout.swift */; };
 		94805A3E283B879600341432 /* MomentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94805A3D283B879600341432 /* MomentCollectionViewCell.swift */; };
+		94805AA5283BC82F00341432 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94805AA4283BC82F00341432 /* BaseViewController.swift */; };
+		94805AAB283BD57F00341432 /* PublishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94805AAA283BD57F00341432 /* PublishVC.swift */; };
 		94D73E23283388B20024AFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D73E22283388B20024AFD5 /* AppDelegate.swift */; };
 		94D73E25283388B20024AFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D73E24283388B20024AFD5 /* SceneDelegate.swift */; };
 		94D73E2C283388B40024AFD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94D73E2B283388B40024AFD5 /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 		94805A39283B5F2A00341432 /* MomentsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentsModel.swift; sourceTree = "<group>"; };
 		94805A3B283B834B00341432 /* WaterFallFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterFallFlowLayout.swift; sourceTree = "<group>"; };
 		94805A3D283B879600341432 /* MomentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentCollectionViewCell.swift; sourceTree = "<group>"; };
+		94805AA4283BC82F00341432 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		94805AAA283BD57F00341432 /* PublishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishVC.swift; sourceTree = "<group>"; };
 		94D73E1F283388B20024AFD5 /* MyCampus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCampus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94D73E22283388B20024AFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94D73E24283388B20024AFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,8 +137,17 @@
 			isa = PBXGroup;
 			children = (
 				94805A34283B28A300341432 /* MomentsVC.swift */,
+				94805AAA283BD57F00341432 /* PublishVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		94805AA3283BC82000341432 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				94805AA4283BC82F00341432 /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		94D73E16283388B20024AFD5 = {
@@ -158,6 +171,7 @@
 		94D73E21283388B20024AFD5 /* MyCampus */ = {
 			isa = PBXGroup;
 			children = (
+				94805AA3283BC82000341432 /* Base */,
 				94805A26283B1F3D00341432 /* Config */,
 				94805A25283B1F3500341432 /* Extensions */,
 				94805A22283B1E2E00341432 /* Personal */,
@@ -289,6 +303,8 @@
 				94805A2F283B234B00341432 /* TopImageBtn.swift in Sources */,
 				94D73E25283388B20024AFD5 /* SceneDelegate.swift in Sources */,
 				94805A2A283B1F8B00341432 /* Config.swift in Sources */,
+				94805AAB283BD57F00341432 /* PublishVC.swift in Sources */,
+				94805AA5283BC82F00341432 /* BaseViewController.swift in Sources */,
 				94805A35283B28A300341432 /* MomentsVC.swift in Sources */,
 				94805A3E283B879600341432 /* MomentCollectionViewCell.swift in Sources */,
 				94805A32283B270F00341432 /* WMpageDataModel.swift in Sources */,
