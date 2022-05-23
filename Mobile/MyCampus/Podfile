@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '13.0'
+platform :ios, '13.0'
 
 target 'MyCampus' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -7,8 +7,8 @@ target 'MyCampus' do
 
   # Pods for MyCampus
   pod 'SnapKit', '~> 5.0.0'
-  pod 'Alamofire', '~> 5.5'
-  pod 'SwiftyJSON', '~> 4.0'
+#  pod 'Alamofire', '~> 5.5'
+#  pod 'SwiftyJSON', '~> 4.0'
   pod 'WMPageController', '~> 2.4.0'
   pod 'SDWebImage', '~> 5.0'
   pod 'MJRefresh'
@@ -16,7 +16,7 @@ target 'MyCampus' do
   pod 'RxCocoa', '6.5.0'
   pod "RTRootNavigationController"
   pod 'IQKeyboardManagerSwift'
-  pod 'SkyFloatingLabelTextField', '~> 3.0'
+#  pod 'SkyFloatingLabelTextField', '~> 3.0'
   pod 'Toaster'
   pod 'Cache'
   pod 'SwiftDate'
