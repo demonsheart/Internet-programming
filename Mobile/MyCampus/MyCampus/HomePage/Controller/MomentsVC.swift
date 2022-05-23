@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class MomentsVC: UIViewController {
     
-    private let cellID = "baseCellID"
+    private let cellID = "moment"
+    
+    let data = MomentsModel.default
     
     var itemCount: Int = 30
     var collectionView: UICollectionView!
@@ -31,13 +34,16 @@ class MomentsVC: UIViewController {
         layout.minimumLineSpacing = margin
         layout.minimumInteritemSpacing = margin
         layout.sectionInset = UIEdgeInsets(top: 0, left: margin, bottom: 0, right: margin)
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
         
         // 注册 Cell
-        collectionView.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(MomentCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
 
@@ -48,23 +54,18 @@ extension MomentsVC: UICollectionViewDelegate{
 extension MomentsVC: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemCount
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! BaseCollectionViewCell
-        cell.cellIndex = indexPath.item
-        cell.backgroundColor = indexPath.item % 2 == 0 ? UIColor.blue : UIColor.purple
-        if itemCount - 1 == indexPath.item {
-            itemCount += 20
-            collectionView.reloadData()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MomentCollectionViewCell
+        cell.model = data[indexPath.row]
         return cell
     }
 }
 
 extension MomentsVC: WaterFallLayoutDelegate{
     func waterFlowLayout(_ waterFlowLayout: WaterFallFlowLayout, itemHeight indexPath: IndexPath) -> CGFloat {
-        return CGFloat(arc4random_uniform(150) + 50)
+        return data[indexPath.row].overLookHeight
     }
 }
