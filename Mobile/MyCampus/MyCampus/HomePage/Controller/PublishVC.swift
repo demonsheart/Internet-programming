@@ -65,6 +65,10 @@ class PublishVC: BaseViewController, UITextViewDelegate {
                 cell.callBack = { [weak self] type in
                     if type == 0 {
                         self?.viewModel.addText(in: tv)
+                    } else if type == 2 {
+                        // TODO: picture picker
+                    } else if type == 3 {
+                        // TODO: Add Location, Use GaoDe API
                     }
                 }
                 return cell
