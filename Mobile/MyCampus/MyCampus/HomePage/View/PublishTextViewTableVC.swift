@@ -9,17 +9,17 @@ import UIKit
 import IQKeyboardManagerSwift
 
 class PublishTextViewTableVC: UITableViewCell {
-
+    var deleteCallBack: (() -> Void)?
+    
     @IBOutlet weak var textView: IQTextView!
     
-    var callBack: (() -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = CPColor.bgGray
     }
     
     @IBAction func remove(_ sender: UIButton) {
-        callBack?()
+        deleteCallBack?()
     }
     
 }

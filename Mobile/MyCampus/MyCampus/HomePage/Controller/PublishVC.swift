@@ -53,13 +53,15 @@ class PublishVC: BaseViewController, UITextViewDelegate {
         //初始化数据
         viewModel.sectionListSubject.onNext([
             SectionOfPublishItemData(header: "", items: [
-                PublishItemData(itemType: .Text),
-                PublishItemData(itemType: .Text),
-                PublishItemData(itemType: .Text),
+                PublishTextData(),
+                PublishTextData(),
+                PublishTextData(),
+                PublishTextData(),
+                PublishTextData(),
             ]),
             SectionOfPublishItemData(header: "", items: [
-                PublishItemData(itemType: .Tool),
-                PublishItemData(itemType: .Btn),
+                PublishToolData(),
+                PublishBtnData(),
             ])
         ])
         
@@ -67,17 +69,31 @@ class PublishVC: BaseViewController, UITextViewDelegate {
         let dataSource = RxTableViewSectionedReloadDataSource
         <SectionOfPublishItemData>(configureCell: {
             (dataSource, tv, indexPath, element) in
-            let cell = tv.dequeueReusableCell(withIdentifier: element.itemType.rawValue, for: indexPath)
-            return cell
+            
+            switch element {
+            case let element as PublishTextData:
+                let cell = tv.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PublishTextViewTableVC
+                cell.textView.text = element.text
+                cell.deleteCallBack = { [weak self] in
+                    guard let self = self else { return }
+                    self.viewModel.removeItem(in: tv, at: indexPath)
+                }
+                
+                return cell
+            case _ as PublishToolData:
+                let cell = tv.dequeueReusableCell(withIdentifier: "tool", for: indexPath) as! PublishToolTableViewCell
+                return cell
+            case _ as PublishBtnData:
+                let cell = tv.dequeueReusableCell(withIdentifier: "btn", for: indexPath) as! PublishBtnTableVC
+                return cell
+            default:
+                return UITableViewCell()
+            }
         })
         
         //绑定单元格数据
         viewModel.sectionListSubject.asObserver()
             .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        
-        tableView.rx.itemDeleted
-            .subscribe(onNext: { self.viewModel.removeItem(at: $0) })
             .disposed(by: disposeBag)
     }
 

@@ -10,19 +10,18 @@ import RxCocoa
 import RxSwift
 import RxRelay
 
-// cell identify
-enum ItemType: String {
-    case Tool = "tool"
-    case Btn = "btn"
-    case Text = "text"
-    case Pic = "pic"
-    case Audio = "audio"
-    case Video = "video"
+protocol PublishItemData {
 }
 
-struct PublishItemData {
-    var itemType: ItemType
-    // 其他所需变量
+// data项必须用class
+class PublishTextData: PublishItemData {
+    var text: String = ""
+}
+
+class PublishToolData: PublishItemData {
+}
+
+class PublishBtnData: PublishItemData {
 }
 
 struct SectionOfPublishItemData {
@@ -43,11 +42,24 @@ class PublishTableViewModel {
     
     let sectionListSubject = BehaviorSubject(value: [SectionOfPublishItemData]())
     
-    func removeItem(at indexPath: IndexPath) {
+    // 删除前必须保存信息并重新渲染
+    func removeItem(in tableView: UITableView, at indexPath: IndexPath) {
         guard var sections = try? sectionListSubject.value() else { return }
 
         // Get the current section from the indexPath
         var currentSection = sections[indexPath.section]
+        
+        for i in 0..<currentSection.items.count {
+            let cell = tableView.cellForRow(at: IndexPath(row: i, section: indexPath.section))
+            let itemData = currentSection.items[i]
+            
+            if let cell = cell as? PublishTextViewTableVC, let itemData = itemData as? PublishTextData {
+                itemData.text = cell.textView.text
+            }
+            
+            // TODO: Other type save
+            
+        }
 
         // Remove the item from the section at the specified indexPath
         currentSection.items.remove(at: indexPath.row)
@@ -57,5 +69,10 @@ class PublishTableViewModel {
 
         // Inform your subject with the new changes
         sectionListSubject.onNext(sections)
+    }
+    
+    // 捕获数据到model
+    func saveDataIntoModel() {
+        // TODO: 捕获数据到model
     }
 }
