@@ -26,11 +26,6 @@ class PublishVC: BaseViewController, UITextViewDelegate {
     
     let viewModel = PublishTableViewModel()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "发布"
@@ -50,21 +45,6 @@ class PublishVC: BaseViewController, UITextViewDelegate {
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
         
-        //初始化数据
-        viewModel.sectionListSubject.onNext([
-            SectionOfPublishItemData(header: "", items: [
-                PublishTextData(),
-                PublishTextData(),
-                PublishTextData(),
-                PublishTextData(),
-                PublishTextData(),
-            ]),
-            SectionOfPublishItemData(header: "", items: [
-                PublishToolData(),
-                PublishBtnData(),
-            ])
-        ])
-        
         //创建数据源
         let dataSource = RxTableViewSectionedReloadDataSource
         <SectionOfPublishItemData>(configureCell: {
@@ -82,9 +62,17 @@ class PublishVC: BaseViewController, UITextViewDelegate {
                 return cell
             case _ as PublishToolData:
                 let cell = tv.dequeueReusableCell(withIdentifier: "tool", for: indexPath) as! PublishToolTableViewCell
+                cell.callBack = { [weak self] type in
+                    if type == 0 {
+                        self?.viewModel.addText(in: tv)
+                    }
+                }
                 return cell
             case _ as PublishBtnData:
                 let cell = tv.dequeueReusableCell(withIdentifier: "btn", for: indexPath) as! PublishBtnTableVC
+                cell.callBack = { [weak self] in
+                    self?.viewModel.publish(in: tv, at: indexPath)
+                }
                 return cell
             default:
                 return UITableViewCell()
@@ -98,76 +86,3 @@ class PublishVC: BaseViewController, UITextViewDelegate {
     }
 
 }
-
-//extension PublishVC: UITableViewDelegate, UITableViewDataSource {
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 3
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 0 {
-//            return textCellNum
-//        }
-//        return 1
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.section == 0 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PublishTextViewTableVC
-//            cell.callBack = { [weak self] in
-//                guard let self = self, self.textCellNum > 1 else {
-//                    return
-//                }
-//                print("cancel \(indexPath)")
-//                tableView.beginUpdates()
-//                self.textCellNum -= 1
-//                tableView.deleteRows(at: [indexPath], with: .automatic)
-//                tableView.endUpdates()
-//            }
-//            return cell
-//        }
-//
-//        if indexPath.section == 1 {
-//            // tool
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "tool", for: indexPath) as! PublishToolTableViewCell
-//            cell.callBack = { [weak self] id in
-//                guard let self = self else { return }
-//                if id == 2 && !self.isAddedLoc {
-//                    self.isAddedLoc = true
-//                    // TODO: add Location
-//                    print("add Location")
-//                } else if id == 0 {
-//                    // TODO: add text
-//                    print("add text")
-//                } else if id == 1 {
-//                    // TODO: add pic
-//                    print("add pic")
-//                }
-//
-//            }
-//            return cell
-//        } else if indexPath.section == 2 {
-//            // publish button
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "btn", for: indexPath) as! PublishBtnTableVC
-//            cell.callBack = {
-//                print("publish")
-//            }
-//            return cell
-//        }
-//        return UITableViewCell()
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let view = UIView()
-//        view.backgroundColor = CPColor.bgGray
-//        return view
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 5
-//    }
-//
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//}

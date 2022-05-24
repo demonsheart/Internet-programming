@@ -46,8 +46,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="dtm-SF-iVc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1bh-ay-BHg"/>
+                    <constraint firstAttribute="bottom" secondItem="uLp-BB-bPm" secondAttribute="bottom" constant="6.5" id="2YP-LF-Fz4"/>
                     <constraint firstItem="uLp-BB-bPm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DTD-yQ-bj0"/>
                     <constraint firstItem="eRx-23-PbU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LeG-xA-Zn6"/>
+                    <constraint firstItem="uLp-BB-bPm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6.5" id="dHN-hB-nBE"/>
                     <constraint firstItem="dtm-SF-iVc" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hbs-0D-3IA"/>
                     <constraint firstAttribute="trailing" secondItem="eRx-23-PbU" secondAttribute="trailing" constant="10" id="os5-eC-WCS"/>
                     <constraint firstItem="uLp-BB-bPm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="zVM-rN-q5P"/>

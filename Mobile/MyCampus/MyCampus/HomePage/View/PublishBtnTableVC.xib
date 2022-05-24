@@ -9,15 +9,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PublishBtnTableVC" customModule="MyCampus" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="54" id="KGk-i7-Jjw" customClass="PublishBtnTableVC" customModule="MyCampus" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2u-pU-6Rg">
-                        <rect key="frame" x="30" y="6.5" width="260" height="31"/>
+                        <rect key="frame" x="20" y="10" width="280" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="unD-05-Mqc"/>
+                        </constraints>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" title="发布"/>
                         <buttonConfiguration key="configuration" style="filled" title="发布"/>
@@ -28,16 +31,18 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="H2u-pU-6Rg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4jc-om-aC5"/>
-                    <constraint firstAttribute="trailing" secondItem="H2u-pU-6Rg" secondAttribute="trailing" constant="30" id="7dx-AJ-kUZ"/>
+                    <constraint firstAttribute="trailing" secondItem="H2u-pU-6Rg" secondAttribute="trailing" constant="20" id="7dx-AJ-kUZ"/>
                     <constraint firstItem="H2u-pU-6Rg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="9ot-DU-gZo"/>
-                    <constraint firstItem="H2u-pU-6Rg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="SCd-Ce-138"/>
+                    <constraint firstItem="H2u-pU-6Rg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="SCd-Ce-138"/>
+                    <constraint firstAttribute="bottom" secondItem="H2u-pU-6Rg" secondAttribute="bottom" constant="10" id="SQk-Ce-CMr"/>
+                    <constraint firstItem="H2u-pU-6Rg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="yHU-1G-KtH"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="btn" destination="H2u-pU-6Rg" id="dAP-Gu-Mfi"/>
             </connections>
-            <point key="canvasLocation" x="133" y="95"/>
+            <point key="canvasLocation" x="131.8840579710145" y="97.767857142857139"/>
         </tableViewCell>
     </objects>
 </document>
