@@ -22,4 +22,5 @@ target 'MyCampus' do
   pod 'Cache'
   pod 'SwiftDate'
   pod "MobilePlayer"
+  pod 'YPImagePicker'
 end

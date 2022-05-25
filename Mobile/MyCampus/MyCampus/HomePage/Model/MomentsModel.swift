@@ -22,7 +22,7 @@ struct MomentTextItem: MomentItem {
 
 // TODO: https://linsyorozuya.gitbook.io/avfoundation-programming-guide/
 // PhotoKit
-// 视频、音频后续再实现
+// 视频、音频数据类型用 PHAsset
 // https://developer.apple.com/documentation/photokit/selecting_photos_and_videos_in_ios
 struct MomentPicItem: MomentItem {
     
