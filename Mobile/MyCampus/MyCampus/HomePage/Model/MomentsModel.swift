@@ -10,8 +10,6 @@ import AVFoundation
 import UIKit
 import SwiftDate
 
-// AVAudioRecorder AVAudioPlayer
-
 protocol MomentItem {
 }
 
@@ -25,15 +23,16 @@ struct MomentTextItem: MomentItem {
 // 视频、音频数据类型用 PHAsset
 // https://developer.apple.com/documentation/photokit/selecting_photos_and_videos_in_ios
 struct MomentPicItem: MomentItem {
-    
+    // UIImage.jpeg
 }
 
 struct MomentAudioItem: MomentItem {
-    
+    // AVAudioRecorder AVAudioPlayer
 }
 
 struct MomentVideoItem: MomentItem {
-    
+    // AVPlayer AVPlayerItem
+    // PHCachingImageManager().requestAVAssetForVideo
 }
 
 struct Owner {
