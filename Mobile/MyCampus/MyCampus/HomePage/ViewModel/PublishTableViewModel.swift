@@ -18,6 +18,10 @@ class PublishTextData: PublishItemData {
     var text: String = ""
 }
 
+class PublishImageData: PublishItemData {
+    var image: UIImage = UIImage(named: "example")!
+}
+
 class PublishToolData: PublishItemData {
 }
 
@@ -46,6 +50,7 @@ class PublishTableViewModel {
         sectionListSubject.onNext([
             SectionOfPublishItemData(header: "", items: [
                 PublishTextData(),
+                PublishImageData(),
             ]),
             SectionOfPublishItemData(header: "", items: [
                 PublishToolData(),
@@ -104,6 +109,10 @@ class PublishTableViewModel {
             
             if let cell = cell as? PublishTextViewTableVC, let itemData = itemData as? PublishTextData {
                 itemData.text = cell.textView.text
+            }
+            
+            if let cell = cell as? PublishImageTableViewCell, let itemData = itemData as? PublishImageData {
+                itemData.image = cell.imgView.image ?? UIImage()
             }
             
             // TODO: Other type save

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		63F7FC397DE1EB590539F926 /* Pods_MyCampus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A9E7C3A4FEEA4382C2BE7D /* Pods_MyCampus.framework */; };
+		94324205283FB13800D9C89A /* PublishImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */; };
+		94324206283FB13800D9C89A /* PublishImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */; };
 		943F8B4E283C68B4004E908C /* PublishVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943F8B4C283C68B4004E908C /* PublishVC.swift */; };
 		943F8B4F283C68B4004E908C /* PublishVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 943F8B4D283C68B4004E908C /* PublishVC.xib */; };
 		943F8B52283CB639004E908C /* PublishToolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943F8B50283CB639004E908C /* PublishToolTableViewCell.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		87A12964A2E56617EF21DF69 /* Pods-MyCampus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCampus.debug.xcconfig"; path = "Target Support Files/Pods-MyCampus/Pods-MyCampus.debug.xcconfig"; sourceTree = "<group>"; };
+		94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishImageTableViewCell.swift; sourceTree = "<group>"; };
+		94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishImageTableViewCell.xib; sourceTree = "<group>"; };
 		943F8B4C283C68B4004E908C /* PublishVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishVC.swift; sourceTree = "<group>"; };
 		943F8B4D283C68B4004E908C /* PublishVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishVC.xib; sourceTree = "<group>"; };
 		943F8B50283CB639004E908C /* PublishToolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishToolTableViewCell.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				943F8B55283CBBB6004E908C /* PublishBtnTableVC.xib */,
 				943F8B58283CC1A3004E908C /* PublishTextViewTableVC.swift */,
 				943F8B59283CC1A3004E908C /* PublishTextViewTableVC.xib */,
+				94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */,
+				94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,6 +286,7 @@
 				943F8B57283CBBB6004E908C /* PublishBtnTableVC.xib in Resources */,
 				943F8B5B283CC1A3004E908C /* PublishTextViewTableVC.xib in Resources */,
 				943F8B4F283C68B4004E908C /* PublishVC.xib in Resources */,
+				94324206283FB13800D9C89A /* PublishImageTableViewCell.xib in Resources */,
 				943F8B53283CB639004E908C /* PublishToolTableViewCell.xib in Resources */,
 				94D73E2F283388B40024AFD5 /* LaunchScreen.storyboard in Resources */,
 				94D73E2C283388B40024AFD5 /* Assets.xcassets in Resources */,
@@ -349,6 +356,7 @@
 				94805A24283B1E6700341432 /* HomePageViewController.swift in Sources */,
 				94805A3C283B834B00341432 /* WaterFallFlowLayout.swift in Sources */,
 				94805A3A283B5F2A00341432 /* MomentsModel.swift in Sources */,
+				94324205283FB13800D9C89A /* PublishImageTableViewCell.swift in Sources */,
 				94805A2C283B209E00341432 /* PersonalPageViewController.swift in Sources */,
 				943F8B56283CBBB6004E908C /* PublishBtnTableVC.swift in Sources */,
 				943F8B5A283CC1A3004E908C /* PublishTextViewTableVC.swift in Sources */,

@@ -281,3 +281,11 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
+
+
+extension UIImage {
+    func getImageHeight(width: CGFloat) -> CGFloat {
+        let imageRatio = CGFloat(self.size.width / self.size.height)
+        return  width / imageRatio
+    }
+}
