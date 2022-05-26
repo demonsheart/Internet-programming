@@ -19,7 +19,11 @@ class PublishTextData: PublishItemData {
 }
 
 class PublishImageData: PublishItemData {
-    var image: UIImage = UIImage(named: "example")!
+    var image: UIImage
+    
+    init() { self.image = UIImage(named: "example")! }
+    
+    init(image: UIImage) { self.image = image }
 }
 
 class PublishToolData: PublishItemData {
@@ -50,7 +54,6 @@ class PublishTableViewModel {
         sectionListSubject.onNext([
             SectionOfPublishItemData(header: "", items: [
                 PublishTextData(),
-                PublishImageData(),
             ]),
             SectionOfPublishItemData(header: "", items: [
                 PublishToolData(),
@@ -88,6 +91,17 @@ class PublishTableViewModel {
         
     }
     
+    func addImage(in tableView: UITableView, image: UIImage) {
+        // 默认在section 0
+        guard
+            var sections = try? sectionListSubject.value(),
+            var preSection = preData(from: tableView)
+        else { return }
+        preSection.items.append(PublishImageData(image: image))
+        sections[0] = preSection
+        sectionListSubject.onNext(sections)
+    }
+    
     // 捕获数据到model
     func saveDataIntoModel() {
         // TODO: 捕获数据到model
@@ -106,18 +120,19 @@ class PublishTableViewModel {
         for i in 0..<preSection.items.count {
             let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0))
             let itemData = preSection.items[i]
-            
+
             if let cell = cell as? PublishTextViewTableVC, let itemData = itemData as? PublishTextData {
                 itemData.text = cell.textView.text
             }
-            
+
             if let cell = cell as? PublishImageTableViewCell, let itemData = itemData as? PublishImageData {
                 itemData.image = cell.imgView.image ?? UIImage()
             }
-            
+
             // TODO: Other type save
-            
+
         }
+        
         return preSection
     }
 }

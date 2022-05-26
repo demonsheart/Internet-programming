@@ -7,13 +7,20 @@
 
 import UIKit
 
-class PublishImageTableViewCell: UITableViewCell {
+class PublishImageTableViewCell: UITableViewCell, SaveBeforeReuse {
 
     @IBOutlet weak var imgView: UIImageView!
     
     @IBOutlet weak var imgHeight: NSLayoutConstraint!
     
     var deleteCallBack: (() -> Void)?
+    
+    var saveCallBack: ((UIImage) -> Void)?
+    
+    override func prepareForReuse() {
+        saveCallBack?(imgView.image ?? UIImage())
+        super.prepareForReuse()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

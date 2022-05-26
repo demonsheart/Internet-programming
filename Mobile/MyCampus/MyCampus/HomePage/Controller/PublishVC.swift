@@ -56,6 +56,9 @@ class PublishVC: BaseViewController, UITextViewDelegate {
             case let element as PublishTextData:
                 let cell = tv.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PublishTextViewTableVC
                 cell.textView.text = element.text
+                cell.saveCallBack = { text in
+                    element.text = text
+                }
                 cell.deleteCallBack = { [weak self] in
                     guard let self = self else { return }
                     self.viewModel.removeItem(in: tv, at: indexPath)
@@ -66,6 +69,9 @@ class PublishVC: BaseViewController, UITextViewDelegate {
                 let cell = tv.dequeueReusableCell(withIdentifier: "image", for: indexPath) as! PublishImageTableViewCell
                 cell.imgView.image = element.image
                 cell.imgHeight.constant = element.image.getImageHeight(width: withOfCell)
+                cell.saveCallBack = { image in
+                    element.image = image
+                }
                 cell.deleteCallBack = { [weak self] in
                     guard let self = self else { return }
                     self.viewModel.removeItem(in: tv, at: indexPath)
@@ -107,7 +113,7 @@ class PublishVC: BaseViewController, UITextViewDelegate {
         config.startOnScreen = .library
         config.shouldSaveNewPicturesToAlbum = false
         let picker = YPImagePicker(configuration: config)
-        picker.didFinishPicking { [unowned picker] items, cancelled in
+        picker.didFinishPicking { [unowned picker, unowned self] items, cancelled in
             if cancelled {
                 print("Picker was canceled")
                 picker.dismiss(animated: true, completion: nil)
@@ -115,7 +121,7 @@ class PublishVC: BaseViewController, UITextViewDelegate {
             }
             
             if let photo = items.singlePhoto {
-                // TODO: Add image
+                viewModel.addImage(in: self.tableView, image: photo.image)
             }
             picker.dismiss(animated: true, completion: nil)
         }

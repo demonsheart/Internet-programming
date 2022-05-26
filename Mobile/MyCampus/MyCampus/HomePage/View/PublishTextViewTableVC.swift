@@ -8,10 +8,17 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class PublishTextViewTableVC: UITableViewCell {
+class PublishTextViewTableVC: UITableViewCell, SaveBeforeReuse {
+    var saveCallBack: ((String) -> Void)?
+    
     var deleteCallBack: (() -> Void)?
     
     @IBOutlet weak var textView: IQTextView!
+    
+    override func prepareForReuse() {
+        saveCallBack?(textView.text ?? "")
+        super.prepareForReuse()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
