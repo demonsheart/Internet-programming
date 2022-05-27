@@ -23,10 +23,21 @@ class PublishTextViewTableVC: UITableViewCell, SaveBeforeReuse {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = CPColor.bgGray
+        self.textView.delegate = self
     }
     
     @IBAction func remove(_ sender: UIButton) {
         deleteCallBack?()
     }
     
+}
+
+extension PublishTextViewTableVC: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let character = text.first, character.isNewline {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
 }

@@ -13,7 +13,7 @@ import RxRelay
 import RxDataSources
 import YPImagePicker
 
-class PublishVC: BaseViewController, UITextViewDelegate {
+class PublishVC: BaseViewController {
     
     @IBOutlet weak var titleTextView: IQTextView!
     
@@ -32,12 +32,10 @@ class PublishVC: BaseViewController, UITextViewDelegate {
         self.title = "发布"
         self.navigationController?.navigationBar.fixBarTintColor = .white
         self.view.backgroundColor = CPColor.bgGray
+        self.hideKeyboardWhenTappedAround()
         titleTextView.delegate = self
         titleTextView.textContainerInset = .init(top: 3, left: 10, bottom: 3, right: 10)
         titleTextView.becomeFirstResponder()
-
-//        tableView.delegate = self
-//        tableView.dataSource = self
         
         tableView.backgroundColor = CPColor.bgGray
         tableView.register(UINib(nibName: "PublishToolTableViewCell", bundle: nil), forCellReuseIdentifier: "tool")
@@ -128,4 +126,19 @@ class PublishVC: BaseViewController, UITextViewDelegate {
         present(picker, animated: true, completion: nil)
     }
 
+}
+
+extension PublishVC: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let character = text.first, character.isNewline {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("end")
+    }
 }
