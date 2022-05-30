@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		63F7FC397DE1EB590539F926 /* Pods_MyCampus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A9E7C3A4FEEA4382C2BE7D /* Pods_MyCampus.framework */; };
+		942EC6502845035600E4C8A0 /* MomentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942EC64F2845035600E4C8A0 /* MomentDetailVC.swift */; };
 		94324205283FB13800D9C89A /* PublishImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */; };
 		94324206283FB13800D9C89A /* PublishImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */; };
 		9432420B283FCBE100D9C89A /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432420A283FCBE100D9C89A /* Protocol.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		87A12964A2E56617EF21DF69 /* Pods-MyCampus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCampus.debug.xcconfig"; path = "Target Support Files/Pods-MyCampus/Pods-MyCampus.debug.xcconfig"; sourceTree = "<group>"; };
+		942EC64F2845035600E4C8A0 /* MomentDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailVC.swift; sourceTree = "<group>"; };
 		94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishImageTableViewCell.swift; sourceTree = "<group>"; };
 		94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishImageTableViewCell.xib; sourceTree = "<group>"; };
 		9432420A283FCBE100D9C89A /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
@@ -101,6 +103,21 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		942EC64E2845027000E4C8A0 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				943F8B50283CB639004E908C /* PublishToolTableViewCell.swift */,
+				943F8B51283CB639004E908C /* PublishToolTableViewCell.xib */,
+				943F8B54283CBBB6004E908C /* PublishBtnTableVC.swift */,
+				943F8B55283CBBB6004E908C /* PublishBtnTableVC.xib */,
+				943F8B58283CC1A3004E908C /* PublishTextViewTableVC.swift */,
+				943F8B59283CC1A3004E908C /* PublishTextViewTableVC.xib */,
+				94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */,
+				94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
 		94324209283FCBCB00D9C89A /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,14 +176,7 @@
 				94805A2E283B234B00341432 /* TopImageBtn.swift */,
 				94805A3B283B834B00341432 /* WaterFallFlowLayout.swift */,
 				94805A3D283B879600341432 /* MomentCollectionViewCell.swift */,
-				943F8B50283CB639004E908C /* PublishToolTableViewCell.swift */,
-				943F8B51283CB639004E908C /* PublishToolTableViewCell.xib */,
-				943F8B54283CBBB6004E908C /* PublishBtnTableVC.swift */,
-				943F8B55283CBBB6004E908C /* PublishBtnTableVC.xib */,
-				943F8B58283CC1A3004E908C /* PublishTextViewTableVC.swift */,
-				943F8B59283CC1A3004E908C /* PublishTextViewTableVC.xib */,
-				94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */,
-				94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */,
+				942EC64E2845027000E4C8A0 /* TableView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,6 +196,7 @@
 				94805A34283B28A300341432 /* MomentsVC.swift */,
 				943F8B4C283C68B4004E908C /* PublishVC.swift */,
 				943F8B4D283C68B4004E908C /* PublishVC.xib */,
+				942EC64F2845035600E4C8A0 /* MomentDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -370,6 +381,7 @@
 				94324205283FB13800D9C89A /* PublishImageTableViewCell.swift in Sources */,
 				94805A2C283B209E00341432 /* PersonalPageViewController.swift in Sources */,
 				943F8B56283CBBB6004E908C /* PublishBtnTableVC.swift in Sources */,
+				942EC6502845035600E4C8A0 /* MomentDetailVC.swift in Sources */,
 				943F8B5A283CC1A3004E908C /* PublishTextViewTableVC.swift in Sources */,
 				94805A28283B1F6600341432 /* Extensions.swift in Sources */,
 				9432420B283FCBE100D9C89A /* Protocol.swift in Sources */,

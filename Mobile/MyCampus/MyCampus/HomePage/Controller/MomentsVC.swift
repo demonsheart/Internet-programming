@@ -61,13 +61,15 @@ class MomentsVC: UIViewController {
     }
 }
 
-extension MomentsVC: UICollectionViewDelegate{
+extension MomentsVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(model.list[indexPath.row].title)
+        let detail = MomentDetailVC(model: model.list[indexPath.row])
+        detail.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 }
 
-extension MomentsVC: UICollectionViewDataSource{
+extension MomentsVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return model.list.count
@@ -80,7 +82,7 @@ extension MomentsVC: UICollectionViewDataSource{
     }
 }
 
-extension MomentsVC: WaterFallLayoutDelegate{
+extension MomentsVC: WaterFallLayoutDelegate {
     func waterFlowLayout(_ waterFlowLayout: WaterFallFlowLayout, itemHeight indexPath: IndexPath) -> CGFloat {
         return model.list[indexPath.row].overLookHeight
     }

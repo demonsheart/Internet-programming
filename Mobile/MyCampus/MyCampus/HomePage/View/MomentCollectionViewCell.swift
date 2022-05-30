@@ -87,6 +87,7 @@ class MomentCollectionViewCell: UICollectionViewCell {
 //        userView.avatarView.sd_setImage(with: URL(string: model.owner.avatar), placeholderImage: UIImage(named: "person.crop.circle"))
         userView.avatarView.sd_setImage(with: URL(string: "https://p3-sign.toutiaoimg.com/pgc-image/21507a12df2c4e7eb2d859c6f32dd497~tplv-tt-large.image?x-expires=1965128203&x-signature=RgTmiaTxyrICK4%2B%2B1xB4esDHb7U%3D"), placeholderImage: UIImage(named: "person.crop.circle"))
         userView.sourceLabel.text = model.owner.nick
+        userView.sourceInfoLabel.text = "管理员"
         
         self.contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in

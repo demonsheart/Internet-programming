@@ -117,6 +117,7 @@ enum MomentItemWrapper: Codable {
 struct Owner: Codable {
     var avatar: String
     var nick: String
+    // TODO: subText
 }
 
 // 每个文章可由文字、图片、视频、音频组合形成
@@ -322,6 +323,6 @@ class StoragedMoments {
             print("storage not init")
             return
         }
-        try? storage.setObject(list, forKey: key)
+        try? storage.setObject(list, forKey: key, expiry: .date(Date().addingTimeInterval(45 * 24 * 60 * 60)))
     }
 }
