@@ -169,7 +169,7 @@ class MomentsModel: Codable {
         let current = DateInRegion(seconds: Date().timeIntervalSince1970, region: Date.currentRome)
         let timeIntervalMinute = date.getInterval(toDate: current, component: .minute)
         
-        if timeIntervalMinute <= 1 && timeIntervalMinute > 0 {
+        if timeIntervalMinute <= 1 && timeIntervalMinute >= 0 {
             timeText = "刚刚"
         } else if timeIntervalMinute > 1 && timeIntervalMinute < 60 {
             timeText = String(format: "%d分钟前", Int(timeIntervalMinute))

@@ -17,7 +17,7 @@ class MomentDetailVC: BaseViewController {
     
     let header = HeaderView()
     
-    let content = ContentView()
+    let content: ContentView
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -51,6 +51,7 @@ class MomentDetailVC: BaseViewController {
     
     init(model: MomentsModel) {
         self.model = model
+        self.content = ContentView(items: model.items)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -95,7 +96,7 @@ class MomentDetailVC: BaseViewController {
         containerView.addSubview(header)
         header.avatarView.sd_setImage(with: URL(string: "https://p3-sign.toutiaoimg.com/pgc-image/21507a12df2c4e7eb2d859c6f32dd497~tplv-tt-large.image?x-expires=1965128203&x-signature=RgTmiaTxyrICK4%2B%2B1xB4esDHb7U%3D"), placeholderImage: UIImage(named: "person.crop.circle"))
         header.sourceLabel.text = model.owner.nick
-        header.sourceInfoLabel.text = "管理员"
+        header.sourceInfoLabel.text = "\(model.formattedTimeStr) · 管理员"
         header.snp.makeConstraints { make in
             make.left.equalTo(10)
             make.right.equalTo(-10)
@@ -103,7 +104,6 @@ class MomentDetailVC: BaseViewController {
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
         
-        content.content.text = "测试文本"
         containerView.addSubview(content)
         content.snp.makeConstraints { make in
             make.top.equalTo(header.snp.bottom).offset(10)
@@ -295,31 +295,153 @@ extension MomentDetailVC {
     
     class ContentView: UIView {
         
-        lazy var content: UILabel = {
-            let label = UILabel()
-            label.numberOfLines = 0
-            label.textAlignment = .left
-            label.lineBreakMode = .byCharWrapping
-            label.font = .systemFont(ofSize: 17)
-            return label
-        }()
+        enum UIViewWrapper {
+            case label(UILabel)
+            case image(UIImageView)
+            case audio
+            case video
+        }
         
-        init() {
+        let items: [MomentItemWrapper]
+        var views = [UIViewWrapper]()
+        
+        init(items: [MomentItemWrapper]) {
+            self.items = items
             super.init(frame: .zero)
             
-            self.addSubview(content)
-            content.snp.makeConstraints { make in
-                make.left.equalTo(10)
-                make.right.equalTo(-10)
-                make.top.equalToSuperview()
-                
-                // bottom
-                make.bottom.equalToSuperview().offset(-10)
-            }
+            // 按照[MomentItemWrapper]顺序布局 生成布局
+            initViews()
+            initConstraints()
         }
         
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+        
+        private func initViews() {
+            for item in items {
+                switch item {
+                case .text(let momentTextItem):
+                    views.append(generateUILabel(text: momentTextItem.text))
+                case .pic(let momentPicItem):
+                    views.append(generateUIImageView(image: momentPicItem.image))
+                case .audio(_):
+                    break
+                case .video(_):
+                    break
+                }
+            }
+        }
+        
+        private func initConstraints() {
+            
+            var preView = UIView() // 前一个view引用 用来下一个item加top约束
+            for i in 0..<views.count {
+                let wrapper = views[i]
+                
+                if i == 0 { // first -- top
+                    switch wrapper {
+                    case .image(let imageView):
+                        self.addSubview(imageView)
+                        let height: CGFloat = imageView.image?.getImageHeight(width: UIScreen.main.bounds.size.width - 20) ?? .leastNonzeroMagnitude
+                        imageView.snp.makeConstraints { make in
+                            make.top.equalToSuperview()
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                            make.height.equalTo(height)
+                        }
+                        preView = imageView
+                    case .label(let label):
+                        self.addSubview(label)
+                        label.snp.makeConstraints { make in
+                            make.top.equalToSuperview()
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                        }
+                        preView = label
+                    case .audio:
+                        break
+                    case .video:
+                        break
+                    }
+                    // 补充情况 如果唯一元素 则加底部约束
+                    if views.count == 1 {
+                        preView.snp.makeConstraints { make in
+                            make.bottom.equalToSuperview().offset(-10)
+                        }
+                    }
+                } else if i < views.count - 1 { // center
+                    switch wrapper {
+                    case .image(let imageView):
+                        self.addSubview(imageView)
+                        let height: CGFloat = imageView.image?.getImageHeight(width: UIScreen.main.bounds.size.width - 20) ?? .leastNonzeroMagnitude
+                        imageView.snp.makeConstraints { make in
+                            make.top.equalTo(preView.snp.bottom).offset(10)
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                            make.height.equalTo(height)
+                        }
+                        preView = imageView
+                    case .label(let label):
+                        self.addSubview(label)
+                        label.snp.makeConstraints { make in
+                            make.top.equalTo(preView.snp.bottom).offset(10)
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                        }
+                        preView = label
+                    case .audio:
+                        break
+                    case .video:
+                        break
+                    }
+                } else { // bottom -- bottom
+                    switch wrapper {
+                    case .image(let imageView):
+                        self.addSubview(imageView)
+                        let height: CGFloat = imageView.image?.getImageHeight(width: UIScreen.main.bounds.size.width - 20) ?? .leastNonzeroMagnitude
+                        imageView.snp.makeConstraints { make in
+                            make.top.equalTo(preView.snp.bottom).offset(10)
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                            make.height.equalTo(height)
+                            make.bottom.equalToSuperview().offset(-10)
+                        }
+                        preView = imageView
+                    case .label(let label):
+                        self.addSubview(label)
+                        label.snp.makeConstraints { make in
+                            make.top.equalTo(preView.snp.bottom).offset(10)
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                            make.bottom.equalToSuperview().offset(-10)
+                        }
+                        preView = label
+                    case .audio:
+                        break
+                    case .video:
+                        break
+                    }
+                }
+            }
+        }
+        
+        private func generateUILabel(text: String) -> UIViewWrapper {
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.textAlignment = .left
+            label.lineBreakMode = .byCharWrapping
+            label.textColor = .darkText
+            label.font = .systemFont(ofSize: 17)
+            label.text = text
+            return UIViewWrapper.label(label)
+        }
+        
+        private func generateUIImageView(image: UIImage) -> UIViewWrapper {
+            let view = UIImageView()
+            view.image = image
+            view.contentMode = .scaleToFill
+            return UIViewWrapper.image(view)
         }
     }
 }
