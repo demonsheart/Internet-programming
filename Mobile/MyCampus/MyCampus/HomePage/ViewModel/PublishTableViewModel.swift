@@ -9,6 +9,7 @@ import RxDataSources
 import RxCocoa
 import RxSwift
 import RxRelay
+import Cache
 
 protocol PublishItemData {
 }
@@ -108,6 +109,7 @@ class PublishTableViewModel {
     }
     
     func publish(in tableView: UITableView, at indexPath: IndexPath) {
+        // TODO: publish
         print("publish")
     }
     

@@ -299,4 +299,29 @@ extension UIImage {
         let imageRatio = CGFloat(self.size.width / self.size.height)
         return  width / imageRatio
     }
+    
+    /// Checks if image has alpha component
+    var hasAlpha: Bool {
+      let result: Bool
+
+      guard let alpha = cgImage?.alphaInfo else {
+        return false
+      }
+
+      switch alpha {
+      case .none, .noneSkipFirst, .noneSkipLast:
+        result = false
+      default:
+        result = true
+      }
+
+      return result
+    }
+
+    /// Convert to data
+    func cache_toData() -> Data? {
+      return hasAlpha
+        ? pngData()
+        : jpegData(compressionQuality: 1.0)
+    }
 }

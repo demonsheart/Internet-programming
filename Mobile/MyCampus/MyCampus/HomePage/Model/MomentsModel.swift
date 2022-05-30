@@ -10,20 +10,62 @@ import AVFoundation
 import UIKit
 import SwiftDate
 
-protocol MomentItem {
+enum StorageError: Error {
+  /// Object can not be found
+  case notFound
+  /// Object is found, but casting to requested type failed
+  case typeNotMatch
+  /// The file attributes are malformed
+  case malformedFileAttributes
+  /// Can't perform Decode
+  case decodingFailed
+  /// Can't perform Encode
+  case encodingFailed
+  /// The storage has been deallocated
+  case deallocated
+  /// Fail to perform transformation to or from Data
+  case transformerFail
+}
+
+protocol MomentItem: Codable {
+    
 }
 
 struct MomentTextItem: MomentItem {
     let text: String
-    
 }
 
-// TODO: https://linsyorozuya.gitbook.io/avfoundation-programming-guide/
-// PhotoKit
-// 视频、音频数据类型用 PHAsset
-// https://developer.apple.com/documentation/photokit/selecting_photos_and_videos_in_ios
 struct MomentPicItem: MomentItem {
     // UIImage.jpeg
+    let image: UIImage
+    
+    init(image: UIImage) {
+        self.image = image
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case image
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let data = try container.decode(Data.self, forKey: CodingKeys.image)
+        guard let image = UIImage(data: data) else {
+            throw StorageError.decodingFailed
+        }
+        
+        self.image = image
+    }
+    
+    // cache_toData() wraps UIImagePNG/JPEGRepresentation around some conditional logic with some whipped cream and sprinkles.
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        guard let data = image.cache_toData() else {
+            throw StorageError.encodingFailed
+        }
+        
+        try container.encode(data, forKey: CodingKeys.image)
+    }
 }
 
 struct MomentAudioItem: MomentItem {
@@ -35,19 +77,62 @@ struct MomentVideoItem: MomentItem {
     // PHCachingImageManager().requestAVAssetForVideo
 }
 
-struct Owner {
+enum MomentItemWrapper: Codable {
+    case text(MomentTextItem)
+    case pic(MomentPicItem)
+    case audio(MomentAudioItem)
+    case video(MomentVideoItem)
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let data = try? container.decode(MomentTextItem.self) {
+            self = .text(data)
+        } else if let data = try? container.decode(MomentPicItem.self) {
+            self = .pic(data)
+        } else if let data = try? container.decode(MomentAudioItem.self) {
+            self = .audio(data)
+        } else if let data = try? container.decode(MomentVideoItem.self) {
+            self = .video(data)
+        } else {
+            throw StorageError.decodingFailed
+        }
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .text(let text):
+            try container.encode(text)
+        case .pic(let pic):
+            try container.encode(pic)
+        case .audio(let audio):
+            try container.encode(audio)
+        case .video(let video):
+            try container.encode(video)
+        }
+    }
+}
+
+struct Owner: Codable {
     var avatar: String
     var nick: String
 }
 
 // 每个文章可由文字、图片、视频、音频组合形成
-// 缓存如何做？ Cache
 struct MomentsModel {
     var title: String
     var location: String?
     var timeStamp: String
     var owner: Owner
-    var items: [MomentItem]
+    var items: [MomentItemWrapper]
+    
+    init(title: String, location: String?, timeStamp: String, owner: Owner, items: [MomentItemWrapper]) {
+        self.title = title
+        self.location = location
+        self.timeStamp = timeStamp
+        self.owner = owner
+        self.items = items
+    }
     
     var formattedTimeStr: String {
         guard let intStamp = TimeInterval(timeStamp) else { return "" }
@@ -77,19 +162,25 @@ struct MomentsModel {
     
     // 0文本 < 1图片 < 2视频
     var modelType: Int {
-        let videoCount = items.reduce(0) { partialResult, item in
-            return item is MomentVideoItem ? partialResult + 1 : partialResult
-        }
-        if videoCount > 0 {
-            return 2
+        var videoCount = 0
+        var picCount = 0
+        var textCount = 0
+        var audioCount = 0
+        for item in items {
+            switch item {
+            case .text(_):
+                textCount += 1
+            case .pic(_):
+                picCount += 1
+            case .audio(_):
+                audioCount += 1
+            case .video(_):
+                videoCount += 1
+            }
         }
         
-        let picCount = items.reduce(0) { partialResult, item in
-            return item is MomentPicItem ? partialResult + 1 : partialResult
-        }
-        if picCount > 0 {
-            return 1
-        }
+        if videoCount > 0 { return 2 }
+        if picCount > 0 { return 1 }
         
         return 0;
     }
@@ -114,24 +205,53 @@ struct MomentsModel {
     
     static var `default`: [MomentsModel] = [
         MomentsModel(title: "总书记的一周", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "央视新闻"), items: [
-            MomentTextItem(text: ""),
+            MomentItemWrapper.text(MomentTextItem(text: "")),
         ]),
         MomentsModel(title: "焦点访谈：并肩战“疫”同心守“沪”", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "央视网"), items: [
-            MomentTextItem(text: ""),
-            MomentPicItem(),
+            MomentItemWrapper.text(MomentTextItem(text: "")),
+            MomentItemWrapper.pic(MomentPicItem(image: UIImage(systemName: "airtag.fill")!)),
         ]),
         MomentsModel(title: "雾海中的重庆丰都宛如“天空之城”", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "新华社"), items: [
-            MomentAudioItem(),
+            MomentItemWrapper.audio(MomentAudioItem()),
         ]),
         MomentsModel(title: "习近平关心网信事业发展", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "新华网"), items: [
-            MomentVideoItem(),
+            MomentItemWrapper.video(MomentVideoItem()),
         ]),
         MomentsModel(title: "小山村“贷”来4300万元的背后", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "人民网"), items: [
-            MomentPicItem(),
+            MomentItemWrapper.pic(MomentPicItem(image: UIImage(systemName: "airtag.fill")!))
         ]),
         MomentsModel(title: "吴尊友发文解读动态清零及其四点误解,据网友爆料，吴尊为了他的妻子", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "中国网"), items: [
-            MomentTextItem(text: ""),
-            MomentAudioItem(),
+            MomentItemWrapper.text(MomentTextItem(text: "")),
+            MomentItemWrapper.audio(MomentAudioItem()),
         ]),
     ]
+}
+
+extension MomentsModel: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case location
+        case timeStamp
+        case owner
+        case items
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        title = try values.decode(String.self, forKey: .title)
+        location = try? values.decode(String.self, forKey: .location)
+        timeStamp = try values.decode(String.self, forKey: .timeStamp)
+        owner = try values.decode(Owner.self, forKey: .owner)
+        items = try values.decode([MomentItemWrapper].self, forKey: .items)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(title, forKey: .title)
+        try container.encode(location, forKey: .location)
+        try container.encode(timeStamp, forKey: .timeStamp)
+        try container.encode(owner, forKey: .owner)
+        try container.encode(items, forKey: .items)
+    }
 }
