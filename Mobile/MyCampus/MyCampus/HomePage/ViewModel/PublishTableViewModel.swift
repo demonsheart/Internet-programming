@@ -14,8 +14,9 @@ import Cache
 enum PublishCellModel {
     case text(MomentTextItem)
     case image(MomentPicItem)
-    case tool
-    case btn
+    case tool1 // 文字 图片 位置
+    case tool2 // 音频 视频
+    case btn // 发布按钮
 }
 
 struct SectionOfPublishItemData {
@@ -43,7 +44,8 @@ class PublishTableViewModel {
                 PublishCellModel.text(MomentTextItem(text: "")),
             ]),
             SectionOfPublishItemData(header: "", items: [
-                PublishCellModel.tool,
+                PublishCellModel.tool1,
+                PublishCellModel.tool2,
                 PublishCellModel.btn,
             ])
         ])
@@ -103,7 +105,7 @@ class PublishTableViewModel {
                 items.append(MomentItemWrapper.pic(imageItem))
             case .text(let textItem):
                 items.append(MomentItemWrapper.text(textItem))
-            case .tool, .btn:
+            case .tool1, .tool2, .btn:
                 break
             }
         }
@@ -141,7 +143,7 @@ class PublishTableViewModel {
                     break
                 }
                 imageItem.image = cell.imgView.image ?? UIImage()
-            case .tool, .btn:
+            case .tool1, .tool2, .btn:
                 break
             }
         }

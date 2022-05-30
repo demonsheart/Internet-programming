@@ -149,6 +149,7 @@ class MomentsModel: Codable {
             case .video(_):
                 break
             }
+            if image != nil { break }
         }
         return image
     }

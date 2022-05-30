@@ -39,6 +39,7 @@ class PublishVC: BaseViewController {
         
         tableView.backgroundColor = CPColor.bgGray
         tableView.register(UINib(nibName: "PublishToolTableViewCell", bundle: nil), forCellReuseIdentifier: "tool")
+        tableView.register(UINib(nibName: "PublishTool2TableViewCell", bundle: nil), forCellReuseIdentifier: "tool2")
         tableView.register(UINib(nibName: "PublishBtnTableVC", bundle: nil), forCellReuseIdentifier: "btn")
         tableView.register(UINib(nibName: "PublishTextViewTableVC", bundle: nil), forCellReuseIdentifier: "text")
         tableView.register(UINib(nibName: "PublishImageTableViewCell", bundle: nil), forCellReuseIdentifier: "image")
@@ -51,16 +52,27 @@ class PublishVC: BaseViewController {
             (dataSource, tv, indexPath, element) in
             let withOfCell = UIScreen.main.bounds.size.width - 20
             switch element {
-            case .tool:
+            case .tool1:
                 let cell = tv.dequeueReusableCell(withIdentifier: "tool", for: indexPath) as! PublishToolTableViewCell
                 cell.callBack = { [weak self] type in
                     if type == 0 {
                         self?.viewModel.addText(in: tv)
                     } else if type == 1 {
-                        // TODO: picture picker
                         self?.showImagePicker()
                     } else if type == 2 {
                         // TODO: Add Location, Use GaoDe API
+                        print("location")
+                    }
+                }
+                return cell
+            case .tool2:
+                let cell = tv.dequeueReusableCell(withIdentifier: "tool2", for: indexPath) as! PublishTool2TableViewCell
+                cell.callBack = { [weak self] type in
+                    if type == 0 {
+                        // TODO: audio cell
+                        print("audio")
+                    } else if type == 1 {
+                        self?.showVideoPicker()
                     }
                 }
                 return cell
@@ -106,6 +118,7 @@ class PublishVC: BaseViewController {
             .disposed(by: disposeBag)
     }
     
+    // image选择器
     private func showImagePicker() {
         var config = YPImagePickerConfiguration()
         config.startOnScreen = .library
@@ -124,6 +137,12 @@ class PublishVC: BaseViewController {
             picker.dismiss(animated: true, completion: nil)
         }
         present(picker, animated: true, completion: nil)
+    }
+    
+    // video 选择器
+    private func showVideoPicker() {
+        // TODO: showVideoPicker
+        print("showVideoPicker")
     }
     
 }

@@ -36,6 +36,8 @@
 		94D73E25283388B20024AFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D73E24283388B20024AFD5 /* SceneDelegate.swift */; };
 		94D73E2C283388B40024AFD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94D73E2B283388B40024AFD5 /* Assets.xcassets */; };
 		94D73E2F283388B40024AFD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D73E2D283388B40024AFD5 /* LaunchScreen.storyboard */; };
+		94FC567A284530A60048A9A8 /* PublishTool2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FC5678284530A60048A9A8 /* PublishTool2TableViewCell.swift */; };
+		94FC567B284530A60048A9A8 /* PublishTool2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94FC5679284530A60048A9A8 /* PublishTool2TableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		94D73E2B283388B40024AFD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94D73E2E283388B40024AFD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94D73E30283388B40024AFD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94FC5678284530A60048A9A8 /* PublishTool2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishTool2TableViewCell.swift; sourceTree = "<group>"; };
+		94FC5679284530A60048A9A8 /* PublishTool2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishTool2TableViewCell.xib; sourceTree = "<group>"; };
 		9AFA35E70C93F1489CF04809 /* Pods-MyCampus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyCampus.release.xcconfig"; path = "Target Support Files/Pods-MyCampus/Pods-MyCampus.release.xcconfig"; sourceTree = "<group>"; };
 		A2A9E7C3A4FEEA4382C2BE7D /* Pods_MyCampus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyCampus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,6 +118,8 @@
 				943F8B59283CC1A3004E908C /* PublishTextViewTableVC.xib */,
 				94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */,
 				94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */,
+				94FC5678284530A60048A9A8 /* PublishTool2TableViewCell.swift */,
+				94FC5679284530A60048A9A8 /* PublishTool2TableViewCell.xib */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94FC567B284530A60048A9A8 /* PublishTool2TableViewCell.xib in Resources */,
 				943F8B57283CBBB6004E908C /* PublishBtnTableVC.xib in Resources */,
 				943F8B5B283CC1A3004E908C /* PublishTextViewTableVC.xib in Resources */,
 				943F8B4F283C68B4004E908C /* PublishVC.xib in Resources */,
@@ -372,6 +379,7 @@
 				94805AA5283BC82F00341432 /* BaseViewController.swift in Sources */,
 				94805A35283B28A300341432 /* MomentsVC.swift in Sources */,
 				943F8B5E283CCD0F004E908C /* PublishTableViewModel.swift in Sources */,
+				94FC567A284530A60048A9A8 /* PublishTool2TableViewCell.swift in Sources */,
 				943F8B52283CB639004E908C /* PublishToolTableViewCell.swift in Sources */,
 				94805A3E283B879600341432 /* MomentCollectionViewCell.swift in Sources */,
 				94805A32283B270F00341432 /* WMpageDataModel.swift in Sources */,
