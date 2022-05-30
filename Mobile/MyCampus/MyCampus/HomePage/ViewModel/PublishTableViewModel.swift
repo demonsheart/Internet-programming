@@ -11,26 +11,11 @@ import RxSwift
 import RxRelay
 import Cache
 
-protocol PublishItemData {
-}
-
-// data项必须用class
-class PublishTextData: PublishItemData {
-    var text: String = ""
-}
-
-class PublishImageData: PublishItemData {
-    var image: UIImage
-    
-    init() { self.image = UIImage(named: "example")! }
-    
-    init(image: UIImage) { self.image = image }
-}
-
-class PublishToolData: PublishItemData {
-}
-
-class PublishBtnData: PublishItemData {
+enum PublishCellModel {
+    case text(MomentTextItem)
+    case image(MomentPicItem)
+    case tool
+    case btn
 }
 
 struct SectionOfPublishItemData {
@@ -39,7 +24,7 @@ struct SectionOfPublishItemData {
 }
 
 extension SectionOfPublishItemData: SectionModelType {
-  typealias Item = PublishItemData
+  typealias Item = PublishCellModel
 
    init(original: SectionOfPublishItemData, items: [Item]) {
     self = original
@@ -47,6 +32,7 @@ extension SectionOfPublishItemData: SectionModelType {
   }
 }
 
+// MARK: PublishTableViewModel
 class PublishTableViewModel {
     
     let sectionListSubject = BehaviorSubject(value: [SectionOfPublishItemData]())
@@ -54,11 +40,11 @@ class PublishTableViewModel {
     init() {
         sectionListSubject.onNext([
             SectionOfPublishItemData(header: "", items: [
-                PublishTextData(),
+                PublishCellModel.text(MomentTextItem(text: "")),
             ]),
             SectionOfPublishItemData(header: "", items: [
-                PublishToolData(),
-                PublishBtnData(),
+                PublishCellModel.tool,
+                PublishCellModel.btn,
             ])
         ])
     }
@@ -86,7 +72,7 @@ class PublishTableViewModel {
             var sections = try? sectionListSubject.value(),
             var preSection = preData(from: tableView)
         else { return }
-        preSection.items.append(PublishTextData())
+        preSection.items.append(PublishCellModel.text(MomentTextItem(text: "")))
         sections[0] = preSection
         sectionListSubject.onNext(sections)
         
@@ -98,18 +84,25 @@ class PublishTableViewModel {
             var sections = try? sectionListSubject.value(),
             var preSection = preData(from: tableView)
         else { return }
-        preSection.items.append(PublishImageData(image: image))
+        preSection.items.append(PublishCellModel.image(MomentPicItem(image: image)))
         sections[0] = preSection
         sectionListSubject.onNext(sections)
     }
     
     // 捕获数据到model
-    func saveDataIntoModel() {
+    func saveDataIntoModel(in tableView: UITableView) {
         // TODO: 捕获数据到model
+        guard let _ = preData(from: tableView) else { return }
+        
+        let _ =  MomentsModel(title: "总书记的一周", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "央视新闻"), items: [
+            MomentItemWrapper.text(MomentTextItem(text: "")),
+        ])
+        
     }
     
     func publish(in tableView: UITableView, at indexPath: IndexPath) {
         // TODO: publish
+        saveDataIntoModel(in: tableView)
         print("publish")
     }
     
@@ -122,17 +115,24 @@ class PublishTableViewModel {
         for i in 0..<preSection.items.count {
             let cell = tableView.cellForRow(at: IndexPath(row: i, section: 0))
             let itemData = preSection.items[i]
-
-            if let cell = cell as? PublishTextViewTableVC, let itemData = itemData as? PublishTextData {
-                itemData.text = cell.textView.text
+            
+            switch itemData {
+            case .text(let textItem):
+                guard let cell = cell as? PublishTextViewTableVC else {
+                    print("error textview")
+                    break
+                }
+                textItem.text = cell.textView.text
+                
+            case .image(let imageItem):
+                guard let cell = cell as? PublishImageTableViewCell else {
+                    print("error image")
+                    break
+                }
+                imageItem.image = cell.imgView.image ?? UIImage()
+            case .tool, .btn:
+                break
             }
-
-            if let cell = cell as? PublishImageTableViewCell, let itemData = itemData as? PublishImageData {
-                itemData.image = cell.imgView.image ?? UIImage()
-            }
-
-            // TODO: Other type save
-
         }
         
         return preSection

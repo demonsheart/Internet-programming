@@ -51,32 +51,7 @@ class PublishVC: BaseViewController {
             (dataSource, tv, indexPath, element) in
             let withOfCell = UIScreen.main.bounds.size.width - 20
             switch element {
-            case let element as PublishTextData:
-                let cell = tv.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PublishTextViewTableVC
-                cell.textView.text = element.text
-                cell.saveCallBack = { text in
-                    element.text = text
-                }
-                cell.deleteCallBack = { [weak self] in
-                    guard let self = self else { return }
-                    self.viewModel.removeItem(in: tv, at: indexPath)
-                }
-                
-                return cell
-            case let element as PublishImageData:
-                let cell = tv.dequeueReusableCell(withIdentifier: "image", for: indexPath) as! PublishImageTableViewCell
-                cell.imgView.image = element.image
-                cell.imgHeight.constant = element.image.getImageHeight(width: withOfCell)
-                cell.saveCallBack = { image in
-                    element.image = image
-                }
-                cell.deleteCallBack = { [weak self] in
-                    guard let self = self else { return }
-                    self.viewModel.removeItem(in: tv, at: indexPath)
-                }
-                
-                return cell
-            case _ as PublishToolData:
+            case .tool:
                 let cell = tv.dequeueReusableCell(withIdentifier: "tool", for: indexPath) as! PublishToolTableViewCell
                 cell.callBack = { [weak self] type in
                     if type == 0 {
@@ -89,14 +64,37 @@ class PublishVC: BaseViewController {
                     }
                 }
                 return cell
-            case _ as PublishBtnData:
+            case .btn:
                 let cell = tv.dequeueReusableCell(withIdentifier: "btn", for: indexPath) as! PublishBtnTableVC
                 cell.callBack = { [weak self] in
                     self?.viewModel.publish(in: tv, at: indexPath)
                 }
                 return cell
-            default:
-                return UITableViewCell()
+            case .text(let textItem):
+                let cell = tv.dequeueReusableCell(withIdentifier: "text", for: indexPath) as! PublishTextViewTableVC
+                cell.textView.text = textItem.text
+                cell.saveCallBack = { text in
+                    textItem.text = text
+                }
+                cell.deleteCallBack = { [weak self] in
+                    guard let self = self else { return }
+                    self.viewModel.removeItem(in: tv, at: indexPath)
+                }
+                
+                return cell
+            case .image(let imageItem):
+                let cell = tv.dequeueReusableCell(withIdentifier: "image", for: indexPath) as! PublishImageTableViewCell
+                cell.imgView.image = imageItem.image
+                cell.imgHeight.constant = imageItem.image.getImageHeight(width: withOfCell)
+                cell.saveCallBack = { image in
+                    imageItem.image = image
+                }
+                cell.deleteCallBack = { [weak self] in
+                    guard let self = self else { return }
+                    self.viewModel.removeItem(in: tv, at: indexPath)
+                }
+                
+                return cell
             }
         })
         
@@ -125,7 +123,7 @@ class PublishVC: BaseViewController {
         }
         present(picker, animated: true, completion: nil)
     }
-
+    
 }
 
 extension PublishVC: UITextViewDelegate {

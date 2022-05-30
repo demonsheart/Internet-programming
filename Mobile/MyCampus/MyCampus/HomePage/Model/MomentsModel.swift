@@ -9,6 +9,7 @@ import Foundation
 import AVFoundation
 import UIKit
 import SwiftDate
+import Cache
 
 enum StorageError: Error {
   /// Object can not be found
@@ -27,17 +28,17 @@ enum StorageError: Error {
   case transformerFail
 }
 
-protocol MomentItem: Codable {
+class MomentTextItem: Codable {
+    var text: String
     
+    init(text: String) {
+        self.text = text
+    }
 }
 
-struct MomentTextItem: MomentItem {
-    let text: String
-}
-
-struct MomentPicItem: MomentItem {
+class MomentPicItem: Codable {
     // UIImage.jpeg
-    let image: UIImage
+    var image: UIImage
     
     init(image: UIImage) {
         self.image = image
@@ -47,7 +48,7 @@ struct MomentPicItem: MomentItem {
         case image
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let data = try container.decode(Data.self, forKey: CodingKeys.image)
         guard let image = UIImage(data: data) else {
@@ -68,11 +69,11 @@ struct MomentPicItem: MomentItem {
     }
 }
 
-struct MomentAudioItem: MomentItem {
+class MomentAudioItem: Codable {
     // AVAudioRecorder AVAudioPlayer
 }
 
-struct MomentVideoItem: MomentItem {
+class MomentVideoItem: Codable {
     // AVPlayer AVPlayerItem
     // PHCachingImageManager().requestAVAssetForVideo
 }
@@ -119,7 +120,7 @@ struct Owner: Codable {
 }
 
 // 每个文章可由文字、图片、视频、音频组合形成
-struct MomentsModel {
+class MomentsModel: Codable {
     var title: String
     var location: String?
     var timeStamp: String
@@ -225,10 +226,9 @@ struct MomentsModel {
             MomentItemWrapper.audio(MomentAudioItem()),
         ]),
     ]
-}
-
-extension MomentsModel: Codable {
     
+    
+    // MARK: Codable
     enum CodingKeys: String, CodingKey {
         case title
         case location
@@ -237,7 +237,7 @@ extension MomentsModel: Codable {
         case items
     }
     
-    init(from decoder: Decoder) throws {
+    required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         title = try values.decode(String.self, forKey: .title)
         location = try? values.decode(String.self, forKey: .location)
@@ -253,5 +253,50 @@ extension MomentsModel: Codable {
         try container.encode(timeStamp, forKey: .timeStamp)
         try container.encode(owner, forKey: .owner)
         try container.encode(items, forKey: .items)
+    }
+}
+
+// MARK: StoragedMoments
+class StoragedMoments {
+    
+    static let shared = StoragedMoments()
+    
+    var key = "MomentsModels"
+    
+    var list: [MomentsModel] = [MomentsModel]() {
+        didSet {
+            writeToCache()
+        }
+    }
+    
+    lazy var storage: Storage<String, [MomentsModel]>? = {
+        let diskConfig = DiskConfig(name: "Floppy")
+        let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
+
+        let storage = try? Storage<String, [MomentsModel]>(
+          diskConfig: diskConfig,
+          memoryConfig: memoryConfig,
+          transformer: TransformerFactory.forCodable(ofType: [MomentsModel].self)
+        )
+        
+        return storage
+    }()
+    
+    init() {
+        guard let storage = storage else {
+            print("storage not init")
+            return
+        }
+        if let list = try? storage.object(forKey: key) {
+            self.list = list
+        }
+    }
+    
+    func writeToCache() {
+        guard let storage = storage else {
+            print("storage not init")
+            return
+        }
+        try? storage.setObject(list, forKey: key)
     }
 }
