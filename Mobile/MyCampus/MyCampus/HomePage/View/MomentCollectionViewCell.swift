@@ -103,16 +103,15 @@ class MomentCollectionViewCell: UICollectionViewCell {
                 make.left.right.top.equalToSuperview()
                 make.bottom.equalTo(titleLabel.snp.top).offset(-margin)
             }
-            imgView.sd_setImage(with: URL(string: "https://img2.baidu.com/it/u=1497164695,4188964579&fm=253&fmt=auto&app=138&f=JPEG?w=888&h=500"))
             
+            imgView.image = model.firstImage
         } else if model.modelType == 2 { // video
             self.contentView.addSubview(imgView)
             imgView.snp.makeConstraints { make in
                 make.left.right.top.equalToSuperview()
-                make.height.equalTo(130)
                 make.bottom.equalTo(titleLabel.snp.top).offset(-margin)
             }
-            imgView.image = UIImage(systemName: "video")
+            imgView.image = model.firstImage
         }
     }
 }

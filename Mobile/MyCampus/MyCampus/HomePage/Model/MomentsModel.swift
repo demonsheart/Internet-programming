@@ -135,6 +135,31 @@ class MomentsModel: Codable {
         self.items = items
     }
     
+    var firstImage: UIImage? {
+        var image: UIImage? = nil
+        for item in items {
+            switch item {
+            case .text(_):
+                break
+            case .pic(let imageItem):
+                image = imageItem.image
+            case .audio(_):
+                break
+            case .video(_):
+                break
+            }
+        }
+        return image
+    }
+    
+    var firstImageHeight: CGFloat {
+        var height: CGFloat = 130
+        if let firstImage = firstImage {
+            height = firstImage.getImageHeight(width: (UIScreen.main.bounds.size.width - 3 * 8)/2)
+        }
+        return height
+    }
+    
     var formattedTimeStr: String {
         guard let intStamp = TimeInterval(timeStamp) else { return "" }
         
@@ -196,7 +221,7 @@ class MomentsModel: Codable {
                 totalHeight += titleHeight + 10
             case 1, 2:
                 // pic/video + title
-                totalHeight += 130 + margin + titleHeight
+                totalHeight += firstImageHeight + margin + titleHeight
             default:
                 totalHeight = 0
         }

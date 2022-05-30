@@ -7,24 +7,25 @@
 
 import UIKit
 import SnapKit
+import MJRefresh
 
 class MomentsVC: UIViewController {
     
     private let cellID = "moment"
     
-//    let data = MomentsModel.default
+    let model = StoragedMoments.shared
     
-    // TODO: 改为响应式
-    let data = StoragedMoments.shared.list
-    
-    var itemCount: Int = 30
     var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         setUpView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refleshData()
     }
     
     func setUpView() {
@@ -41,6 +42,10 @@ class MomentsVC: UIViewController {
         collectionView.backgroundColor = CPColor.bgGray
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.mj_header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
+            sleep(1)
+            self?.refleshData()
+        })
         
         // 注册 Cell
         collectionView.register(MomentCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
@@ -49,29 +54,34 @@ class MomentsVC: UIViewController {
             make.edges.equalToSuperview()
         }
     }
+    
+    func refleshData() {
+        collectionView.reloadData()
+        collectionView.mj_header?.endRefreshing()
+    }
 }
 
 extension MomentsVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(data[indexPath.row].title)
+        print(model.list[indexPath.row].title)
     }
 }
 
 extension MomentsVC: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return model.list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MomentCollectionViewCell
-        cell.model = data[indexPath.row]
+        cell.model = model.list[indexPath.row]
         return cell
     }
 }
 
 extension MomentsVC: WaterFallLayoutDelegate{
     func waterFlowLayout(_ waterFlowLayout: WaterFallFlowLayout, itemHeight indexPath: IndexPath) -> CGFloat {
-        return data[indexPath.row].overLookHeight
+        return model.list[indexPath.row].overLookHeight
     }
 }
