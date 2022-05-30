@@ -89,21 +89,32 @@ class PublishTableViewModel {
         sectionListSubject.onNext(sections)
     }
     
-    // 捕获数据到model
-    func saveDataIntoModel(in tableView: UITableView) {
-        // TODO: 捕获数据到model
-        guard let _ = preData(from: tableView) else { return }
+    func publish(in tableView: UITableView, title: String,  _ callback: @escaping () -> Void) {
+        guard let data = preData(from: tableView) else { return }
         
-        let _ =  MomentsModel(title: "总书记的一周", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "央视新闻"), items: [
-            MomentItemWrapper.text(MomentTextItem(text: "")),
-        ])
+        let location: String? = nil
+        let timeStamp: String = "\(Int(NSDate().timeIntervalSince1970))"
+        let owner = Owner(avatar: "", nick: "小何")
+        var items = [MomentItemWrapper]()
         
-    }
-    
-    func publish(in tableView: UITableView, at indexPath: IndexPath) {
-        // TODO: publish
-        saveDataIntoModel(in: tableView)
-        print("publish")
+        for item in data.items {
+            switch item {
+            case .image(let imageItem):
+                items.append(MomentItemWrapper.pic(imageItem))
+            case .text(let textItem):
+                items.append(MomentItemWrapper.text(textItem))
+            case .tool, .btn:
+                break
+            }
+        }
+        
+        let moment =  MomentsModel(title: title, location: location, timeStamp: timeStamp, owner: owner, items: items)
+        
+        // save to storage
+        StoragedMoments.shared.list.append(moment)
+        
+        // TODO: pop callback
+        callback()
     }
     
     // 获取section0的所有SectionOfPublishItemData

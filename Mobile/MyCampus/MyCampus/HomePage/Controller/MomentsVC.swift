@@ -12,7 +12,10 @@ class MomentsVC: UIViewController {
     
     private let cellID = "moment"
     
-    let data = MomentsModel.default
+//    let data = MomentsModel.default
+    
+    // TODO: 改为响应式
+    let data = StoragedMoments.shared.list
     
     var itemCount: Int = 30
     var collectionView: UICollectionView!

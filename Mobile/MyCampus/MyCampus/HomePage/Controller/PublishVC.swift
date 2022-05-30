@@ -67,7 +67,9 @@ class PublishVC: BaseViewController {
             case .btn:
                 let cell = tv.dequeueReusableCell(withIdentifier: "btn", for: indexPath) as! PublishBtnTableVC
                 cell.callBack = { [weak self] in
-                    self?.viewModel.publish(in: tv, at: indexPath)
+                    self?.viewModel.publish(in: tv, title: self?.titleTextView.text ?? "") {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
                 }
                 return cell
             case .text(let textItem):

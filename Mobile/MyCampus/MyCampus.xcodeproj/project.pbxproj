@@ -120,11 +120,11 @@
 		94805A21283B1E1500341432 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
+				94805A23283B1E6700341432 /* HomePageViewController.swift */,
 				943F8B5C283CCCF0004E908C /* ViewModel */,
 				94805A33283B281E00341432 /* Controller */,
 				94805A30283B26FF00341432 /* Model */,
 				94805A2D283B232100341432 /* View */,
-				94805A23283B1E6700341432 /* HomePageViewController.swift */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
