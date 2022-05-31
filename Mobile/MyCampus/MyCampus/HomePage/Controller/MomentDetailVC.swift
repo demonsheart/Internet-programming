@@ -466,11 +466,8 @@ extension MomentDetailVC {
             let image = model.thumbnail
             let height = image.getImageHeight(width: UIScreen.main.bounds.size.width - 20)
             videoView.setPreviewImage(image)
-            if let ur = URL(string: model.url) {
-                videoView.loadVideo(ur)
-            } else {
-                print("invalid url")
-            }
+            // 此时，从持久化缓存中取
+            videoView.loadVideo(model.absoluteUrl)
             
             self.addSubview(videoView) // 提前加约束 因为内部view intervel
             videoView.snp.makeConstraints { make in

@@ -93,13 +93,13 @@ class PublishTableViewModel {
         sectionListSubject.onNext(sections)
     }
     
-    func addVideo(in tableView: UITableView, urlStr: String) {
+    func addVideo(in tableView: UITableView, ypVideo: YPMediaVideo) {
         // 默认在section 0
         guard
             var sections = try? sectionListSubject.value(),
             var preSection = preData(from: tableView)
         else { return }
-        preSection.items.append(PublishCellModel.video(MomentVideoItem(url: urlStr)))
+        preSection.items.append(PublishCellModel.video(MomentVideoItem(ypVideo: ypVideo)))
         sections[0] = preSection
         sectionListSubject.onNext(sections)
     }
@@ -122,22 +122,8 @@ class PublishTableViewModel {
                 break
             case .video(let videoItem):
                 // MARK: picker内部缓存只是暂时缓存 需要自己执行一次copy
-                if let url = URL(string: videoItem.url) {
-                    let fileName = url.lastPathComponent
-                    let newPath = StoragedMoments.shared.videoFileDirectory.appendingPathComponent(fileName)
-                    // move
-                    do {
-                        if FileManager.default.fileExists(atPath: newPath.path) {
-                            try FileManager.default.removeItem(atPath: newPath.path)
-                        }
-                        try FileManager.default.moveItem(atPath: url.path, toPath: newPath.path)
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-
-                    videoItem.url = newPath.absoluteString
-                    items.append(MomentItemWrapper.video(videoItem))
-                }
+                videoItem.saveToCache()
+                items.append(MomentItemWrapper.video(videoItem))
             }
         }
         
@@ -180,7 +166,7 @@ class PublishTableViewModel {
                     print("error video")
                     break
                 }
-                videoItem.url = cell.model?.url ?? ""
+                videoItem.fileName = cell.model?.fileName ?? ""
             }
         }
         

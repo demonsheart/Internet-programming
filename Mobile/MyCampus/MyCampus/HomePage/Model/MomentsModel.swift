@@ -10,6 +10,16 @@ import AVFoundation
 import UIKit
 import SwiftDate
 import Cache
+import YPImagePicker
+
+// FIXME: 每次Application/下的目录会变
+let videoFileDirectory: URL = {
+    let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+    let documentsDirectory = paths[0]
+    
+    let fileURL = URL(fileURLWithPath: documentsDirectory)
+    return fileURL.appendingPathComponent("video", isDirectory: true)
+}()
 
 enum StorageError: Error {
   /// Object can not be found
@@ -70,44 +80,83 @@ class MomentPicItem: Codable {
 
 class MomentAudioItem: Codable {
     // AVAudioRecorder AVAudioPlayer
+    var audioFileName: String
     
+    init(audioFileName: String = "") {
+        self.audioFileName = audioFileName
+    }
 }
 
 class MomentVideoItem: Codable {
     // YPImagePicker已经做了导出缓存 但是暂时缓存 需要另外做一次持久缓存
-    // fileURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingUniquePathComponent(pathExtension: YPConfig.video.fileType.fileExtension)
-    // PHCachingImageManager().requestAVAssetForVideo
     
-    // AVPlayer AVPlayerItem
-    // YPVideoView -- setPreviewImage setAssetFrame
-    // ||| loadVideo play deallocate
+    // 暂存数据
+    var tmpVideo: YPMediaVideo?
     
-    var url: String
+    var fileName: String // 必须启用相对路径 每次运行目录id会变
     
-    var thumbnail: UIImage {
-        guard let ur = URL(string: url) else { return UIImage() }
-        let asset = AVURLAsset(url: ur, options: nil)
+    // 持久化的路径
+    var absoluteUrl: URL
+    
+    var thumbnail: UIImage
+    
+    enum CodingKeys: String, CodingKey {
+        case fileName
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.fileName = try container.decode(String.self, forKey: CodingKeys.fileName)
+        self.thumbnail = UIImage()
+        self.absoluteUrl = videoFileDirectory.appendingPathComponent(fileName)
+        getThumbnailFromCathe()
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(fileName, forKey: CodingKeys.fileName)
+    }
+    
+    init(fileName: String, ypVideo: YPMediaVideo? = nil) {
+        self.fileName = fileName
+        self.tmpVideo = ypVideo
+        self.thumbnail = UIImage()
+        self.absoluteUrl = videoFileDirectory.appendingPathComponent(fileName)
+    }
+    
+    init(ypVideo: YPMediaVideo) {
+        self.tmpVideo = ypVideo
+        self.fileName = ypVideo.url.lastPathComponent
+        self.thumbnail = ypVideo.thumbnail
+        self.absoluteUrl = videoFileDirectory.appendingPathComponent(fileName)
+    }
+    
+    func getThumbnailFromCathe() {
+        let asset = AVURLAsset(url: absoluteUrl, options: nil)
         let gen = AVAssetImageGenerator(asset: asset)
         gen.appliesPreferredTrackTransform = true
         let time = CMTimeMakeWithSeconds(0.0, preferredTimescale: 600)
         var actualTime = CMTimeMake(value: 0, timescale: 0)
-        let image: CGImage
-        do {
-            image = try gen.copyCGImage(at: time, actualTime: &actualTime)
-            let thumbnail = UIImage(cgImage: image)
-            return thumbnail
-        } catch { }
-        
-        return UIImage()
+        if let image = try? gen.copyCGImage(at: time, actualTime: &actualTime) {
+            thumbnail = UIImage(cgImage: image)
+        }
     }
-//    var asset: PHAsset?
-//
-//    var avAsset: AVAsset {
-//        return AVAsset(url: url)
-//    }
     
-    init(url: String) {
-        self.url = url
+    func saveToCache() {
+        guard let ypVideo = tmpVideo else {
+            print("cannot save nil")
+            return
+        }
+        
+        // move
+        do {
+            if FileManager.default.fileExists(atPath: absoluteUrl.path) {
+                try FileManager.default.removeItem(atPath: absoluteUrl.path)
+            }
+            try FileManager.default.moveItem(atPath: ypVideo.url.path, toPath: absoluteUrl.path)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
@@ -276,7 +325,7 @@ class MomentsModel: Codable {
             MomentItemWrapper.audio(MomentAudioItem()),
         ]),
         MomentsModel(title: "习近平关心网信事业发展", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "新华网"), items: [
-            MomentItemWrapper.video(MomentVideoItem(url: "")),
+            MomentItemWrapper.video(MomentVideoItem(fileName: "")),
         ]),
         MomentsModel(title: "小山村“贷”来4300万元的背后", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "人民网"), items: [
             MomentItemWrapper.pic(MomentPicItem(image: UIImage(systemName: "airtag.fill")!))
@@ -329,11 +378,6 @@ class StoragedMoments {
         }
     }
     
-    // FIXME: 每次Application/下的目录会变
-    var videoFileDirectory: URL {
-        return getDirectoryPath().appendingPathComponent("video", isDirectory: true)
-    }
-    
     lazy var storage: Storage<String, [MomentsModel]>? = {
         let diskConfig = DiskConfig(name: "Floppy")
         let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
@@ -358,7 +402,9 @@ class StoragedMoments {
         
         // 创建video目录
         do {
-            try FileManager.default.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true)
+            if !FileManager.default.fileExists(atPath: videoFileDirectory.path) {
+                try FileManager.default.createDirectory(atPath: videoFileDirectory.path, withIntermediateDirectories: true)
+            }
         } catch {
             print(error.localizedDescription)
         }
@@ -370,14 +416,5 @@ class StoragedMoments {
             return
         }
         try? storage.setObject(list, forKey: key, expiry: .date(Date().addingTimeInterval(45 * 24 * 60 * 60)))
-    }
-    
-    private func getDirectoryPath() -> URL {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        
-        let fileURL = URL(fileURLWithPath: documentsDirectory)
-        
-        return fileURL
     }
 }

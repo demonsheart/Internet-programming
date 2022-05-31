@@ -38,10 +38,11 @@ class PublishVideoTableViewCell: UITableViewCell, SaveBeforeReuse {
         self.model = model
         videoView.setPreviewImage(model.thumbnail)
         height.constant = model.thumbnail.getImageHeight(width: UIScreen.main.bounds.size.width - 20)
-        if let ur = URL(string: model.url) {
-            videoView.loadVideo(ur)
+        // cell中是picker的数据即可
+        if let ypVideo = model.tmpVideo {
+            videoView.loadVideo(ypVideo)
         } else {
-            print("invalid url")
+            videoView.loadVideo(model.absoluteUrl)
         }
         isRendered = true
     }

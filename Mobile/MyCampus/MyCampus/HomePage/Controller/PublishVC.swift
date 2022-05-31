@@ -115,7 +115,8 @@ class PublishVC: BaseViewController {
                 let cell = tv.dequeueReusableCell(withIdentifier: "video", for: indexPath) as! PublishVideoTableViewCell
                 cell.prepareVideo(model: videoItem)
                 cell.saveCallBack = { model in
-                    videoItem.url = model?.url ?? ""
+                    videoItem.tmpVideo = model?.tmpVideo
+                    videoItem.fileName = model?.fileName ?? ""
                 }
                 cell.deleteCallBack = { [weak self] in
                     self?.viewModel.removeItem(in: tv, at: indexPath)
@@ -168,7 +169,7 @@ class PublishVC: BaseViewController {
             }
             
             if let video = items.singleVideo {
-                viewModel.addVideo(in: self.tableView, urlStr: video.url.absoluteString)
+                viewModel.addVideo(in: self.tableView, ypVideo: video)
             }
             picker.dismiss(animated: true, completion: nil)
         }
