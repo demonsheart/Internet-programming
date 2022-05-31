@@ -74,7 +74,7 @@ class MomentAudioItem: Codable {
 }
 
 class MomentVideoItem: Codable {
-    // YPImagePicker已经做了导出缓存 故直接存URL即可
+    // YPImagePicker已经做了导出缓存 但是暂时缓存 需要另外做一次持久缓存
     // fileURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingUniquePathComponent(pathExtension: YPConfig.video.fileType.fileExtension)
     // PHCachingImageManager().requestAVAssetForVideo
     
@@ -329,6 +329,11 @@ class StoragedMoments {
         }
     }
     
+    // FIXME: 每次Application/下的目录会变
+    var videoFileDirectory: URL {
+        return getDirectoryPath().appendingPathComponent("video", isDirectory: true)
+    }
+    
     lazy var storage: Storage<String, [MomentsModel]>? = {
         let diskConfig = DiskConfig(name: "Floppy")
         let memoryConfig = MemoryConfig(expiry: .never, countLimit: 10, totalCostLimit: 10)
@@ -350,6 +355,13 @@ class StoragedMoments {
         if let list = try? storage.object(forKey: key) {
             self.list = list
         }
+        
+        // 创建video目录
+        do {
+            try FileManager.default.createDirectory(at: videoFileDirectory, withIntermediateDirectories: true)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func writeToCache() {
@@ -358,5 +370,14 @@ class StoragedMoments {
             return
         }
         try? storage.setObject(list, forKey: key, expiry: .date(Date().addingTimeInterval(45 * 24 * 60 * 60)))
+    }
+    
+    private func getDirectoryPath() -> URL {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        
+        let fileURL = URL(fileURLWithPath: documentsDirectory)
+        
+        return fileURL
     }
 }

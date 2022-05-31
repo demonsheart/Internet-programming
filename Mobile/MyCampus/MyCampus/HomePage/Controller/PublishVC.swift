@@ -168,7 +168,7 @@ class PublishVC: BaseViewController {
             }
             
             if let video = items.singleVideo {
-                viewModel.addVideo(in: self.tableView, video: video)
+                viewModel.addVideo(in: self.tableView, urlStr: video.url.absoluteString)
             }
             picker.dismiss(animated: true, completion: nil)
         }

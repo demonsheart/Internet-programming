@@ -93,13 +93,13 @@ class PublishTableViewModel {
         sectionListSubject.onNext(sections)
     }
     
-    func addVideo(in tableView: UITableView, video: YPMediaVideo) {
+    func addVideo(in tableView: UITableView, urlStr: String) {
         // 默认在section 0
         guard
             var sections = try? sectionListSubject.value(),
             var preSection = preData(from: tableView)
         else { return }
-        preSection.items.append(PublishCellModel.video(MomentVideoItem(url: video.url.absoluteString)))
+        preSection.items.append(PublishCellModel.video(MomentVideoItem(url: urlStr)))
         sections[0] = preSection
         sectionListSubject.onNext(sections)
     }
@@ -121,7 +121,23 @@ class PublishTableViewModel {
             case .tool1, .tool2, .btn:
                 break
             case .video(let videoItem):
-                items.append(MomentItemWrapper.video(videoItem))
+                // MARK: picker内部缓存只是暂时缓存 需要自己执行一次copy
+                if let url = URL(string: videoItem.url) {
+                    let fileName = url.lastPathComponent
+                    let newPath = StoragedMoments.shared.videoFileDirectory.appendingPathComponent(fileName)
+                    // move
+                    do {
+                        if FileManager.default.fileExists(atPath: newPath.path) {
+                            try FileManager.default.removeItem(atPath: newPath.path)
+                        }
+                        try FileManager.default.moveItem(atPath: url.path, toPath: newPath.path)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+
+                    videoItem.url = newPath.absoluteString
+                    items.append(MomentItemWrapper.video(videoItem))
+                }
             }
         }
         
