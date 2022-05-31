@@ -43,6 +43,7 @@ class PublishVC: BaseViewController {
         tableView.register(UINib(nibName: "PublishBtnTableVC", bundle: nil), forCellReuseIdentifier: "btn")
         tableView.register(UINib(nibName: "PublishTextViewTableVC", bundle: nil), forCellReuseIdentifier: "text")
         tableView.register(UINib(nibName: "PublishImageTableViewCell", bundle: nil), forCellReuseIdentifier: "image")
+        tableView.register(UINib(nibName: "PublishVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "video")
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
         
@@ -109,6 +110,10 @@ class PublishVC: BaseViewController {
                 }
                 
                 return cell
+            case .video(let videoItem):
+                let cell = tv.dequeueReusableCell(withIdentifier: "video", for: indexPath) as! PublishVideoTableViewCell
+                cell.prepareVideo(model: videoItem)
+                return cell
             }
         })
         
@@ -141,8 +146,26 @@ class PublishVC: BaseViewController {
     
     // video 选择器
     private func showVideoPicker() {
-        // TODO: showVideoPicker
-        print("showVideoPicker")
+        var config = YPImagePickerConfiguration()
+        config.screens = [.library, .video]
+        config.startOnScreen = .library
+        config.library.mediaType = .video
+        config.shouldSaveNewPicturesToAlbum = false
+        
+        let picker = YPImagePicker(configuration: config)
+        picker.didFinishPicking { [unowned picker, unowned self] items, cancelled in
+            if cancelled {
+                print("Picker was canceled")
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+            
+            if let video = items.singleVideo {
+                viewModel.addVideo(in: self.tableView, video: video)
+            }
+            picker.dismiss(animated: true, completion: nil)
+        }
+        present(picker, animated: true, completion: nil)
     }
     
 }

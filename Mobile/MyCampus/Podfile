@@ -21,6 +21,6 @@ target 'MyCampus' do
   pod 'Toaster'
   pod 'Cache'
   pod 'SwiftDate'
-  pod "MobilePlayer"
+#  pod "MobilePlayer"
   pod 'YPImagePicker'
 end

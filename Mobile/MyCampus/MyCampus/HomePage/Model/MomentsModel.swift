@@ -37,7 +37,6 @@ class MomentTextItem: Codable {
 }
 
 class MomentPicItem: Codable {
-    // UIImage.jpeg
     var image: UIImage
     
     init(image: UIImage) {
@@ -71,11 +70,45 @@ class MomentPicItem: Codable {
 
 class MomentAudioItem: Codable {
     // AVAudioRecorder AVAudioPlayer
+    
 }
 
 class MomentVideoItem: Codable {
-    // AVPlayer AVPlayerItem
+    // YPImagePicker已经做了导出缓存 故直接存URL即可
+    // fileURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingUniquePathComponent(pathExtension: YPConfig.video.fileType.fileExtension)
     // PHCachingImageManager().requestAVAssetForVideo
+    
+    // AVPlayer AVPlayerItem
+    // YPVideoView -- setPreviewImage setAssetFrame
+    // ||| loadVideo play deallocate
+    
+    var url: String
+    
+    var thumbnail: UIImage {
+        guard let ur = URL(string: url) else { return UIImage() }
+        let asset = AVURLAsset(url: ur, options: nil)
+        let gen = AVAssetImageGenerator(asset: asset)
+        gen.appliesPreferredTrackTransform = true
+        let time = CMTimeMakeWithSeconds(0.0, preferredTimescale: 600)
+        var actualTime = CMTimeMake(value: 0, timescale: 0)
+        let image: CGImage
+        do {
+            image = try gen.copyCGImage(at: time, actualTime: &actualTime)
+            let thumbnail = UIImage(cgImage: image)
+            return thumbnail
+        } catch { }
+        
+        return UIImage()
+    }
+//    var asset: PHAsset?
+//
+//    var avAsset: AVAsset {
+//        return AVAsset(url: url)
+//    }
+    
+    init(url: String) {
+        self.url = url
+    }
 }
 
 enum MomentItemWrapper: Codable {
@@ -243,7 +276,7 @@ class MomentsModel: Codable {
             MomentItemWrapper.audio(MomentAudioItem()),
         ]),
         MomentsModel(title: "习近平关心网信事业发展", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "新华网"), items: [
-            MomentItemWrapper.video(MomentVideoItem()),
+            MomentItemWrapper.video(MomentVideoItem(url: "")),
         ]),
         MomentsModel(title: "小山村“贷”来4300万元的背后", location: "深圳大学", timeStamp: "1653299917", owner: Owner(avatar: "", nick: "人民网"), items: [
             MomentItemWrapper.pic(MomentPicItem(image: UIImage(systemName: "airtag.fill")!))
@@ -292,7 +325,7 @@ class StoragedMoments {
     
     var list: [MomentsModel] = [MomentsModel]() {
         didSet {
-            writeToCache()
+//            writeToCache()
         }
     }
     

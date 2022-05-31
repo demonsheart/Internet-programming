@@ -10,10 +10,12 @@ import RxCocoa
 import RxSwift
 import RxRelay
 import Cache
+import YPImagePicker
 
 enum PublishCellModel {
     case text(MomentTextItem)
     case image(MomentPicItem)
+    case video(MomentVideoItem)
     case tool1 // 文字 图片 位置
     case tool2 // 音频 视频
     case btn // 发布按钮
@@ -91,6 +93,18 @@ class PublishTableViewModel {
         sectionListSubject.onNext(sections)
     }
     
+    func addVideo(in tableView: UITableView, video: YPMediaVideo) {
+        // 默认在section 0
+        guard
+            var sections = try? sectionListSubject.value(),
+            var preSection = preData(from: tableView)
+        else { return }
+        // TODO: Append
+        preSection.items.append(PublishCellModel.video(MomentVideoItem(url: video.url.absoluteString)))
+        sections[0] = preSection
+        sectionListSubject.onNext(sections)
+    }
+    
     func publish(in tableView: UITableView, title: String,  _ callback: @escaping () -> Void) {
         guard let data = preData(from: tableView) else { return }
         
@@ -107,6 +121,8 @@ class PublishTableViewModel {
                 items.append(MomentItemWrapper.text(textItem))
             case .tool1, .tool2, .btn:
                 break
+            case .video(let videoItem):
+                items.append(MomentItemWrapper.video(videoItem))
             }
         }
         
@@ -115,7 +131,6 @@ class PublishTableViewModel {
         // save to storage
         StoragedMoments.shared.list.append(moment)
         
-        // TODO: pop callback
         callback()
     }
     
@@ -145,6 +160,12 @@ class PublishTableViewModel {
                 imageItem.image = cell.imgView.image ?? UIImage()
             case .tool1, .tool2, .btn:
                 break
+            case .video(let videoItem):
+                guard let cell = cell as? PublishVideoTableViewCell else {
+                    print("error video")
+                    break
+                }
+                videoItem.url = cell.model?.url ?? ""
             }
         }
         
