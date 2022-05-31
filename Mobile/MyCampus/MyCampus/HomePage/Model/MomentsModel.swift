@@ -179,8 +179,8 @@ class MomentsModel: Codable {
                 image = imageItem.image
             case .audio(_):
                 break
-            case .video(_):
-                break
+            case .video(let videoItem):
+                image = videoItem.thumbnail
             }
             if image != nil { break }
         }
@@ -325,7 +325,7 @@ class StoragedMoments {
     
     var list: [MomentsModel] = [MomentsModel]() {
         didSet {
-//            writeToCache()
+            writeToCache()
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import YPImagePicker
 
 class MomentDetailVC: BaseViewController {
     
@@ -299,7 +300,7 @@ extension MomentDetailVC {
             case label(UILabel)
             case image(UIImageView)
             case audio
-            case video
+            case video(YPVideoView)
         }
         
         let items: [MomentItemWrapper]
@@ -327,8 +328,8 @@ extension MomentDetailVC {
                     views.append(generateUIImageView(image: momentPicItem.image))
                 case .audio(_):
                     break
-                case .video(_):
-                    break
+                case .video(let videoItem):
+                    views.append(generateYPVideoView(model: videoItem))
                 }
             }
         }
@@ -361,8 +362,13 @@ extension MomentDetailVC {
                         preView = label
                     case .audio:
                         break
-                    case .video:
-                        break
+                    case .video(let videoView):
+                        videoView.snp.makeConstraints { make in
+                            make.top.equalToSuperview()
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                        }
+                        preView = videoView
                     }
                     // 补充情况 如果唯一元素 则加底部约束
                     if views.count == 1 {
@@ -392,8 +398,13 @@ extension MomentDetailVC {
                         preView = label
                     case .audio:
                         break
-                    case .video:
-                        break
+                    case .video(let videoView):
+                        videoView.snp.makeConstraints { make in
+                            make.top.equalTo(preView.snp.bottom).offset(10)
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                        }
+                        preView = videoView
                     }
                 } else { // bottom -- bottom
                     switch wrapper {
@@ -419,8 +430,14 @@ extension MomentDetailVC {
                         preView = label
                     case .audio:
                         break
-                    case .video:
-                        break
+                    case .video(let videoView):
+                        videoView.snp.makeConstraints { make in
+                            make.top.equalTo(preView.snp.bottom).offset(10)
+                            make.left.equalTo(10)
+                            make.right.equalTo(-10)
+                            make.bottom.equalToSuperview().offset(-10)
+                        }
+                        preView = videoView
                     }
                 }
             }
@@ -442,6 +459,25 @@ extension MomentDetailVC {
             view.image = image
             view.contentMode = .scaleToFill
             return UIViewWrapper.image(view)
+        }
+        
+        private func generateYPVideoView(model: MomentVideoItem) -> UIViewWrapper {
+            let videoView = YPVideoView()
+            let image = model.thumbnail
+            let height = image.getImageHeight(width: UIScreen.main.bounds.size.width - 20)
+            videoView.setPreviewImage(image)
+            if let ur = URL(string: model.url) {
+                videoView.loadVideo(ur)
+            } else {
+                print("invalid url")
+            }
+            
+            self.addSubview(videoView) // 提前加约束 因为内部view intervel
+            videoView.snp.makeConstraints { make in
+                make.height.equalTo(height)
+            }
+            
+            return UIViewWrapper.video(videoView)
         }
     }
 }

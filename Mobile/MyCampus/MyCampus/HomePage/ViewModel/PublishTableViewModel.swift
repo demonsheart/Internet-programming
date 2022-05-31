@@ -99,7 +99,6 @@ class PublishTableViewModel {
             var sections = try? sectionListSubject.value(),
             var preSection = preData(from: tableView)
         else { return }
-        // TODO: Append
         preSection.items.append(PublishCellModel.video(MomentVideoItem(url: video.url.absoluteString)))
         sections[0] = preSection
         sectionListSubject.onNext(sections)

@@ -46,6 +46,7 @@ class PublishVC: BaseViewController {
         tableView.register(UINib(nibName: "PublishVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "video")
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
+        tableView.isPrefetchingEnabled = false
         
         //创建数据源
         let dataSource = RxTableViewSectionedReloadDataSource
@@ -113,6 +114,12 @@ class PublishVC: BaseViewController {
             case .video(let videoItem):
                 let cell = tv.dequeueReusableCell(withIdentifier: "video", for: indexPath) as! PublishVideoTableViewCell
                 cell.prepareVideo(model: videoItem)
+                cell.saveCallBack = { model in
+                    videoItem.url = model?.url ?? ""
+                }
+                cell.deleteCallBack = { [weak self] in
+                    self?.viewModel.removeItem(in: tv, at: indexPath)
+                }
                 return cell
             }
         })

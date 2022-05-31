@@ -16,10 +16,17 @@ class PublishVideoTableViewCell: UITableViewCell, SaveBeforeReuse {
     
     var model: MomentVideoItem? = nil
     
+    var isRendered = false
+    
     // YPVideoView
     @IBOutlet weak var videoView: YPVideoView!
     
     @IBOutlet weak var height: NSLayoutConstraint!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+//        self.contentView.backgroundColor = CPColor.bgGray
+    }
     
     override func prepareForReuse() {
         saveCallBack?(model)
@@ -27,13 +34,16 @@ class PublishVideoTableViewCell: UITableViewCell, SaveBeforeReuse {
     }
     
     func prepareVideo(model: MomentVideoItem) {
+        if isRendered { return }
         self.model = model
         videoView.setPreviewImage(model.thumbnail)
+        height.constant = model.thumbnail.getImageHeight(width: UIScreen.main.bounds.size.width - 20)
         if let ur = URL(string: model.url) {
             videoView.loadVideo(ur)
         } else {
             print("invalid url")
         }
+        isRendered = true
     }
     
     @IBAction func deleteCell(_ sender: UIButton) {
