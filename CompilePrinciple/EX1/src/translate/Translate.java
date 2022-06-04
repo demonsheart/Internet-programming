@@ -66,7 +66,7 @@ public class Translate {
                 }
                 operatorStack.pop(); // pop '('
             } else { // 操作符入栈 根据优先级判断是否需要运算
-                while (!operatorStack.isEmpty() && isNeedToCalculate(head, operatorStack.peek())) {
+                while (!operatorStack.isEmpty() && getPriority(head) <= getPriority(operatorStack.peek())) {
                     doOperation();
                 }
                 operatorStack.push(head);
@@ -89,10 +89,6 @@ public class Translate {
 
     private boolean isOperator(char ch) {
         return ch == '(' || ch == ')' || ch == '+' || ch == '-' || ch == '*' || ch == '/';
-    }
-
-    private boolean isNeedToCalculate(char head, Character topChar) {
-        return getPriority(head) <= getPriority(topChar);
     }
 
     private int getPriority(char ch) {
