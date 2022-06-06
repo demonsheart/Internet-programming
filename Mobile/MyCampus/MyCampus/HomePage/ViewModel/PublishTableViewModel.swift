@@ -109,6 +109,7 @@ class PublishTableViewModel {
         
         let location: String? = nil
         let timeStamp: String = "\(Int(NSDate().timeIntervalSince1970))"
+        // TODO: 读取用户配置
         let owner = Owner(avatar: "", nick: "小何")
         var items = [MomentItemWrapper]()
         

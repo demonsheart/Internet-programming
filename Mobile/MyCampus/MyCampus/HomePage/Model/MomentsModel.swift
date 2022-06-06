@@ -198,8 +198,8 @@ enum MomentItemWrapper: Codable {
 
 struct Owner: Codable {
     var avatar: String
-    var nick: String
-    // TODO: subText
+    var nick: String // 友盟userid
+//    var level: String // 友盟level
 }
 
 // 每个文章可由文字、图片、视频、音频组合形成

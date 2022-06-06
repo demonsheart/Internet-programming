@@ -10,6 +10,20 @@
 		63F7FC397DE1EB590539F926 /* Pods_MyCampus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2A9E7C3A4FEEA4382C2BE7D /* Pods_MyCampus.framework */; };
 		942BE42A284CC728000D0EF2 /* MyCampusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BE429284CC728000D0EF2 /* MyCampusUITests.swift */; };
 		942BE42C284CC728000D0EF2 /* MyCampusUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BE42B284CC728000D0EF2 /* MyCampusUITestsLaunchTests.swift */; };
+		942BE443284E298C000D0EF2 /* UMCommonLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BE433284E298C000D0EF2 /* UMCommonLog.framework */; };
+		942BE444284E298C000D0EF2 /* UMAnalyticsGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BE434284E298C000D0EF2 /* UMAnalyticsGame.framework */; };
+		942BE445284E298C000D0EF2 /* UMCommonLog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 942BE435284E298C000D0EF2 /* UMCommonLog.bundle */; };
+		942BE446284E298C000D0EF2 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BE436284E298C000D0EF2 /* UMCommon.framework */; };
+		942BE447284E298C000D0EF2 /* UMAPM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BE437284E298C000D0EF2 /* UMAPM.framework */; };
+		942BE448284E298C000D0EF2 /* UMDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BE438284E298C000D0EF2 /* UMDevice.framework */; };
+		942BE449284E298C000D0EF2 /* UMAnalyticsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BE43A284E298C000D0EF2 /* UMAnalyticsSwift.swift */; };
+		942BE44A284E298C000D0EF2 /* UMCommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BE43B284E298C000D0EF2 /* UMCommonSwift.swift */; };
+		942BE44B284E298C000D0EF2 /* UMGameAnalyticsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BE43C284E298C000D0EF2 /* UMGameAnalyticsSwift.swift */; };
+		942BE44C284E298C000D0EF2 /* iOS UMeng OC和Swift混编文档.md in Resources */ = {isa = PBXBuildFile; fileRef = 942BE43D284E298C000D0EF2 /* iOS UMeng OC和Swift混编文档.md */; };
+		942BE44D284E298C000D0EF2 /* swift3.png in Resources */ = {isa = PBXBuildFile; fileRef = 942BE43F284E298C000D0EF2 /* swift3.png */; };
+		942BE44E284E298C000D0EF2 /* swift2.png in Resources */ = {isa = PBXBuildFile; fileRef = 942BE440284E298C000D0EF2 /* swift2.png */; };
+		942BE44F284E298C000D0EF2 /* swift1.png in Resources */ = {isa = PBXBuildFile; fileRef = 942BE441284E298C000D0EF2 /* swift1.png */; };
+		942BE450284E298C000D0EF2 /* UMCommonLogSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942BE442284E298C000D0EF2 /* UMCommonLogSwift.swift */; };
 		942EC6502845035600E4C8A0 /* MomentDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942EC64F2845035600E4C8A0 /* MomentDetailVC.swift */; };
 		94324205283FB13800D9C89A /* PublishImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */; };
 		94324206283FB13800D9C89A /* PublishImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */; };
@@ -62,6 +76,21 @@
 		942BE427284CC728000D0EF2 /* MyCampusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyCampusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		942BE429284CC728000D0EF2 /* MyCampusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCampusUITests.swift; sourceTree = "<group>"; };
 		942BE42B284CC728000D0EF2 /* MyCampusUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCampusUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		942BE433284E298C000D0EF2 /* UMCommonLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommonLog.framework; sourceTree = "<group>"; };
+		942BE434284E298C000D0EF2 /* UMAnalyticsGame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalyticsGame.framework; sourceTree = "<group>"; };
+		942BE435284E298C000D0EF2 /* UMCommonLog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMCommonLog.bundle; sourceTree = "<group>"; };
+		942BE436284E298C000D0EF2 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		942BE437284E298C000D0EF2 /* UMAPM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAPM.framework; sourceTree = "<group>"; };
+		942BE438284E298C000D0EF2 /* UMDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMDevice.framework; sourceTree = "<group>"; };
+		942BE43A284E298C000D0EF2 /* UMAnalyticsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMAnalyticsSwift.swift; sourceTree = "<group>"; };
+		942BE43B284E298C000D0EF2 /* UMCommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMCommonSwift.swift; sourceTree = "<group>"; };
+		942BE43C284E298C000D0EF2 /* UMGameAnalyticsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMGameAnalyticsSwift.swift; sourceTree = "<group>"; };
+		942BE43D284E298C000D0EF2 /* iOS UMeng OC和Swift混编文档.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "iOS UMeng OC和Swift混编文档.md"; sourceTree = "<group>"; };
+		942BE43F284E298C000D0EF2 /* swift3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swift3.png; sourceTree = "<group>"; };
+		942BE440284E298C000D0EF2 /* swift2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swift2.png; sourceTree = "<group>"; };
+		942BE441284E298C000D0EF2 /* swift1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swift1.png; sourceTree = "<group>"; };
+		942BE442284E298C000D0EF2 /* UMCommonLogSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMCommonLogSwift.swift; sourceTree = "<group>"; };
+		942BE451284E34E4000D0EF2 /* MyCampus-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyCampus-Bridging-Header.h"; sourceTree = "<group>"; };
 		942EC64F2845035600E4C8A0 /* MomentDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MomentDetailVC.swift; sourceTree = "<group>"; };
 		94324203283FB13800D9C89A /* PublishImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishImageTableViewCell.swift; sourceTree = "<group>"; };
 		94324204283FB13800D9C89A /* PublishImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublishImageTableViewCell.xib; sourceTree = "<group>"; };
@@ -116,7 +145,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942BE448284E298C000D0EF2 /* UMDevice.framework in Frameworks */,
+				942BE443284E298C000D0EF2 /* UMCommonLog.framework in Frameworks */,
+				942BE446284E298C000D0EF2 /* UMCommon.framework in Frameworks */,
 				63F7FC397DE1EB590539F926 /* Pods_MyCampus.framework in Frameworks */,
+				942BE447284E298C000D0EF2 /* UMAPM.framework in Frameworks */,
+				942BE444284E298C000D0EF2 /* UMAnalyticsGame.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +184,42 @@
 				942BE42B284CC728000D0EF2 /* MyCampusUITestsLaunchTests.swift */,
 			);
 			path = MyCampusUITests;
+			sourceTree = "<group>";
+		};
+		942BE432284E298C000D0EF2 /* UMFramework */ = {
+			isa = PBXGroup;
+			children = (
+				942BE433284E298C000D0EF2 /* UMCommonLog.framework */,
+				942BE434284E298C000D0EF2 /* UMAnalyticsGame.framework */,
+				942BE435284E298C000D0EF2 /* UMCommonLog.bundle */,
+				942BE436284E298C000D0EF2 /* UMCommon.framework */,
+				942BE437284E298C000D0EF2 /* UMAPM.framework */,
+				942BE438284E298C000D0EF2 /* UMDevice.framework */,
+			);
+			path = UMFramework;
+			sourceTree = "<group>";
+		};
+		942BE439284E298C000D0EF2 /* UMSwift */ = {
+			isa = PBXGroup;
+			children = (
+				942BE43A284E298C000D0EF2 /* UMAnalyticsSwift.swift */,
+				942BE43B284E298C000D0EF2 /* UMCommonSwift.swift */,
+				942BE43C284E298C000D0EF2 /* UMGameAnalyticsSwift.swift */,
+				942BE43D284E298C000D0EF2 /* iOS UMeng OC和Swift混编文档.md */,
+				942BE43E284E298C000D0EF2 /* img */,
+				942BE442284E298C000D0EF2 /* UMCommonLogSwift.swift */,
+			);
+			path = UMSwift;
+			sourceTree = "<group>";
+		};
+		942BE43E284E298C000D0EF2 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				942BE43F284E298C000D0EF2 /* swift3.png */,
+				942BE440284E298C000D0EF2 /* swift2.png */,
+				942BE441284E298C000D0EF2 /* swift1.png */,
+			);
+			path = img;
 			sourceTree = "<group>";
 		};
 		942EC64E2845027000E4C8A0 /* TableView */ = {
@@ -286,6 +356,8 @@
 		94D73E21283388B20024AFD5 /* MyCampus */ = {
 			isa = PBXGroup;
 			children = (
+				942BE432284E298C000D0EF2 /* UMFramework */,
+				942BE439284E298C000D0EF2 /* UMSwift */,
 				94324209283FCBCB00D9C89A /* Protocol */,
 				94805AA3283BC82000341432 /* Base */,
 				94805A26283B1F3D00341432 /* Config */,
@@ -297,6 +369,7 @@
 				94D73E2B283388B40024AFD5 /* Assets.xcassets */,
 				94D73E2D283388B40024AFD5 /* LaunchScreen.storyboard */,
 				94D73E30283388B40024AFD5 /* Info.plist */,
+				942BE451284E34E4000D0EF2 /* MyCampus-Bridging-Header.h */,
 			);
 			path = MyCampus;
 			sourceTree = "<group>";
@@ -392,15 +465,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942BE44C284E298C000D0EF2 /* iOS UMeng OC和Swift混编文档.md in Resources */,
+				942BE44D284E298C000D0EF2 /* swift3.png in Resources */,
 				94FC567B284530A60048A9A8 /* PublishTool2TableViewCell.xib in Resources */,
 				943F8B57283CBBB6004E908C /* PublishBtnTableVC.xib in Resources */,
 				943F8B5B283CC1A3004E908C /* PublishTextViewTableVC.xib in Resources */,
 				943F8B4F283C68B4004E908C /* PublishVC.xib in Resources */,
 				94324206283FB13800D9C89A /* PublishImageTableViewCell.xib in Resources */,
+				942BE44F284E298C000D0EF2 /* swift1.png in Resources */,
 				94FC56812845CBD40048A9A8 /* PublishVideoTableViewCell.xib in Resources */,
 				943F8B53283CB639004E908C /* PublishToolTableViewCell.xib in Resources */,
 				94D73E2F283388B40024AFD5 /* LaunchScreen.storyboard in Resources */,
+				942BE44E284E298C000D0EF2 /* swift2.png in Resources */,
 				94D73E2C283388B40024AFD5 /* Assets.xcassets in Resources */,
+				942BE445284E298C000D0EF2 /* UMCommonLog.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +563,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94D73E23283388B20024AFD5 /* AppDelegate.swift in Sources */,
+				942BE449284E298C000D0EF2 /* UMAnalyticsSwift.swift in Sources */,
 				94805A2F283B234B00341432 /* TopImageBtn.swift in Sources */,
 				94D73E25283388B20024AFD5 /* SceneDelegate.swift in Sources */,
 				94805A2A283B1F8B00341432 /* Config.swift in Sources */,
@@ -495,6 +574,8 @@
 				943F8B5E283CCD0F004E908C /* PublishTableViewModel.swift in Sources */,
 				94FC567A284530A60048A9A8 /* PublishTool2TableViewCell.swift in Sources */,
 				943F8B52283CB639004E908C /* PublishToolTableViewCell.swift in Sources */,
+				942BE44B284E298C000D0EF2 /* UMGameAnalyticsSwift.swift in Sources */,
+				942BE44A284E298C000D0EF2 /* UMCommonSwift.swift in Sources */,
 				94805A3E283B879600341432 /* MomentCollectionViewCell.swift in Sources */,
 				94805A32283B270F00341432 /* WMpageDataModel.swift in Sources */,
 				94805A24283B1E6700341432 /* HomePageViewController.swift in Sources */,
@@ -508,6 +589,7 @@
 				943F8B5A283CC1A3004E908C /* PublishTextViewTableVC.swift in Sources */,
 				94805A28283B1F6600341432 /* Extensions.swift in Sources */,
 				9432420B283FCBE100D9C89A /* Protocol.swift in Sources */,
+				942BE450284E298C000D0EF2 /* UMCommonLogSwift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +773,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MyCampus/UMFramework",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCampus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -703,9 +790,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.demo.MyCampus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/aicoin/code/github/Study-Code/Mobile/MyCampus/MyCampus/MyCampus-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -719,6 +808,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MyCampus/UMFramework",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCampus/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -731,9 +825,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.demo.MyCampus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/aicoin/code/github/Study-Code/Mobile/MyCampus/MyCampus/MyCampus-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
