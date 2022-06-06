@@ -80,6 +80,13 @@ class MomentDetailVC: BaseViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
+        MobClick.event("Um_Event_PageView", attributes: [
+            "Um_Key_PageName": model.title,
+            "Um_Key_PageCategory": "详情页",
+            "Um_Key_UserID": "小金",
+            "Um_Key_UserLevel": "管理员",
+        ])
+        
         self.view.addSubview(toolBar)
         toolBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
