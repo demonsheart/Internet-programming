@@ -1,1 +1,3 @@
-a=b+c*e/g; d=f*g;
+a=b+c*e/g; d=f*g/g;
+f=(a+c)*(b+d); f=a+c*(b+d);
+b=((a+c)/d)-(b+c)*d;

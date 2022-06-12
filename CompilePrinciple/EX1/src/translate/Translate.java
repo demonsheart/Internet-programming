@@ -72,7 +72,7 @@ public class Translate {
                 operatorStack.push(head);
             }
         }
-
+        // 读入完毕，直接根据栈运算
         while (!operatorStack.isEmpty()) {
             doOperation();
         }
