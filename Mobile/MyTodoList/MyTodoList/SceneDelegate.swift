@@ -46,15 +46,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let quadrantPageViewController = RTRootNavigationController(rootViewController: QuadrantsPageViewController())
         quadrantPageViewController.tabBarItem = UITabBarItem(title: "四象限", image: UIImage(systemName: "rectangle.grid.2x2"), selectedImage: UIImage(systemName: "rectangle.grid.2x2"))
         
-        let punchPageViewController = RTRootNavigationController(rootViewController: PunchPageViewController())
-        punchPageViewController.tabBarItem = UITabBarItem(title: "打卡", image: UIImage(systemName: "clock.badge.checkmark"), selectedImage: UIImage(systemName: "clock.badge.checkmark"))
+//        let punchPageViewController = RTRootNavigationController(rootViewController: PunchPageViewController())
+//        punchPageViewController.tabBarItem = UITabBarItem(title: "打卡", image: UIImage(systemName: "clock.badge.checkmark"), selectedImage: UIImage(systemName: "clock.badge.checkmark"))
         
         let personalViewController = RTRootNavigationController(rootViewController: PersonalPageViewController())
         personalViewController.tabBarItem = UITabBarItem(title: "个人", image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill"))
         
         
         // add to tabbar
-        myTabBar.viewControllers = [homePageViewController, monthViewController, quadrantPageViewController, punchPageViewController, personalViewController]
+//        myTabBar.viewControllers = [homePageViewController, monthViewController, quadrantPageViewController, punchPageViewController, personalViewController]
+        myTabBar.viewControllers = [homePageViewController, monthViewController, quadrantPageViewController, personalViewController]
         
         myTabBar.selectedIndex = 4 // 0
         

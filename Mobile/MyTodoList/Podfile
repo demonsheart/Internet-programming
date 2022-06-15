@@ -18,4 +18,7 @@ target 'MyTodoList' do
   pod 'IQKeyboardManagerSwift'
   pod 'SkyFloatingLabelTextField', '~> 3.0'
   pod 'Toaster'
+  pod 'Cache'
+  pod 'SwiftDate'
+  pod 'FSCalendar'
 end

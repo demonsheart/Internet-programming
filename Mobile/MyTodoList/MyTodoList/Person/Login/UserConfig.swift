@@ -76,7 +76,7 @@ class UserConfig {
     func startHeartbeatForLogin() {
         stopHeartbeatForLogin()
         
-        heartbeatForLoginTimer = Timer(timeInterval: 10, repeats: true, block: { timer in
+        heartbeatForLoginTimer = Timer(timeInterval: 30, repeats: true, block: { timer in
              Service.shared.heartbeatForLogin { success in
                 if !success {
                     UserConfig.shared.isLogin = false
