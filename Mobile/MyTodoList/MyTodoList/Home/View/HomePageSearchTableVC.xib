@@ -26,6 +26,9 @@
                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system" title="搜索"/>
+                        <connections>
+                            <action selector="search:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8ca-gE-xmx"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

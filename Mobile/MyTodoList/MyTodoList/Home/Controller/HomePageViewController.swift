@@ -50,6 +50,10 @@ class HomePageViewController: BaseViewController {
             switch element {
             case .search:
                 let cell = tv.dequeueReusableCell(withIdentifier: "search", for: indexPath) as! HomePageSearchTableVC
+                cell.selectionStyle = .none
+                cell.callBack = { [weak self] in
+                    self?.search()
+                }
                 return cell
             case .list(let model):
                 let cell = UITableViewCell()
@@ -63,12 +67,23 @@ class HomePageViewController: BaseViewController {
             return dataSource.sectionModels[index].header
         }
         
-        viewModel.sectionListSubject.asObserver()
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+        dataSource.canEditRowAtIndexPath = { dataSource, indexPath in
+            return indexPath.section != 0
+        }
+
+        dataSource.canMoveRowAtIndexPath = { dataSource, indexPath in
+            return indexPath.section != 0
+        }
+        
+        viewModel.todoSections.asDriver()
+            .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        Observable.zip(tableView.rx.modelSelected(HomePageListCellModel.self), tableView.rx.itemSelected).bind { [weak self] model, index in
-            print(index, model)
+        Observable.zip(tableView.rx.modelSelected(HomePageListCellModel.self), tableView.rx.itemSelected).bind { [weak self] model, indexPath in
+            if indexPath.section == 0 { self?.search() }
+            else {
+                print(indexPath, model)
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -90,6 +105,10 @@ class HomePageViewController: BaseViewController {
     
     @objc func boardTapped() {
         
+    }
+    
+    func search() {
+        print("search")
     }
 
 }

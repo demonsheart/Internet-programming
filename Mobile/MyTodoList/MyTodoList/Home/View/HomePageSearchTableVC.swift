@@ -8,11 +8,15 @@
 import UIKit
 
 class HomePageSearchTableVC: UITableViewCell {
+    
+    var callBack: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.selectionStyle = .none
     }
     
+    @IBAction func search(_ sender: UIButton) {
+        callBack?()
+    }
 }

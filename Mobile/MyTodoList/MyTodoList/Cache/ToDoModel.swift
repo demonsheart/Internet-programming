@@ -14,9 +14,28 @@ enum ToDoType: Int {
     case middle = 2
     case low = 1
     case none = 0
+    
+    var header: String {
+        switch self {
+        case .done:
+            return "已完成"
+        case .expired:
+            return "已过期"
+        case .high:
+            return "高优先级"
+        case .middle:
+            return "中优先级"
+        case .low:
+            return "低优先级"
+        case .none:
+            return "无优先级"
+        }
+    }
 }
 
 struct ToDoModel: Codable {
+    
+    // 今天: 日期为今天的 + 逾期的
     
     // 6种section isExpired与isDone互斥
     // 1逾期 isExpired == true

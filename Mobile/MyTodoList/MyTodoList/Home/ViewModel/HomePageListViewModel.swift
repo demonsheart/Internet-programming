@@ -12,32 +12,63 @@ import RxSwift
 import RxRelay
 
 class HomePageListViewModel {
-    let sectionListSubject = BehaviorSubject(value: [SectionOfHPCellData]())
+    let todoSections = BehaviorRelay(value: [SectionOfHPCellData]())
     
-    let data = ToDoModel.default
+    private let data = BehaviorRelay(value: [ToDoModel]())
     
-//    let expiredList = BehaviorRelay
+    private let disposeBag = DisposeBag()
     
     init() {
-        sectionListSubject.onNext([
-            SectionOfHPCellData(header: "", items: [
-                .search
-            ]),
-            SectionOfHPCellData(header: "已过期", items: data.filter{ $0.type == .expired }.map({ model in
-                return HomePageListCellModel.list(model)
-            })),
-            SectionOfHPCellData(header: "高优先级", items: data.filter{ $0.type == .high }.map({ model in
-                return HomePageListCellModel.list(model)
-            })),
-            SectionOfHPCellData(header: "中优先级", items: data.filter{ $0.type == .middle }.map({ model in
-                return HomePageListCellModel.list(model)
-            })),
-            SectionOfHPCellData(header: "低优先级", items: data.filter{ $0.type == .low }.map({ model in
-                return HomePageListCellModel.list(model)
-            })),
-            SectionOfHPCellData(header: "无优先级", items: data.filter{ $0.type == .none }.map({ model in
-                return HomePageListCellModel.list(model)
-            })),
-        ])
+        generateTodos()
+        getDataFromCathe()
+    }
+    
+    private func getDataFromCathe() {
+        // TODO: 今天的todos
+        data.accept(ToDoModel.default)
+    }
+    
+    private func saveDataToCathe() {
+        
+    }
+    
+    private func generateTodos() {
+        data.subscribe (onNext: { [unowned self] todos in
+            var sections = [SectionOfHPCellData]()
+            sections.append(SectionOfHPCellData(header: "", items: [.search]))
+            if let section = self.section(todos: todos, type: .expired) {
+                sections.append(section)
+            }
+            if let section = self.section(todos: todos, type: .high) {
+                sections.append(section)
+            }
+            if let section = self.section(todos: todos, type: .middle) {
+                sections.append(section)
+            }
+            if let section = self.section(todos: todos, type: .low) {
+                sections.append(section)
+            }
+            if let section = self.section(todos: todos, type: .none) {
+                sections.append(section)
+            }
+            if let section = self.section(todos: todos, type: .done) {
+                sections.append(section)
+            }
+            
+            self.todoSections.accept(sections)
+        }).disposed(by: disposeBag)
+    }
+    
+    private func section(todos: [ToDoModel], type: ToDoType) ->  SectionOfHPCellData? {
+        let item = todos.filter{ $0.type == type }
+        if item.count == 0 {
+            return nil
+        } else {
+            return SectionOfHPCellData(header: type.header, items: item.map{ HomePageListCellModel.list($0) })
+        }
+    }
+    
+    func addToDo() {
+        
     }
 }
