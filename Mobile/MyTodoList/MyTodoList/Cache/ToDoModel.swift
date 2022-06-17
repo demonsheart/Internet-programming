@@ -7,6 +7,15 @@
 
 import Foundation
 
+enum ToDoType: Int {
+    case done = 5
+    case expired = 4
+    case high = 3
+    case middle = 2
+    case low = 1
+    case none = 0
+}
+
 struct ToDoModel: Codable {
     
     // 6种section isExpired与isDone互斥
@@ -16,7 +25,13 @@ struct ToDoModel: Codable {
     // 4低优先级 level == 1
     // 5无优先级 level == 0
     // 6已完成 isDone = true
+    var type: ToDoType {
+        if done { return .done }
+        if isExpired { return .expired }
+        return ToDoType.init(rawValue: level) ?? .none
+    }
     
+    var id: Int
     var keyword: String
     var content: String? // mardown格式正文内容 图片看情况支持
     var level: Int // 0 1 2 3四个section
@@ -29,15 +44,15 @@ struct ToDoModel: Codable {
     }
     
     static var `default`: [ToDoModel] = [
-        ToDoModel(keyword: "H5游戏策划", level: 3, done: false, date: ""),
-        ToDoModel(keyword: "宣传视频拍摄", level: 3, done: false, date: ""),
-        ToDoModel(keyword: "功能评审会议", level: 3, done: false, date: ""),
-        ToDoModel(keyword: "生日会", level: 2, done: false, date: ""),
-        ToDoModel(keyword: "瑜伽课", level: 2, done: false, date: ""),
-        ToDoModel(keyword: "问候父母", level: 1, done: false, date: ""),
-        ToDoModel(keyword: "练琴", level: 1, done: false, date: ""),
-        ToDoModel(keyword: "佳佳生日", level: 1, done: false, date: ""),
-        ToDoModel(keyword: "交房租", level: 1, done: true, date: ""),
+        ToDoModel(id: 0, keyword: "H5游戏策划", level: 3, done: false, date: ""),
+        ToDoModel(id: 1, keyword: "宣传视频拍摄", level: 3, done: false, date: ""),
+        ToDoModel(id: 2, keyword: "功能评审会议", level: 3, done: false, date: ""),
+        ToDoModel(id: 3, keyword: "生日会", level: 2, done: false, date: ""),
+        ToDoModel(id: 4, keyword: "瑜伽课", level: 2, done: false, date: ""),
+        ToDoModel(id: 5, keyword: "问候父母", level: 1, done: false, date: ""),
+        ToDoModel(id: 6, keyword: "练琴", level: 1, done: false, date: ""),
+        ToDoModel(id: 7, keyword: "佳佳生日", level: 1, done: false, date: ""),
+        ToDoModel(id: 8, keyword: "交房租", level: 1, done: true, date: ""),
     ]
 }
 

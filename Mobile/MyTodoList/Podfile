@@ -21,4 +21,5 @@ target 'MyTodoList' do
   pod 'Cache'
   pod 'SwiftDate'
   pod 'FSCalendar'
+  pod 'RxDataSources'
 end
