@@ -11,6 +11,8 @@
 		9449921E285B48690089A93F /* HomePageSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449921C285B48690089A93F /* HomePageSearchTableVC.swift */; };
 		9449921F285B48690089A93F /* HomePageSearchTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9449921D285B48690089A93F /* HomePageSearchTableVC.xib */; };
 		94499225285B65300089A93F /* HomePageListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94499224285B65300089A93F /* HomePageListCellModel.swift */; };
+		94499228285C72F10089A93F /* HomePageTodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94499226285C72F10089A93F /* HomePageTodoVC.swift */; };
+		94499229285C72F10089A93F /* HomePageTodoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94499227285C72F10089A93F /* HomePageTodoVC.xib */; };
 		94597AF92859CC7A00D2C30E /* ToDoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597AF82859CC7A00D2C30E /* ToDoModel.swift */; };
 		94597AFF285A2D2800D2C30E /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597AFE285A2D2800D2C30E /* HomePageViewController.swift */; };
 		94597B01285A30D900D2C30E /* HomePageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597B00285A30D900D2C30E /* HomePageListViewModel.swift */; };
@@ -43,6 +45,8 @@
 		9449921C285B48690089A93F /* HomePageSearchTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSearchTableVC.swift; sourceTree = "<group>"; };
 		9449921D285B48690089A93F /* HomePageSearchTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageSearchTableVC.xib; sourceTree = "<group>"; };
 		94499224285B65300089A93F /* HomePageListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageListCellModel.swift; sourceTree = "<group>"; };
+		94499226285C72F10089A93F /* HomePageTodoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTodoVC.swift; sourceTree = "<group>"; };
+		94499227285C72F10089A93F /* HomePageTodoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageTodoVC.xib; sourceTree = "<group>"; };
 		94597AF82859CC7A00D2C30E /* ToDoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoModel.swift; sourceTree = "<group>"; };
 		94597AFE285A2D2800D2C30E /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		94597B00285A30D900D2C30E /* HomePageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageListViewModel.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				94597B02285A349A00D2C30E /* HomePageListHeaderView.swift */,
 				9449921C285B48690089A93F /* HomePageSearchTableVC.swift */,
 				9449921D285B48690089A93F /* HomePageSearchTableVC.xib */,
+				94499226285C72F10089A93F /* HomePageTodoVC.swift */,
+				94499227285C72F10089A93F /* HomePageTodoVC.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -343,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9474F32C2828A3560047FA1B /* LoginViewController.xib in Resources */,
+				94499229285C72F10089A93F /* HomePageTodoVC.xib in Resources */,
 				9494B718282953590066BE5B /* RegisterViewController.xib in Resources */,
 				9474F2F3282661870047FA1B /* LaunchScreen.storyboard in Resources */,
 				9474F323282757FD0047FA1B /* CommonTableViewCell.xib in Resources */,
@@ -402,6 +409,7 @@
 			files = (
 				9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */,
 				9474F328282803CE0047FA1B /* Service.swift in Sources */,
+				94499228285C72F10089A93F /* HomePageTodoVC.swift in Sources */,
 				9474F2E7282661850047FA1B /* AppDelegate.swift in Sources */,
 				94597AFF285A2D2800D2C30E /* HomePageViewController.swift in Sources */,
 				9474F32B2828A3560047FA1B /* LoginViewController.swift in Sources */,

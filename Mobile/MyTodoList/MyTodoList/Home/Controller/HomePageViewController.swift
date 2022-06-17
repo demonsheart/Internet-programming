@@ -15,17 +15,15 @@ class HomePageViewController: BaseViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .insetGrouped)
-//        tableView.delegate = self
-//        tableView.dataSource = self
         tableView.backgroundColor = TDLColor.bgGreen
+        tableView.separatorStyle = .none
         if #available(iOS 15.0, *) {
             tableView.isPrefetchingEnabled = false
             tableView.sectionHeaderTopPadding = 0
         }
         
-//        table.register(HomePageListHeaderView.self,
-//               forHeaderFooterViewReuseIdentifier: "listHeader")
         tableView.register(UINib(nibName: "HomePageSearchTableVC", bundle: nil), forCellReuseIdentifier: "search")
+        tableView.register(UINib(nibName: "HomePageTodoVC", bundle: nil), forCellReuseIdentifier: "todo")
         
         return tableView
     }()
@@ -56,8 +54,8 @@ class HomePageViewController: BaseViewController {
                 }
                 return cell
             case .list(let model):
-                let cell = UITableViewCell()
-                cell.textLabel?.text = model.keyword
+                let cell = tv.dequeueReusableCell(withIdentifier: "todo", for: indexPath) as! HomePageTodoVC
+                cell.render(todo: model)
                 cell.selectionStyle = .none
                 return cell
             }
@@ -112,46 +110,3 @@ class HomePageViewController: BaseViewController {
     }
 
 }
-
-//extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 2
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 0 { return 1 }
-//        return 2
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        return UITableViewCell()
-//    }
-//
-//    // MARK: - Header
-//    func tableView(_ tableView: UITableView,
-//                   viewForHeaderInSection section: Int) -> UIView? {
-//        if section == 0 { return nil }
-//
-//        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier:"listHeader") as! HomePageListHeaderView
-//        view.label.text = "Header"
-//
-//        return view
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 { return CGFloat.leastNonzeroMagnitude }
-//        return 40
-//    }
-//
-//    // MARK: - Footer
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 20
-//    }
-//
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return nil
-//    }
-//
-//
-//}

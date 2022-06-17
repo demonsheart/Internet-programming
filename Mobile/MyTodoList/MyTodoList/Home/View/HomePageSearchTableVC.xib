@@ -18,10 +18,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBe-8x-Pxw">
-                        <rect key="frame" x="110" y="9.5" width="100" height="31"/>
+                        <rect key="frame" x="110" y="5" width="100" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="8n8-F1-MAV"/>
-                            <constraint firstAttribute="height" constant="31" id="KAJ-bV-Y8J"/>
                         </constraints>
                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" title="Button"/>
@@ -33,9 +32,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="EBe-8x-Pxw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="QOP-3u-dZZ"/>
-                    <constraint firstAttribute="bottom" secondItem="EBe-8x-Pxw" secondAttribute="bottom" constant="9.5" id="QV4-xS-R3M"/>
+                    <constraint firstAttribute="bottom" secondItem="EBe-8x-Pxw" secondAttribute="bottom" constant="5" id="QV4-xS-R3M"/>
                     <constraint firstItem="EBe-8x-Pxw" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="jMJ-5t-LNp"/>
-                    <constraint firstItem="EBe-8x-Pxw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9.5" id="lh5-qK-lkp"/>
+                    <constraint firstItem="EBe-8x-Pxw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="lh5-qK-lkp"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

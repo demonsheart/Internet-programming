@@ -19,20 +19,20 @@ class HomePageListViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
-        generateTodos()
+        bindSections()
         getDataFromCathe()
     }
     
     private func getDataFromCathe() {
         // TODO: 今天的todos
-        data.accept(ToDoModel.default)
+        data.accept(ToDoModel.default.filter { $0.shouldInHomePage })
     }
     
     private func saveDataToCathe() {
         
     }
     
-    private func generateTodos() {
+    private func bindSections() {
         data.subscribe (onNext: { [unowned self] todos in
             var sections = [SectionOfHPCellData]()
             sections.append(SectionOfHPCellData(header: "", items: [.search]))

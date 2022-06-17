@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="48" id="KGk-i7-Jjw" customClass="HomePageTodoVC" customModule="MyTodoList" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzn-Jg-fiS">
+                        <rect key="frame" x="16" y="14" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="RE8-wf-pWX"/>
+                            <constraint firstAttribute="width" constant="20" id="lBy-7s-uaX"/>
+                            <constraint firstAttribute="height" constant="20" id="v1n-vs-7mQ"/>
+                        </constraints>
+                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="">
+                            <imageReference key="image" image="square" catalog="system" symbolScale="default"/>
+                        </state>
+                        <state key="selected" image="checkmark.square.fill" catalog="system"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="游戏策划" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrg-PK-cTq">
+                        <rect key="frame" x="48" y="15" width="62" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="p06-eC-mcB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLk-wk-Sxl">
+                        <rect key="frame" x="269" y="15.5" width="39" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Hrg-PK-cTq" firstAttribute="centerY" secondItem="kzn-Jg-fiS" secondAttribute="centerY" id="9wt-mB-c9H"/>
+                    <constraint firstItem="kzn-Jg-fiS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FfW-0d-FEs"/>
+                    <constraint firstItem="Hrg-PK-cTq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Kcm-Kt-uTc"/>
+                    <constraint firstItem="kzn-Jg-fiS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NX8-8c-GSW"/>
+                    <constraint firstAttribute="trailing" secondItem="PLk-wk-Sxl" secondAttribute="trailing" constant="12" id="Npq-eO-jve"/>
+                    <constraint firstAttribute="bottom" secondItem="Hrg-PK-cTq" secondAttribute="bottom" constant="15" id="h36-Dk-0mH"/>
+                    <constraint firstItem="Hrg-PK-cTq" firstAttribute="centerY" secondItem="PLk-wk-Sxl" secondAttribute="centerY" id="jc0-bp-wqz"/>
+                    <constraint firstItem="Hrg-PK-cTq" firstAttribute="leading" secondItem="kzn-Jg-fiS" secondAttribute="trailing" constant="12" id="ume-p3-zPz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkBox" destination="kzn-Jg-fiS" id="Kxz-Mo-mUu"/>
+                <outlet property="timeLabel" destination="PLk-wk-Sxl" id="iWU-nY-EMf"/>
+                <outlet property="titleLabel" destination="Hrg-PK-cTq" id="wep-Bl-Ta4"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="113.83928571428571"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkmark.square.fill" catalog="system" width="128" height="114"/>
+        <image name="square" catalog="system" width="128" height="114"/>
+    </resources>
+</document>

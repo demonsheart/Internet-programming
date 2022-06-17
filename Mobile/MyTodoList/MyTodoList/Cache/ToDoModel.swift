@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftDate
+import UIKit
 
 enum ToDoType: Int {
     case done = 5
@@ -57,21 +59,58 @@ struct ToDoModel: Codable {
     var done: Bool
     var date: String // timeStamp
     
+    var datetime: TimeInterval {
+        return TimeInterval(Double(date) ?? 0.years.timeInterval)
+    }
+    
     // 是否逾期 逾期不管level全都放在一个section里面
     var isExpired: Bool {
-        return false
+        return DateInRegion(seconds: datetime).isBeforeDate(DateInRegion(), granularity: .day)
+    }
+    
+    var shouldInHomePage: Bool {
+        return DateInRegion(seconds: datetime).isBeforeDate(DateInRegion(), orEqual: true, granularity: .day)
+    }
+    
+    var color: UIColor {
+        switch type {
+        case .done, .none:
+            return .lightGray
+        case .expired:
+            switch level {
+            case 1: return TDLColor.lowPriority
+            case 2: return TDLColor.middlePriority
+            case 3: return TDLColor.highPriority
+            default: return .lightGray
+            }
+        case .high:
+            return TDLColor.highPriority
+        case .middle:
+            return TDLColor.middlePriority
+        case .low:
+            return TDLColor.lowPriority
+        }
+    }
+    
+    var dateTuple: (String, UIColor) {
+        // TODO: 时间显示规则
+        return ("18:00", .lightGray)
     }
     
     static var `default`: [ToDoModel] = [
-        ToDoModel(id: 0, keyword: "H5游戏策划", level: 3, done: false, date: ""),
-        ToDoModel(id: 1, keyword: "宣传视频拍摄", level: 3, done: false, date: ""),
-        ToDoModel(id: 2, keyword: "功能评审会议", level: 3, done: false, date: ""),
-        ToDoModel(id: 3, keyword: "生日会", level: 2, done: false, date: ""),
-        ToDoModel(id: 4, keyword: "瑜伽课", level: 2, done: false, date: ""),
-        ToDoModel(id: 5, keyword: "问候父母", level: 1, done: false, date: ""),
-        ToDoModel(id: 6, keyword: "练琴", level: 1, done: false, date: ""),
-        ToDoModel(id: 7, keyword: "佳佳生日", level: 1, done: false, date: ""),
-        ToDoModel(id: 8, keyword: "交房租", level: 1, done: true, date: ""),
+        ToDoModel(id: 0, keyword: "H5游戏策划", level: 3, done: false, date: "1655467067"),
+        ToDoModel(id: 1, keyword: "宣传视频拍摄", level: 3, done: false, date: "1655467067"),
+        ToDoModel(id: 2, keyword: "功能评审会议", level: 3, done: false, date: "1655467067"),
+        ToDoModel(id: 3, keyword: "生日会", level: 2, done: false, date: "1655467067"),
+        ToDoModel(id: 4, keyword: "瑜伽课", level: 2, done: false, date: "1655467067"),
+        ToDoModel(id: 5, keyword: "问候父母", level: 1, done: false, date: "1655467067"),
+        ToDoModel(id: 6, keyword: "练琴", level: 1, done: false, date: "1655467067"),
+        ToDoModel(id: 7, keyword: "佳佳生日", level: 1, done: false, date: "1655467067"),
+        ToDoModel(id: 8, keyword: "交房租", level: 1, done: true, date: "1655467067"),
+        ToDoModel(id: 9, keyword: "梦华录", level: 3, done: false, date: "1655380640"),
+        ToDoModel(id: 10, keyword: "斗罗大陆", level: 1, done: false, date: "1655380640"),
+        ToDoModel(id: 11, keyword: "王者", level: 2, done: false, date: "1655380640"),
+        ToDoModel(id: 12, keyword: "完结", level: 2, done: false, date: "1655900173"),
     ]
 }
 
