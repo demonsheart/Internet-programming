@@ -56,6 +56,9 @@ class HomePageViewController: BaseViewController {
             case .list(let model):
                 let cell = tv.dequeueReusableCell(withIdentifier: "todo", for: indexPath) as! HomePageTodoVC
                 cell.render(todo: model)
+                cell.checkCallBack = { [weak self] id, check in
+                    self?.viewModel.doneTodo(in: id, to: check)
+                }
                 cell.selectionStyle = .none
                 return cell
             }
@@ -88,17 +91,20 @@ class HomePageViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let operations = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(operationTapped))
+        let add = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addTapped))
         let board = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(boardTapped))
-        operations.tintColor = TDLColor.iconGray
+        add.tintColor = TDLColor.iconGray
         board.tintColor = TDLColor.iconGray
         
-        navigationItem.rightBarButtonItems = [operations]
+        navigationItem.rightBarButtonItems = [add]
         navigationItem.leftBarButtonItems = [board]
     }
     
-    @objc func operationTapped() {
-        
+    @objc func addTapped() {
+        let vc = EditNAddTodoViewController()
+        vc.title = "新增"
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func boardTapped() {

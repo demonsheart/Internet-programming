@@ -18,8 +18,9 @@ class HomePageTodoVC: UITableViewCell {
     var disposeBag = DisposeBag()
     let checkRelay = BehaviorRelay(value: false)
     var color = UIColor.lightGray
+    var model: ToDoModel?
     
-    var checkCallBack: (() -> Void)?
+    var checkCallBack: ((Int, Bool) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +28,9 @@ class HomePageTodoVC: UITableViewCell {
         self.checkBox.rx.tap
             .subscribe(onNext: { [unowned self] _ in
                 self.checkBox.isSelected.toggle()
+                if let id = model?.id {
+                    self.checkCallBack?(id, self.checkBox.isSelected)
+                }
                 self.checkRelay.accept(self.checkBox.isSelected)
             }).disposed(by: disposeBag)
         
@@ -40,6 +44,7 @@ class HomePageTodoVC: UITableViewCell {
     }
     
     func render(todo: ToDoModel) {
+        self.model = todo
         checkBox.isSelected = todo.done
         color = todo.color
         checkRelay.accept(todo.done)

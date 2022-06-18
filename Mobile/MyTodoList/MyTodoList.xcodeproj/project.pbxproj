@@ -13,6 +13,8 @@
 		94499225285B65300089A93F /* HomePageListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94499224285B65300089A93F /* HomePageListCellModel.swift */; };
 		94499228285C72F10089A93F /* HomePageTodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94499226285C72F10089A93F /* HomePageTodoVC.swift */; };
 		94499229285C72F10089A93F /* HomePageTodoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94499227285C72F10089A93F /* HomePageTodoVC.xib */; };
+		94499230285D6F520089A93F /* EditNAddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449922E285D6F520089A93F /* EditNAddTodoViewController.swift */; };
+		94499231285D6F520089A93F /* EditNAddTodoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9449922F285D6F520089A93F /* EditNAddTodoViewController.xib */; };
 		94597AF92859CC7A00D2C30E /* ToDoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597AF82859CC7A00D2C30E /* ToDoModel.swift */; };
 		94597AFF285A2D2800D2C30E /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597AFE285A2D2800D2C30E /* HomePageViewController.swift */; };
 		94597B01285A30D900D2C30E /* HomePageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597B00285A30D900D2C30E /* HomePageListViewModel.swift */; };
@@ -47,6 +49,8 @@
 		94499224285B65300089A93F /* HomePageListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageListCellModel.swift; sourceTree = "<group>"; };
 		94499226285C72F10089A93F /* HomePageTodoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTodoVC.swift; sourceTree = "<group>"; };
 		94499227285C72F10089A93F /* HomePageTodoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageTodoVC.xib; sourceTree = "<group>"; };
+		9449922E285D6F520089A93F /* EditNAddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNAddTodoViewController.swift; sourceTree = "<group>"; };
+		9449922F285D6F520089A93F /* EditNAddTodoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditNAddTodoViewController.xib; sourceTree = "<group>"; };
 		94597AF82859CC7A00D2C30E /* ToDoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoModel.swift; sourceTree = "<group>"; };
 		94597AFE285A2D2800D2C30E /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		94597B00285A30D900D2C30E /* HomePageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageListViewModel.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				94597AFE285A2D2800D2C30E /* HomePageViewController.swift */,
+				9449922E285D6F520089A93F /* EditNAddTodoViewController.swift */,
+				9449922F285D6F520089A93F /* EditNAddTodoViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9474F32C2828A3560047FA1B /* LoginViewController.xib in Resources */,
+				94499231285D6F520089A93F /* EditNAddTodoViewController.xib in Resources */,
 				94499229285C72F10089A93F /* HomePageTodoVC.xib in Resources */,
 				9494B718282953590066BE5B /* RegisterViewController.xib in Resources */,
 				9474F2F3282661870047FA1B /* LaunchScreen.storyboard in Resources */,
@@ -410,6 +417,7 @@
 				9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */,
 				9474F328282803CE0047FA1B /* Service.swift in Sources */,
 				94499228285C72F10089A93F /* HomePageTodoVC.swift in Sources */,
+				94499230285D6F520089A93F /* EditNAddTodoViewController.swift in Sources */,
 				9474F2E7282661850047FA1B /* AppDelegate.swift in Sources */,
 				94597AFF285A2D2800D2C30E /* HomePageViewController.swift in Sources */,
 				9474F32B2828A3560047FA1B /* LoginViewController.swift in Sources */,

@@ -68,6 +68,18 @@ class HomePageListViewModel {
         }
     }
     
+    func doneTodo(in id: Int, to check: Bool) {
+        let value = data.value
+        for i in 0..<value.count {
+            if value[i].id == id {
+                value[i].done = check
+                break
+            }
+        }
+        data.accept(value)
+        // TODO: 持久化
+    }
+    
     func addToDo() {
         
     }

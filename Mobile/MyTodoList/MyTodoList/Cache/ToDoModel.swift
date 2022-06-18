@@ -35,7 +35,7 @@ enum ToDoType: Int {
     }
 }
 
-struct ToDoModel: Codable {
+class ToDoModel: Codable {
     
     // 今天: 日期为今天的 + 逾期的
     
@@ -58,6 +58,15 @@ struct ToDoModel: Codable {
     var level: Int // 0 1 2 3四个section
     var done: Bool
     var date: String // timeStamp
+    
+    init(id: Int, keyword: String, content: String? = nil, level: Int, done: Bool, date: String) {
+        self.id = id
+        self.keyword = keyword
+        self.content = content
+        self.level = level
+        self.done = done
+        self.date = date
+    }
     
     var datetime: TimeInterval {
         return TimeInterval(Double(date) ?? 0.years.timeInterval)
@@ -98,15 +107,15 @@ struct ToDoModel: Codable {
     }
     
     static var `default`: [ToDoModel] = [
-        ToDoModel(id: 0, keyword: "H5游戏策划", level: 3, done: false, date: "1655467067"),
-        ToDoModel(id: 1, keyword: "宣传视频拍摄", level: 3, done: false, date: "1655467067"),
-        ToDoModel(id: 2, keyword: "功能评审会议", level: 3, done: false, date: "1655467067"),
-        ToDoModel(id: 3, keyword: "生日会", level: 2, done: false, date: "1655467067"),
-        ToDoModel(id: 4, keyword: "瑜伽课", level: 2, done: false, date: "1655467067"),
-        ToDoModel(id: 5, keyword: "问候父母", level: 1, done: false, date: "1655467067"),
-        ToDoModel(id: 6, keyword: "练琴", level: 1, done: false, date: "1655467067"),
-        ToDoModel(id: 7, keyword: "佳佳生日", level: 1, done: false, date: "1655467067"),
-        ToDoModel(id: 8, keyword: "交房租", level: 1, done: true, date: "1655467067"),
+        ToDoModel(id: 0, keyword: "H5游戏策划", level: 3, done: false, date: "1655516761"),
+        ToDoModel(id: 1, keyword: "宣传视频拍摄", level: 3, done: false, date: "1655516761"),
+        ToDoModel(id: 2, keyword: "功能评审会议", level: 3, done: false, date: "1655516761"),
+        ToDoModel(id: 3, keyword: "生日会", level: 2, done: false, date: "1655516761"),
+        ToDoModel(id: 4, keyword: "瑜伽课", level: 2, done: false, date: "1655516761"),
+        ToDoModel(id: 5, keyword: "问候父母", level: 1, done: false, date: "1655516761"),
+        ToDoModel(id: 6, keyword: "练琴", level: 1, done: false, date: "1655516761"),
+        ToDoModel(id: 7, keyword: "佳佳生日", level: 1, done: false, date: "1655516761"),
+        ToDoModel(id: 8, keyword: "交房租", level: 1, done: true, date: "1655516761"),
         ToDoModel(id: 9, keyword: "梦华录", level: 3, done: false, date: "1655380640"),
         ToDoModel(id: 10, keyword: "斗罗大陆", level: 1, done: false, date: "1655380640"),
         ToDoModel(id: 11, keyword: "王者", level: 2, done: false, date: "1655380640"),
