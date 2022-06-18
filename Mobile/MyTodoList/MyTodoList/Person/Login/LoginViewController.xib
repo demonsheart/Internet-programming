@@ -50,7 +50,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dg0-7j-ibn" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="204" width="304" height="37"/>
+                    <rect key="frame" x="55" y="204" width="304" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
@@ -74,7 +74,7 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GyD-zP-TWZ" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="270" width="304" height="36.5"/>
+                    <rect key="frame" x="55" y="267" width="304" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
@@ -98,13 +98,13 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJb-OV-nFQ">
-                    <rect key="frame" x="110" y="387.5" width="194" height="31"/>
+                    <rect key="frame" x="110" y="382" width="194" height="31"/>
                     <color key="tintColor" name="iconBlue"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="filled" title="登录"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-m1-R8G">
-                    <rect key="frame" x="86" y="322.5" width="206" height="14.5"/>
+                    <rect key="frame" x="86" y="317" width="206" height="14.5"/>
                     <attributedString key="attributedText">
                         <fragment content="已阅读并同意“">
                             <attributes>
@@ -150,13 +150,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邮箱或密码错误" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IuP-d5-zjW">
-                    <rect key="frame" x="50" y="355.5" width="314" height="18"/>
+                    <rect key="frame" x="50" y="350" width="314" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.92156862750000001" green="0.25882352939999997" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ww-G5-Zrt">
-                    <rect key="frame" x="61" y="320" width="20" height="20"/>
+                    <rect key="frame" x="61" y="314.5" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Erz-Lg-UK7"/>
                         <constraint firstAttribute="width" constant="20" id="fIl-na-uUQ"/>
@@ -201,10 +201,10 @@
     </objects>
     <designables>
         <designable name="Dg0-7j-ibn">
-            <size key="intrinsicContentSize" width="304" height="36.833984375"/>
+            <size key="intrinsicContentSize" width="89.5" height="34"/>
         </designable>
         <designable name="GyD-zP-TWZ">
-            <size key="intrinsicContentSize" width="304" height="36.833984375"/>
+            <size key="intrinsicContentSize" width="89.5" height="34"/>
         </designable>
     </designables>
     <resources>

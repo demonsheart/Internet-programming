@@ -15,6 +15,16 @@ import RxRelay
 enum HomePageListCellModel {
     case search
     case list(ToDoModel)
+    
+    // 便捷访问ToDoModel方法
+    var todo: ToDoModel? {
+        switch self {
+        case .search:
+            return nil
+        case .list(let toDoModel):
+            return toDoModel
+        }
+    }
 }
 
 struct SectionOfHPCellData {

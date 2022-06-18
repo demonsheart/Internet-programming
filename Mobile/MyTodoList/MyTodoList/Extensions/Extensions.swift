@@ -175,3 +175,9 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
+
+extension Array {
+    mutating func move(from: Int, to: Int) {
+        insert(remove(at: from), at: to)
+    }
+}

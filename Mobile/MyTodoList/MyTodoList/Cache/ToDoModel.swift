@@ -35,8 +35,7 @@ enum ToDoType: Int {
     }
 }
 
-class ToDoModel: Codable {
-    
+class ToDoModel: Codable, CustomStringConvertible {
     // 今天: 日期为今天的 + 逾期的
     
     // 6种section isExpired与isDone互斥
@@ -66,6 +65,10 @@ class ToDoModel: Codable {
         self.level = level
         self.done = done
         self.date = date
+    }
+    
+    var description: String {
+        return "\(id), \(keyword)"
     }
     
     var datetime: TimeInterval {
@@ -120,6 +123,7 @@ class ToDoModel: Codable {
         ToDoModel(id: 10, keyword: "斗罗大陆", level: 1, done: false, date: "1655380640"),
         ToDoModel(id: 11, keyword: "王者", level: 2, done: false, date: "1655380640"),
         ToDoModel(id: 12, keyword: "完结", level: 2, done: false, date: "1655900173"),
+        ToDoModel(id: 13, keyword: "快递", level: 0, done: false, date: "1655380640"),
     ]
 }
 

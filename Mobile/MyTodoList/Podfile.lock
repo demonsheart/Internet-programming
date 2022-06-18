@@ -4,6 +4,7 @@ PODS:
   - Differentiator (5.0.0)
   - FSCalendar (2.8.4)
   - IQKeyboardManagerSwift (6.5.10)
+  - MarkdownView (1.9.1)
   - MJRefresh (3.7.5)
   - RTRootNavigationController (0.8.0):
     - RTRootNavigationController/Core (= 0.8.0)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - Cache
   - FSCalendar
   - IQKeyboardManagerSwift
+  - MarkdownView
   - MJRefresh
   - RTRootNavigationController
   - RxCocoa (= 6.5.0)
@@ -53,6 +55,7 @@ SPEC REPOS:
     - Differentiator
     - FSCalendar
     - IQKeyboardManagerSwift
+    - MarkdownView
     - MJRefresh
     - RTRootNavigationController
     - RxCocoa
@@ -73,6 +76,7 @@ SPEC CHECKSUMS:
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
+  MarkdownView: 22249778219cc22901f1454e8355298dd0bda7f0
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   RTRootNavigationController: 36c6301870f0467f89d69f4286795340b537d473
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
@@ -87,6 +91,6 @@ SPEC CHECKSUMS:
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
   WMPageController: 4c7f2c636675a71aea5eecf8fdc07a0ce86954e3
 
-PODFILE CHECKSUM: f93280613dc3cd271f6f409fb86acdd40e54964e
+PODFILE CHECKSUM: 29d97cf5a06e2a981a79c436449e5590ab284ed5
 
 COCOAPODS: 1.11.3

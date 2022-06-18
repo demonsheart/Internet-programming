@@ -10,6 +10,7 @@ import RxDataSources
 import RxCocoa
 import RxSwift
 import RxRelay
+import CoreText
 
 class HomePageListViewModel {
     let todoSections = BehaviorRelay(value: [SectionOfHPCellData]())
@@ -68,6 +69,8 @@ class HomePageListViewModel {
         }
     }
     
+    // MARK: - cell 各种操作
+    
     func doneTodo(in id: Int, to check: Bool) {
         let value = data.value
         for i in 0..<value.count {
@@ -78,6 +81,29 @@ class HomePageListViewModel {
         }
         data.accept(value)
         // TODO: 持久化
+    }
+    
+    func deleteTodo(in id: Int) {
+        let value = data.value.filter { $0.id != id }
+        data.accept(value)
+        // TODO: 持久化
+    }
+    
+    // 当前只考虑同一个section的
+    func moveTodo(from: IndexPath, to: IndexPath) {
+        guard from != to,
+              let sourceModel = todoSections.value[from.section].items[from.row].todo,
+              let destinationModel = todoSections.value[to.section].items[to.row].todo
+        else { return }
+        
+        var value = data.value
+        if let sourceIndex = value.firstIndex(where: { $0.id == sourceModel.id }), let destinationIndex = value.firstIndex(where: { $0.id == destinationModel.id }) {
+            value.move(from: sourceIndex, to: destinationIndex)
+            data.accept(value)
+            // TODO: 持久化
+        } else {
+            print("Err move")
+        }
     }
     
     func addToDo() {
