@@ -84,6 +84,11 @@ class ToDoModel: Codable, CustomStringConvertible {
         return TimeInterval(Double(date) ?? 0.years.timeInterval)
     }
     
+    // TODO: 时间展示规则
+    var dateStr: String {
+        return "18:00"
+    }
+    
     // 是否逾期 逾期不管level全都放在一个section里面
     var isExpired: Bool {
         return DateInRegion(seconds: datetime).isBeforeDate(DateInRegion(), granularity: .day)
@@ -96,13 +101,13 @@ class ToDoModel: Codable, CustomStringConvertible {
     var color: UIColor {
         switch type {
         case .done, .none:
-            return .lightGray
+            return TDLColor.nonePriority
         case .expired:
             switch level {
             case 1: return TDLColor.lowPriority
             case 2: return TDLColor.middlePriority
             case 3: return TDLColor.highPriority
-            default: return .lightGray
+            default: return TDLColor.nonePriority
             }
         case .high:
             return TDLColor.highPriority
@@ -115,7 +120,7 @@ class ToDoModel: Codable, CustomStringConvertible {
     
     var dateTuple: (String, UIColor) {
         // TODO: 时间显示规则
-        return ("18:00", .lightGray)
+        return ("18:00", TDLColor.nonePriority)
     }
     
     static var `default`: [ToDoModel] = [

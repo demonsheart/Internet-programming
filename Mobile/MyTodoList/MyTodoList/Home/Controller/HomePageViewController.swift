@@ -86,6 +86,10 @@ class HomePageViewController: BaseViewController {
             if indexPath.section == 0 { self?.search() }
             else {
                 debugPrint(indexPath, model)
+                let vc = EditNAddTodoViewController(model: model.todo)
+                vc.title = "详情"
+                vc.hidesBottomBarWhenPushed = true
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
         }.disposed(by: disposeBag)
         

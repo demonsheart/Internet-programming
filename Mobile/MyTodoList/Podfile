@@ -23,4 +23,5 @@ target 'MyTodoList' do
   pod 'FSCalendar'
   pod 'RxDataSources'
   pod 'MarkdownView'
+  pod "Popover"
 end

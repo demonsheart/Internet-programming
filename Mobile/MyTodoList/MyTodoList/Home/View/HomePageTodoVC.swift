@@ -17,7 +17,7 @@ class HomePageTodoVC: UITableViewCell {
     
     var disposeBag = DisposeBag()
     let checkRelay = BehaviorRelay(value: false)
-    var color = UIColor.lightGray
+    var color = TDLColor.nonePriority
     var model: ToDoModel?
     
     var checkCallBack: ((Int, Bool) -> Void)?
@@ -36,7 +36,7 @@ class HomePageTodoVC: UITableViewCell {
         
         checkRelay.subscribe(onNext: { [unowned self] check in
             if check {
-                self.checkBox.tintColor = .lightGray
+                self.checkBox.tintColor = TDLColor.nonePriority
             } else {
                 self.checkBox.tintColor = self.color
             }

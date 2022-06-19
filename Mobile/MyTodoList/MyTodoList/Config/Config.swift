@@ -11,7 +11,8 @@ struct TDLColor {
     static let iconBlue = UIColor("4D64F5")
     static let iconGray = UIColor("2A2A2A")
     static let bgGreen = UIColor("D1EDF3")
-    static let highPriority = UIColor("F3664D")
-    static let middlePriority = UIColor("FDDF5A")
-    static let lowPriority = UIColor("59D1F7")
+    static let highPriority = UIColor("DD2827")
+    static let middlePriority = UIColor("FFA100")
+    static let lowPriority = UIColor("446AF8")
+    static let nonePriority = UIColor("929292")
 }

@@ -11,7 +11,10 @@ import RxCocoa
 import RxSwift
 
 class EditNAddTodoViewModel {
-    let model = ToDoModel()
+    
+    var model = ToDoModel()
+    
+    var isEdit = false
     
     init() {
         generateID()
