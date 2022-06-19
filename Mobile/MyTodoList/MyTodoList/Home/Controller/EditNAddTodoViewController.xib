@@ -16,6 +16,8 @@
                 <outlet property="containerWidth" destination="kIz-ZR-m5h" id="PDz-r2-5qF"/>
                 <outlet property="dateBtn" destination="s4o-Bq-JiR" id="zUf-8H-7BP"/>
                 <outlet property="flagBtn" destination="UqO-tv-dgy" id="snr-As-swb"/>
+                <outlet property="inputScrollView" destination="oDb-Ip-pfS" id="6BR-lx-Bvf"/>
+                <outlet property="mdView" destination="tX9-j2-oZb" id="u0k-06-sBO"/>
                 <outlet property="textView" destination="wDQ-a1-SiW" id="CTA-qC-ufG"/>
                 <outlet property="titleTextView" destination="LzE-bx-ru4" id="g4K-Gd-Mpv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -47,6 +49,9 @@
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="昨天，6月17日"/>
+                    <connections>
+                        <action selector="dateBtnTouch:" destination="-1" eventType="touchUpInside" id="fv5-gE-GXs"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqO-tv-dgy" userLabel="flag">
                     <rect key="frame" x="369" y="52.5" width="23" height="23"/>
@@ -61,26 +66,73 @@
                     </state>
                     <state key="selected" image="flag.fill" catalog="system"/>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tX9-j2-oZb" customClass="MarkdownView" customModule="MarkdownView">
+                    <rect key="frame" x="10" y="104" width="394" height="792"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDb-Ip-pfS">
                     <rect key="frame" x="10" y="104" width="394" height="758"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPN-f5-VEm" userLabel="container">
-                            <rect key="frame" x="0.0" y="0.0" width="402" height="365.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="402" height="1139"/>
                             <subviews>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="汉堡王" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LzE-bx-ru4" userLabel="titleTextView">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="汉堡王" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LzE-bx-ru4" userLabel="titleTextView" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
                                     <rect key="frame" x="0.0" y="8" width="402" height="43.5"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <color key="textColor" systemColor="labelColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="准备做什么?"/>
+                                    </userDefinedRuntimeAttributes>
                                 </textView>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDQ-a1-SiW" userLabel="contentTextView">
-                                    <rect key="frame" x="0.0" y="71.5" width="402" height="274"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDQ-a1-SiW" userLabel="contentTextView" customClass="IQTextView" customModule="IQKeyboardManagerSwift">
+                                    <rect key="frame" x="0.0" y="71.5" width="402" height="1047.5"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                    <mutableString key="text">## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+
+## Emoji
+
+:bow:
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+
+## Emoji
+
+:bow:
+</mutableString>
                                     <color key="textColor" systemColor="labelColor"/>
                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="备注..."/>
+                                    </userDefinedRuntimeAttributes>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -109,14 +161,18 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="tX9-j2-oZb" secondAttribute="bottom" id="5Tj-EL-iq1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oDb-Ip-pfS" secondAttribute="trailing" constant="10" id="6I3-g8-zBN"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tX9-j2-oZb" secondAttribute="trailing" constant="10" id="7wN-zV-Its"/>
                 <constraint firstItem="UqO-tv-dgy" firstAttribute="centerY" secondItem="I4R-xD-6lc" secondAttribute="centerY" id="9i8-p8-XGt"/>
                 <constraint firstItem="oDb-Ip-pfS" firstAttribute="top" secondItem="s4o-Bq-JiR" secondAttribute="bottom" constant="20" id="GdS-2y-knL"/>
                 <constraint firstItem="oDb-Ip-pfS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="VdI-H4-9uz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="oDb-Ip-pfS" secondAttribute="bottom" id="ajB-A8-gR7"/>
                 <constraint firstItem="I4R-xD-6lc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" constant="2" id="cC9-Au-LDO"/>
                 <constraint firstItem="UqO-tv-dgy" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" constant="-2" id="dUz-Vv-tmH"/>
+                <constraint firstItem="tX9-j2-oZb" firstAttribute="top" secondItem="s4o-Bq-JiR" secondAttribute="bottom" constant="20" id="eWD-X7-kuC"/>
                 <constraint firstItem="I4R-xD-6lc" firstAttribute="centerY" secondItem="s4o-Bq-JiR" secondAttribute="centerY" id="exQ-SD-Tdj"/>
+                <constraint firstItem="tX9-j2-oZb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="lrb-zS-BAF"/>
                 <constraint firstItem="s4o-Bq-JiR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xuT-dc-JRZ"/>
                 <constraint firstItem="I4R-xD-6lc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="y44-Sg-MXA"/>
             </constraints>

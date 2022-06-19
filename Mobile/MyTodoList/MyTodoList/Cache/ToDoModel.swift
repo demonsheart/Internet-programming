@@ -67,6 +67,15 @@ class ToDoModel: Codable, CustomStringConvertible {
         self.date = date
     }
     
+    init() {
+        self.id = -1
+        self.keyword = ""
+        self.content = nil
+        self.level = 0
+        self.done = false
+        self.date = ""
+    }
+    
     var description: String {
         return "\(id), \(keyword)"
     }
