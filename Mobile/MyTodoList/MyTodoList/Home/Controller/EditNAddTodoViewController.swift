@@ -12,6 +12,7 @@ import RxRelay
 import MarkdownView
 import IQKeyboardManagerSwift
 import Popover
+import FSCalendar
 
 class EditNAddTodoViewController: BaseViewController {
     
@@ -135,7 +136,14 @@ class EditNAddTodoViewController: BaseViewController {
     }
     
     @IBAction func dateBtnTouch(_ sender: UIButton) {
+        titleTextView.resignFirstResponder()
+        textView.resignFirstResponder()
         
+        self.popover = Popover(options: self.popoverOptions)
+        let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: 500))
+        calendar.dataSource = self
+        calendar.delegate = self
+        self.popover.show(calendar, fromView: self.dateBtn)
     }
     
     @IBAction func flagBtnTouch(_ sender: UIButton) {
@@ -153,6 +161,12 @@ class EditNAddTodoViewController: BaseViewController {
     }
 }
 
+// MARK: - calendar delegate
+extension EditNAddTodoViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
+    // TODO: 自定义
+}
+
+// MARK: - flag table view
 extension EditNAddTodoViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
