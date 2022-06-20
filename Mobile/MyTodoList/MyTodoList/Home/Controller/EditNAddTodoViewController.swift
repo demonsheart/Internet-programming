@@ -57,8 +57,13 @@ class EditNAddTodoViewController: BaseViewController {
             viewModel.model = model
             viewModel.isEdit = true
         }
-        
-        // MARK: fetch events
+        fetchEvents {
+            
+        }
+    }
+    
+    // MARK: fetch events
+    func fetchEvents(complete: @escaping () -> Void) {
         let store = EKEventStore()
         store.requestAccess(to: .event) { [weak self] granted, err in
             if granted {
@@ -71,6 +76,7 @@ class EditNAddTodoViewController: BaseViewController {
                 }
                 self?.events = events
             }
+            complete()
         }
     }
     
@@ -209,7 +215,9 @@ class EditNAddTodoViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "FlagItemTableVC", bundle: nil), forCellReuseIdentifier: "flag")
         self.popover = Popover(options: self.popoverOptions)
-        self.popover.show(tableView, fromView: self.flagBtn)
+        fetchEvents {
+            self.popover.show(tableView, fromView: self.flagBtn)
+        }
     }
 }
 
