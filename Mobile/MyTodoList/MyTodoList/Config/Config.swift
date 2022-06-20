@@ -17,6 +17,6 @@ struct TDLColor {
     static let nonePriority = UIColor("929292")
     
     static let selectedDate = UIColor("A3E1F4")
-    static let doneCell = UIColor("7DD5EB")
+    static let doneCell = UIColor("ABE5F3")
     static let undoCell = UIColor("4CC2E4")
 }

@@ -92,18 +92,21 @@ class TodoCalendarCell: FSCalendarCell {
                 let todo = todos[0]
                 todoLabel1.text = todo.keyword
                 todoLabel1.layer.backgroundColor = todo.done ? TDLColor.doneCell.cgColor : TDLColor.undoCell.cgColor
+                todoLabel1.textColor = todo.done ? TDLColor.nonePriority : .darkText
             }
             if count >= 2 {
                 todoLabel2.isHidden = false
                 let todo = todos[1]
                 todoLabel2.text = todo.keyword
                 todoLabel2.layer.backgroundColor = todo.done ? TDLColor.doneCell.cgColor : TDLColor.undoCell.cgColor
+                todoLabel2.textColor = todo.done ? TDLColor.nonePriority : .darkText
             }
             if count >= 3 {
                 todoLabel3.isHidden = false
                 let todo = todos[2]
                 todoLabel3.text = todo.keyword
                 todoLabel3.layer.backgroundColor = todo.done ? TDLColor.doneCell.cgColor : TDLColor.undoCell.cgColor
+                todoLabel3.textColor = todo.done ? TDLColor.nonePriority : .darkText
             }
         }
     }
