@@ -235,6 +235,13 @@ extension EditNAddTodoViewController: FSCalendarDataSource, FSCalendarDelegate, 
 //        debugPrint(region.toFormat("yyyy-MM-dd"))
 //    }
     
+    func calendar(_ calendar: FSCalendar, titleFor date: Date) -> String? {
+        if DateInRegion(date, region: Region.local).isToday {
+            return "今"
+        }
+        return nil
+    }
+    
     func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
         if let event = eventsFor(date: date)?.first {
             return event.title

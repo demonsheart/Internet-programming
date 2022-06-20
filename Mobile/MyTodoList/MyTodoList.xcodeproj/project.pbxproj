@@ -18,6 +18,7 @@
 		94499238285EDFE80089A93F /* EditNAddTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94499237285EDFE80089A93F /* EditNAddTodoViewModel.swift */; };
 		9449923B285F58500089A93F /* FlagItemTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94499239285F58500089A93F /* FlagItemTableVC.swift */; };
 		9449923C285F58500089A93F /* FlagItemTableVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9449923A285F58500089A93F /* FlagItemTableVC.xib */; };
+		9449923F286085C10089A93F /* TodoCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9449923E286085C10089A93F /* TodoCalendarCell.swift */; };
 		94597AF92859CC7A00D2C30E /* ToDoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597AF82859CC7A00D2C30E /* ToDoModel.swift */; };
 		94597AFF285A2D2800D2C30E /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597AFE285A2D2800D2C30E /* HomePageViewController.swift */; };
 		94597B01285A30D900D2C30E /* HomePageListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94597B00285A30D900D2C30E /* HomePageListViewModel.swift */; };
@@ -57,6 +58,7 @@
 		94499237285EDFE80089A93F /* EditNAddTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNAddTodoViewModel.swift; sourceTree = "<group>"; };
 		94499239285F58500089A93F /* FlagItemTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagItemTableVC.swift; sourceTree = "<group>"; };
 		9449923A285F58500089A93F /* FlagItemTableVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FlagItemTableVC.xib; sourceTree = "<group>"; };
+		9449923E286085C10089A93F /* TodoCalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCalendarCell.swift; sourceTree = "<group>"; };
 		94597AF82859CC7A00D2C30E /* ToDoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoModel.swift; sourceTree = "<group>"; };
 		94597AFE285A2D2800D2C30E /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		94597B00285A30D900D2C30E /* HomePageListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageListViewModel.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				9474F311282672A30047FA1B /* MonthPageViewController.swift */,
+				9449923E286085C10089A93F /* TodoCalendarCell.swift */,
 			);
 			path = Month;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9474F322282757FD0047FA1B /* CommonTableViewCell.swift in Sources */,
+				9449923F286085C10089A93F /* TodoCalendarCell.swift in Sources */,
 				9474F328282803CE0047FA1B /* Service.swift in Sources */,
 				94499228285C72F10089A93F /* HomePageTodoVC.swift in Sources */,
 				94499230285D6F520089A93F /* EditNAddTodoViewController.swift in Sources */,
