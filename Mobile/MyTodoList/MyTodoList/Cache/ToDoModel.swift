@@ -119,7 +119,12 @@ class ToDoModel: Codable, CustomStringConvertible, Equatable {
     }
     
     var shouldInHomePage: Bool {
-        return dateRegion.isBeforeDate(DateInRegion(region: Region.local), orEqual: true, granularity: .day)
+        // 今天的
+        let rule1 = dateRegion.compare(.isToday)
+        
+        // 过期未完成
+        let rule2 = isExpired && !done
+        return rule1 || rule2
     }
     
     var color: UIColor {

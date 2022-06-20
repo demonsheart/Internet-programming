@@ -42,6 +42,7 @@ class EditNAddTodoViewController: BaseViewController {
     fileprivate var popover: Popover!
     fileprivate var popoverOptions: [PopoverOption] = [
       .type(.down),
+      .arrowSize(.zero),
       .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
     

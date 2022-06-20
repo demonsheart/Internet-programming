@@ -12,11 +12,14 @@ import SwiftDate
 import RxRelay
 import RxCocoa
 import RxSwift
+import Popover
 
 class MonthPageViewController: BaseViewController {
     
     fileprivate var calendar = FSCalendar()
     fileprivate let viewModel = MonthPageViewModel()
+    
+    fileprivate var popover: Popover!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,18 +90,72 @@ extension MonthPageViewController: FSCalendarDataSource, FSCalendarDelegate, FSC
         return cell
     }
     
-    func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+        viewModel.selectedDate.accept(date)
+        let todos = viewModel.selectedTodos
+        if todos.count == 0 { return }
+        
+        let height: CGFloat = min(10 * 48, CGFloat(todos.count) * 48)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width - 40, height: height))
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(UINib(nibName: "HomePageTodoVC", bundle: nil), forCellReuseIdentifier: "todo")
+        self.popover = Popover(options: [.arrowSize(.zero), .type(.down)])
+//        self.popover.show(tableView, point: CGPoint(x: 0, y: 100))
+        self.popover.show(tableView, fromView: calendar.calendarHeaderView)
     }
     
+//    func calendar(_ calendar: FSCalendar, willDisplay cell: FSCalendarCell, for date: Date, at monthPosition: FSCalendarMonthPosition) {
+//    }
+    
+}
+
+extension MonthPageViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.selectedTodos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "todo", for: indexPath) as! HomePageTodoVC
+        cell.render(todo: viewModel.selectedTodos[indexPath.row])
+        cell.checkCallBack = { [weak self] id, check in
+            self?.viewModel.doneTodo(in: id, to: check)
+        }
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.popover.dismiss()
+        self.popover.didDismissHandler = { [unowned self] in
+            let model = viewModel.selectedTodos[indexPath.row].copy()
+            let vc = EditNAddTodoViewController(model: model)
+            vc.title = "详情"
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
 extension MonthPageViewController {
     class MonthPageViewModel {
         var todos = BehaviorRelay(value: [ToDoModel]())
+        
+        var selectedDate = BehaviorRelay(value: Date())
+        var selectedTodos = [ToDoModel]()
+        
         private let disposeBag = DisposeBag()
         
         init() {
             subscribeDataFromCathe()
+            // TODO: date || todos更新都要subscribe
+            Observable.combineLatest(selectedDate, todos).subscribe(onNext: { [unowned self] date, todos in
+                let dateInRegion = DateInRegion(date, region: Region.local)
+                self.selectedTodos = todos.filter { $0.dateRegion.compare(.isSameDay(dateInRegion)) }
+            }).disposed(by: disposeBag)
         }
         
         private func subscribeDataFromCathe() {
@@ -106,6 +163,10 @@ extension MonthPageViewController {
             StoragedToDos.shared.todos.subscribe(onNext: { [unowned self] todos in
                 self.todos.accept(todos)
             }).disposed(by: disposeBag)
+        }
+        
+        func doneTodo(in id: Int, to check: Bool) {
+            StoragedToDos.shared.doneTodo(in: id, to: check)
         }
         
         func getTodosIn(date: Date) -> [ToDoModel] {
