@@ -154,7 +154,14 @@ extension MonthPageViewController {
             // TODO: date || todos更新都要subscribe
             Observable.combineLatest(selectedDate, todos).subscribe(onNext: { [unowned self] date, todos in
                 let dateInRegion = DateInRegion(date, region: Region.local)
-                self.selectedTodos = todos.filter { $0.dateRegion.compare(.isSameDay(dateInRegion)) }
+                var res = todos.filter { $0.dateRegion.compare(.isSameDay(dateInRegion)) }
+                // 排序 未做的在前 高优先级的在前
+                res = res.sorted { lhs, rhs in
+                    let rule1 = !lhs.done
+                    let rule2 = lhs.level > rhs.level
+                    return rule1 && rule2
+                }
+                self.selectedTodos = res
             }).disposed(by: disposeBag)
         }
         
@@ -171,7 +178,11 @@ extension MonthPageViewController {
         
         func getTodosIn(date: Date) -> [ToDoModel] {
             let dateInRegion = DateInRegion(date, region: Region.local)
-            return todos.value.filter { $0.dateRegion.compare(.isSameDay(dateInRegion)) }
+            return todos.value.filter { $0.dateRegion.compare(.isSameDay(dateInRegion)) }.sorted { lhs, rhs in
+                let rule1 = !lhs.done
+                let rule2 = lhs.level > rhs.level
+                return rule1 && rule2
+            }
         }
     }
 }
