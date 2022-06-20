@@ -38,7 +38,7 @@ class MonthPageViewController: BaseViewController {
         
         viewModel.todos.subscribe(onNext: { [unowned self] _ in
             self.calendar.reloadData()
-        })
+        }).disposed(by: disposeBag)
     }
     
     override func viewWillAppear(_ animated: Bool) {

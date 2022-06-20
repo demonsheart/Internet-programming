@@ -52,7 +52,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Dg0-7j-ibn" userLabel="邮箱" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="204" width="304" height="34"/>
+                    <rect key="frame" x="55" y="204" width="304" height="40.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
@@ -76,7 +76,7 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GyD-zP-TWZ" userLabel="确认密码" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="396" width="304" height="34"/>
+                    <rect key="frame" x="55" y="415" width="304" height="40.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
@@ -100,14 +100,14 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KJb-OV-nFQ">
-                    <rect key="frame" x="110" y="475" width="194" height="31"/>
+                    <rect key="frame" x="110" y="500.5" width="194" height="31"/>
                     <color key="tintColor" name="iconBlue"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <state key="normal" title="立即注册"/>
                     <buttonConfiguration key="configuration" style="filled" title="立即注册"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKe-m1-R8G">
-                    <rect key="frame" x="86" y="446" width="206" height="14.5"/>
+                    <rect key="frame" x="86" y="471.5" width="206" height="14.5"/>
                     <attributedString key="attributedText">
                         <fragment content="已阅读并同意“">
                             <attributes>
@@ -153,7 +153,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ww-G5-Zrt">
-                    <rect key="frame" x="61" y="443.5" width="20" height="20"/>
+                    <rect key="frame" x="61" y="469" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Erz-Lg-UK7"/>
                         <constraint firstAttribute="width" constant="20" id="fIl-na-uUQ"/>
@@ -166,7 +166,7 @@
                     <state key="selected" image="checkmark.square.fill" catalog="system"/>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gKm-Vb-zrC" userLabel="密码" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="332" width="304" height="34"/>
+                    <rect key="frame" x="55" y="345" width="304" height="40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
@@ -190,7 +190,7 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdT-nQ-g86" userLabel="验证码" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                    <rect key="frame" x="55" y="268" width="304" height="34"/>
+                    <rect key="frame" x="55" y="274.5" width="304" height="40.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                     <userDefinedRuntimeAttributes>
@@ -214,7 +214,7 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3h-8m-MM2">
-                    <rect key="frame" x="249" y="267" width="120" height="35"/>
+                    <rect key="frame" x="249" y="280" width="120" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="8gN-rE-m9W"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="nHH-hK-mnu"/>
@@ -263,16 +263,16 @@
     </objects>
     <designables>
         <designable name="Dg0-7j-ibn">
-            <size key="intrinsicContentSize" width="104.5" height="34"/>
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
         </designable>
         <designable name="GyD-zP-TWZ">
-            <size key="intrinsicContentSize" width="104.5" height="34"/>
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
         </designable>
         <designable name="gKm-Vb-zrC">
-            <size key="intrinsicContentSize" width="104.5" height="34"/>
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
         </designable>
         <designable name="xdT-nQ-g86">
-            <size key="intrinsicContentSize" width="120" height="34"/>
+            <size key="intrinsicContentSize" width="304" height="40.4140625"/>
         </designable>
     </designables>
     <resources>

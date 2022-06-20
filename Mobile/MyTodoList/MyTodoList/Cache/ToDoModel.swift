@@ -160,7 +160,12 @@ class ToDoModel: Codable, CustomStringConvertible, Equatable {
         ToDoModel(id: 10, keyword: "斗罗大陆", level: 1, done: false, date: "1655380640"),
         ToDoModel(id: 11, keyword: "王者", level: 2, done: false, date: "1655380640"),
         ToDoModel(id: 12, keyword: "完结", level: 2, done: false, date: "1655900173"),
-        ToDoModel(id: 13, keyword: "快递", level: 0, done: false, date: "1655380640"),
+        ToDoModel(id: 13, keyword: "周年庆", level: 1, done: true, date: "1654088103"),
+        ToDoModel(id: 14, keyword: "打扫卫生", level: 1, done: false, date: "1654433703"),
+        ToDoModel(id: 15, keyword: "项目复盘", level: 3, done: true, date: "1654952103"),
+        ToDoModel(id: 16, keyword: "视频剪辑", level: 2, done: false, date: "1656075303"),
+        ToDoModel(id: 17, keyword: "超市抢购", level: 0, done: false, date: "1656593703"),
+        ToDoModel(id: 18, keyword: "天猫618", level: 3, done: true, date: "1655556903"),
     ]
 }
 
