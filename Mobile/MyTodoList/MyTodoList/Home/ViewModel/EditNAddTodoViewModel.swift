@@ -16,11 +16,14 @@ class EditNAddTodoViewModel {
     
     var isEdit = false
     
-    init() {
-        generateID()
-    }
-    
-    private func generateID() {
-        // TODO:
+    func commit(complete: @escaping (Bool) -> Void) {
+        debugPrint(model)
+        if isEdit { // 修改
+            StoragedToDos.shared.update(in: model)
+            complete(true)
+        } else { // 新增
+            StoragedToDos.shared.insert(new: model)
+            complete(true)
+        }
     }
 }

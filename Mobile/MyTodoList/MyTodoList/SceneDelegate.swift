@@ -43,8 +43,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let monthViewController = RTRootNavigationController(rootViewController: MonthPageViewController())
         monthViewController.tabBarItem = UITabBarItem(title: "月视图", image: UIImage(systemName: "calendar"), selectedImage: UIImage(systemName: "calendar"))
         
-        let quadrantPageViewController = RTRootNavigationController(rootViewController: QuadrantsPageViewController())
-        quadrantPageViewController.tabBarItem = UITabBarItem(title: "四象限", image: UIImage(systemName: "rectangle.grid.2x2"), selectedImage: UIImage(systemName: "rectangle.grid.2x2"))
+//        let quadrantPageViewController = RTRootNavigationController(rootViewController: QuadrantsPageViewController())
+//        quadrantPageViewController.tabBarItem = UITabBarItem(title: "四象限", image: UIImage(systemName: "rectangle.grid.2x2"), selectedImage: UIImage(systemName: "rectangle.grid.2x2"))
         
 //        let punchPageViewController = RTRootNavigationController(rootViewController: PunchPageViewController())
 //        punchPageViewController.tabBarItem = UITabBarItem(title: "打卡", image: UIImage(systemName: "clock.badge.checkmark"), selectedImage: UIImage(systemName: "clock.badge.checkmark"))
@@ -55,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // add to tabbar
 //        myTabBar.viewControllers = [homePageViewController, monthViewController, quadrantPageViewController, punchPageViewController, personalViewController]
-        myTabBar.viewControllers = [homePageViewController, monthViewController, quadrantPageViewController, personalViewController]
+        myTabBar.viewControllers = [homePageViewController, monthViewController, personalViewController]
         
         myTabBar.selectedIndex = 4 // 0
         

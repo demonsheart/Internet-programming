@@ -15,6 +15,7 @@ import Popover
 import FSCalendar
 import SwiftDate
 import EventKit
+import Toaster
 
 class EditNAddTodoViewController: BaseViewController {
     
@@ -31,6 +32,7 @@ class EditNAddTodoViewController: BaseViewController {
     var isRender = BehaviorRelay(value: false)
     var isCheck = BehaviorRelay(value: false)
     var flagSelected = BehaviorRelay(value: 0)
+    var dateSelected = BehaviorRelay(value: DateInRegion(region: Region.local))
     
     let viewModel = EditNAddTodoViewModel()
     
@@ -54,6 +56,7 @@ class EditNAddTodoViewController: BaseViewController {
             viewModel.model = model
             viewModel.isEdit = true
         }
+        
         // MARK: fetch events
         let store = EKEventStore()
         store.requestAccess(to: .event) { [weak self] granted, err in
@@ -89,6 +92,7 @@ class EditNAddTodoViewController: BaseViewController {
         checkBox.isSelected = viewModel.model.done
         isCheck.accept(viewModel.model.done)
         dateBtn.setTitle(viewModel.model.dateStr, for: .normal)
+        dateSelected.accept(viewModel.model.dateRegion)
         changeColor(to: viewModel.model.color)
         flagSelected.accept(viewModel.model.level)
         
@@ -106,9 +110,9 @@ class EditNAddTodoViewController: BaseViewController {
         isCheck.subscribe(onNext: { [unowned self] check in
             self.viewModel.model.done = check
             if check {
-                self.checkBox.tintColor = TDLColor.nonePriority
+                self.changeColor(to: TDLColor.nonePriority)
             } else {
-                self.checkBox.tintColor = self.viewModel.model.color
+                self.changeColor(to: self.viewModel.model.color)
             }
         }).disposed(by: disposeBag)
         
@@ -117,9 +121,19 @@ class EditNAddTodoViewController: BaseViewController {
             self.changeColor(to: self.viewModel.model.color)
         }).disposed(by: disposeBag)
         
+        dateSelected.subscribe(onNext: { [unowned self] dateRegion in
+            self.viewModel.model.date = "\(dateRegion.timeIntervalSince1970)"
+            self.dateBtn.setTitle(self.viewModel.model.dateStr, for: .normal)
+        }).disposed(by: disposeBag)
+        
         // isRender
         isRender.map{!$0}.bind(to: mdView.rx.isHidden).disposed(by: disposeBag)
         isRender.bind(to: inputScrollView.rx.isHidden).disposed(by: disposeBag)
+        
+        // 编辑显示渲染后的 新增显示渲染前
+        if viewModel.isEdit {
+            dotTapped()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -150,12 +164,24 @@ class EditNAddTodoViewController: BaseViewController {
     }
     
     @objc func saveTapped() {
-        // TODO: validate && save
+        titleTextView.resignFirstResponder()
+        textView.resignFirstResponder()
         
         // saveDataToViewModel
         viewModel.model.keyword = titleTextView.text ?? ""
         viewModel.model.content = textView.text
-        // level & date
+        
+        if viewModel.model.keyword.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            Toast(text: "必须输入事项标题").show()
+        } else {
+            viewModel.commit { [weak self] ok in
+                if ok {
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    Toast(text: "保存失败").show()
+                }
+            }
+        }
     }
     
     @IBAction func dateBtnTouch(_ sender: UIButton) {
@@ -166,6 +192,8 @@ class EditNAddTodoViewController: BaseViewController {
         let calendar = FSCalendar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: 500))
         calendar.dataSource = self
         calendar.delegate = self
+        calendar.locale = Locale(identifier: "zh_cn")
+        calendar.select(dateSelected.value.date)
         self.popover.show(calendar, fromView: self.dateBtn)
     }
     
@@ -186,7 +214,6 @@ class EditNAddTodoViewController: BaseViewController {
 
 // MARK: - calendar delegate
 extension EditNAddTodoViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
-    // TODO: 自定义
     
     func eventsFor(date: Date) -> [EKEvent]? {
         guard let events = events else { return nil }
@@ -199,12 +226,14 @@ extension EditNAddTodoViewController: FSCalendarDataSource, FSCalendarDelegate, 
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let region = DateInRegion(date, region: Region.local)
         debugPrint(region.toFormat("yyyy-MM-dd"))
+        dateSelected.accept(region)
+        self.popover.dismiss()
     }
     
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        let region = DateInRegion(calendar.currentPage, region: Region.local)
-        debugPrint(region.toFormat("yyyy-MM-dd"))
-    }
+//    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+//        let region = DateInRegion(calendar.currentPage, region: Region.local)
+//        debugPrint(region.toFormat("yyyy-MM-dd"))
+//    }
     
     func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
         if let event = eventsFor(date: date)?.first {
