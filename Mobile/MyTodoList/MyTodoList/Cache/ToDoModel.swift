@@ -84,18 +84,27 @@ class ToDoModel: Codable, CustomStringConvertible {
         return TimeInterval(Double(date) ?? 0.years.timeInterval)
     }
     
-    // TODO: 时间展示规则
+    // 时间展示规则
     var dateStr: String {
-        return "18:00"
+        let region = DateInRegion(seconds: datetime, region: Region.local)
+        if region.isToday {
+            return "今天"
+        } else if region.isYesterday {
+            return "昨天"
+        } else if region.isTomorrow {
+            return "明天"
+        } else {
+            return region.toFormat("MM-dd")
+        }
     }
     
     // 是否逾期 逾期不管level全都放在一个section里面
     var isExpired: Bool {
-        return DateInRegion(seconds: datetime).isBeforeDate(DateInRegion(), granularity: .day)
+        return DateInRegion(seconds: datetime, region: Region.local).isBeforeDate(DateInRegion(region: Region.local), granularity: .day)
     }
     
     var shouldInHomePage: Bool {
-        return DateInRegion(seconds: datetime).isBeforeDate(DateInRegion(), orEqual: true, granularity: .day)
+        return DateInRegion(seconds: datetime, region: Region.local).isBeforeDate(DateInRegion(region: Region.local), orEqual: true, granularity: .day)
     }
     
     var color: UIColor {
@@ -119,20 +128,19 @@ class ToDoModel: Codable, CustomStringConvertible {
     }
     
     var dateTuple: (String, UIColor) {
-        // TODO: 时间显示规则
-        return ("18:00", TDLColor.nonePriority)
+        return (dateStr, TDLColor.nonePriority)
     }
     
     static var `default`: [ToDoModel] = [
-        ToDoModel(id: 0, keyword: "H5游戏策划", level: 3, done: false, date: "1655603491"),
-        ToDoModel(id: 1, keyword: "宣传视频拍摄", level: 3, done: false, date: "1655603491"),
-        ToDoModel(id: 2, keyword: "功能评审会议", level: 3, done: false, date: "1655603491"),
-        ToDoModel(id: 3, keyword: "生日会", level: 2, done: false, date: "1655603491"),
-        ToDoModel(id: 4, keyword: "瑜伽课", level: 2, done: false, date: "1655603491"),
-        ToDoModel(id: 5, keyword: "问候父母", level: 1, done: false, date: "1655603491"),
-        ToDoModel(id: 6, keyword: "练琴", level: 1, done: false, date: "1655603491"),
-        ToDoModel(id: 7, keyword: "佳佳生日", level: 1, done: false, date: "1655603491"),
-        ToDoModel(id: 8, keyword: "交房租", level: 1, done: true, date: "1655603491"),
+        ToDoModel(id: 0, keyword: "H5游戏策划", level: 3, done: false, date: "1655683305"),
+        ToDoModel(id: 1, keyword: "宣传视频拍摄", level: 3, done: false, date: "1655683305"),
+        ToDoModel(id: 2, keyword: "功能评审会议", level: 3, done: false, date: "1655683305"),
+        ToDoModel(id: 3, keyword: "生日会", level: 2, done: false, date: "1655683305"),
+        ToDoModel(id: 4, keyword: "瑜伽课", level: 2, done: false, date: "1655683305"),
+        ToDoModel(id: 5, keyword: "问候父母", level: 1, done: false, date: "1655683305"),
+        ToDoModel(id: 6, keyword: "练琴", level: 1, done: false, date: "1655683305"),
+        ToDoModel(id: 7, keyword: "佳佳生日", level: 1, done: false, date: "1655683305"),
+        ToDoModel(id: 8, keyword: "交房租", level: 1, done: true, date: "1655683305"),
         ToDoModel(id: 9, keyword: "梦华录", level: 3, done: false, date: "1655380640"),
         ToDoModel(id: 10, keyword: "斗罗大陆", level: 1, done: false, date: "1655380640"),
         ToDoModel(id: 11, keyword: "王者", level: 2, done: false, date: "1655380640"),

@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import SwiftDate
 
 // MARK: UIColor
 extension UIColor {
@@ -180,4 +181,8 @@ extension Array {
     mutating func move(from: Int, to: Int) {
         insert(remove(at: from), at: to)
     }
+}
+
+extension Date {
+    static let regionCN = Region(calendar: Calendars.gregorian, zone: Zones.asiaShanghai, locale: Locales.chinese)
 }

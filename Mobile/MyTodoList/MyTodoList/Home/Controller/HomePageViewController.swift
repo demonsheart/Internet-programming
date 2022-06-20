@@ -85,7 +85,6 @@ class HomePageViewController: BaseViewController {
         Observable.zip(tableView.rx.modelSelected(HomePageListCellModel.self), tableView.rx.itemSelected).bind { [weak self] model, indexPath in
             if indexPath.section == 0 { self?.search() }
             else {
-                debugPrint(indexPath, model)
                 let vc = EditNAddTodoViewController(model: model.todo)
                 vc.title = "详情"
                 vc.hidesBottomBarWhenPushed = true

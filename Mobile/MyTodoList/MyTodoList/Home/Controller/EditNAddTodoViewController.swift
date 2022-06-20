@@ -13,6 +13,8 @@ import MarkdownView
 import IQKeyboardManagerSwift
 import Popover
 import FSCalendar
+import SwiftDate
+import EventKit
 
 class EditNAddTodoViewController: BaseViewController {
     
@@ -33,19 +35,38 @@ class EditNAddTodoViewController: BaseViewController {
     let viewModel = EditNAddTodoViewModel()
     
     // popover
-    fileprivate var levels = [3, 2, 1, 0]
-    fileprivate var flagItemHeight: CGFloat = 45
+    fileprivate let levels = [3, 2, 1, 0]
+    fileprivate let flagItemHeight: CGFloat = 45
     fileprivate var popover: Popover!
     fileprivate var popoverOptions: [PopoverOption] = [
       .type(.down),
       .blackOverlayColor(UIColor(white: 0.0, alpha: 0.6))
     ]
     
+    // luna calendar
+    fileprivate let chineseCalendar = Calendar(identifier: .chinese)
+    fileprivate let lunarChars = ["初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"]
+    fileprivate var events: [EKEvent]?
+    
     convenience init(model: ToDoModel? = nil) {
         self.init(nibName: nil, bundle: nil)
         if let model = model {
             viewModel.model = model
             viewModel.isEdit = true
+        }
+        // MARK: fetch events
+        let store = EKEventStore()
+        store.requestAccess(to: .event) { [weak self] granted, err in
+            if granted {
+                let start = Date() - 6.months
+                let end = Date() + 6.months
+                let fetchCalendarEvents = store.predicateForEvents(withStart: start, end: end, calendars: nil)
+                let eventList = store.events(matching: fetchCalendarEvents)
+                let events = eventList.filter { event in
+                    return event.calendar.isSubscribed
+                }
+                self?.events = events
+            }
         }
     }
     
@@ -66,8 +87,10 @@ class EditNAddTodoViewController: BaseViewController {
         titleTextView.text = viewModel.model.keyword
         textView.text = viewModel.model.content
         checkBox.isSelected = viewModel.model.done
+        isCheck.accept(viewModel.model.done)
         dateBtn.setTitle(viewModel.model.dateStr, for: .normal)
         changeColor(to: viewModel.model.color)
+        flagSelected.accept(viewModel.model.level)
         
         // textview
         titleTextView.becomeFirstResponder()
@@ -164,6 +187,33 @@ class EditNAddTodoViewController: BaseViewController {
 // MARK: - calendar delegate
 extension EditNAddTodoViewController: FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
     // TODO: 自定义
+    
+    func eventsFor(date: Date) -> [EKEvent]? {
+        guard let events = events else { return nil }
+        let filteredEvents = events.filter { event in
+            return event.occurrenceDate.compare(.isSameDay(date))
+        }
+        return filteredEvents
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        let region = DateInRegion(date, region: Region.local)
+        debugPrint(region.toFormat("yyyy-MM-dd"))
+    }
+    
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let region = DateInRegion(calendar.currentPage, region: Region.local)
+        debugPrint(region.toFormat("yyyy-MM-dd"))
+    }
+    
+    func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
+        if let event = eventsFor(date: date)?.first {
+            return event.title
+        } else {
+            let day = chineseCalendar.component(.day, from: date)
+            return lunarChars[day - 1]
+        }
+    }
 }
 
 // MARK: - flag table view
