@@ -201,7 +201,16 @@ class EditNAddTodoViewController: BaseViewController {
         calendar.delegate = self
         calendar.locale = Locale(identifier: "zh_cn")
         calendar.select(dateSelected.value.date)
-        self.popover.show(calendar, fromView: self.dateBtn)
+        if events == nil {
+            fetchEvents { [unowned self] in
+                // main线程更新UI
+                DispatchQueue.main.async {
+                    self.popover.show(calendar, fromView: self.dateBtn)
+                }
+            }
+        } else {
+            self.popover.show(calendar, fromView: self.dateBtn)
+        }
     }
     
     @IBAction func flagBtnTouch(_ sender: UIButton) {
@@ -215,9 +224,7 @@ class EditNAddTodoViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "FlagItemTableVC", bundle: nil), forCellReuseIdentifier: "flag")
         self.popover = Popover(options: self.popoverOptions)
-        fetchEvents {
-            self.popover.show(tableView, fromView: self.flagBtn)
-        }
+        self.popover.show(tableView, fromView: self.flagBtn)
     }
 }
 
