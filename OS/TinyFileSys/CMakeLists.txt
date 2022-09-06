@@ -3,4 +3,4 @@ project(TinyFileSys C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(TinyFileSys main.c assign100MB.c)
+add_executable(TinyFileSys main.c assign100MB.c fileSys.h)
