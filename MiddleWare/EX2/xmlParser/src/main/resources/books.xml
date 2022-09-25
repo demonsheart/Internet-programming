@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Books>
+    <Book>
+        <BookID>1</BookID>
+        <name>Pride and Prejudice</name>
+        <price>60.0</price>
+    </Book>
+    <Book>
+        <BookID>2</BookID>
+        <name>Lincon</name>
+        <price>21.9</price>
+    </Book>
+    <Book>
+        <BookID>3</BookID>
+        <name>Aesop’s Fables</name>
+        <price>11.7</price>
+    </Book>
+    <Book>
+        <BookID>4</BookID>
+        <name>Aesop’s Fables</name>
+        <price>16.0</price>
+    </Book>
+</Books>
