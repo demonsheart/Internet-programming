@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json01.html</title>
+</head>
+<body>
+<a href="javascript:" onclick="jsStrToObj();">JSON字符串转换为对象</a>
+<br>
+<a href="javascript:" onclick="jsStrToArr();">JSON字符串转换为JSON数组</a>
+<br>
+<a href="javascript:" onclick="jsObjToStr();">JSON对象转换为JSON字符串</a>
+</body>
+</html>
+
+<script type="text/javascript">
+    function jsStrToObj() {
+        let str = '{"name":"Luffy","age":17}';
+
+        //方式1(不用js文件)
+        let obj = eval("(" + str + ")");
+
+        //方式2(不用json.js文件)
+        //var obj=JSON.parse(str);
+
+        //方式3(需要json.js文件)
+        //var obj=str.parseJSON();
+        alert(obj.name);
+    }
+
+    function jsStrToArr() {
+        let str = '[{"stuNo":20170031, "name":"何立立"}, {"stuNo":20170032, "name":"赵多多"}]';
+
+        //方式1(不用js文件)
+        let arr = eval("(" + str + ")");
+
+        //方式2(需要json.js文件)
+        //var arr=str.parseJSON();
+        alert(arr[1].name);
+    }
+
+    function jsObjToStr() {
+        let score = {
+            'stuNo': 2019151059,
+            'name': '何荣金',
+            'scores': [{'课程': '中间件技术', '成绩': 90}, {'课程': '数据结构', '成绩': 86}, {'课程': '计算机网络', '成绩': 80}]
+        };
+
+        //方式1(需要json.js文件)
+        //var str=obj.toJSONString();
+
+        //方式2(不需要json.js文件)
+        let str = JSON.stringify(score);
+        alert(str);
+    }
+</script>
