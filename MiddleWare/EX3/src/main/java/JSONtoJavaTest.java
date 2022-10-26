@@ -28,13 +28,13 @@ public class JSONtoJavaTest {
         Student f1 = new Student();
         f1.setName("黄荣峰");
         f1.setAge(21);
-        f.setStuNo("2019151067");
+        f1.setStuNo("2019151067");
         fs.add(f1);
 
         Student f2 = new Student();
         f2.setName("张纹彬");
         f2.setAge(21);
-        f.setStuNo("2019151066");
+        f2.setStuNo("2019151066");
         fs.add(f2);
 
         JSONArray jsonArr = JSONArray.fromObject(fs);
