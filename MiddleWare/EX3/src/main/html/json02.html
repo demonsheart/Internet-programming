@@ -14,10 +14,11 @@
 
 <script type="text/javascript">
     function alertJsonArr1() {
-        let students = [{'stuNo': 2019151059, 'name': '何荣金'}, {
-            'stuNo': 2019151060,
-            'name': '刘万权'
-        }, {'stuNo': 2019151063, 'name': '黄荣峰'}];
+        let students = [
+            {'stuNo': 2019151059, 'name': '何荣金'},
+            {'stuNo': 2019151060, 'name': '刘万权'},
+            {'stuNo': 2019151063, 'name': '黄荣峰'}
+        ];
         alert(students[0].stuNo + " " + students[0].name + "\n" + students[1].stuNo + " " + students[1].name + "\n" + students[2].stuNo + " " + students[2].name);
     }
 
@@ -25,7 +26,11 @@
         let score = {
             'stuNo': 2019151059,
             'name': '何荣金',
-            'scores': [{'课程': '中间件技术', '成绩': 90}, {'课程': '数据结构', '成绩': 86}, {'课程': '计算机网络', '成绩': 80}]
+            'scores': [
+                {'课程': '中间件技术', '成绩': 90},
+                {'课程': '数据结构', '成绩': 86},
+                {'课程': '计算机网络', '成绩': 80},
+            ]
         };
         alert(score.stuNo + " " + score.name + "\n" + score.scores[0].课程 + " " + score.scores[0].成绩 + "\n" +
             score.scores[1].课程 + " " + score.scores[1].成绩 + "\n" + score.scores[2].课程 + " " + score.scores[2].成绩);
