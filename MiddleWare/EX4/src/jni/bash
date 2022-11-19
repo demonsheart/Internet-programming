@@ -1,0 +1,10 @@
+g++ -dynamiclib  -I/Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home/include  -I/Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home/include/darwin   -o libDemo.dylib  Demo.cpp
+g++ -dynamiclib  -I/Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk/Contents/Home/include  -I/Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk/Contents/Home/include/darwin -o libDemo.dylib Demo.cpp
+
+
+
+
+
+/usr/libexec/java_home -V
+export CPPFLAGS="-I/Library/Java/JavaVirtualMachines/jdk-17.0.5.jdk/Contents/Home/include"
+g++ -dynamiclib  $CPPFLAGS  $CPPFLAGS/darwin -o libDemo.dylib Demo.cpp
