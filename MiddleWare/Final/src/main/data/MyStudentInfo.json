@@ -1,0 +1,34 @@
+{
+  "students": [
+    {
+      "stuNo": 2020151018,
+      "name": "Guo Haidong",
+      "gender": "male",
+      "major": "software engineering"
+    },
+    {
+      "stuNo": 2020151065,
+      "name": "Li Yaohua",
+      "gender": "male",
+      "major": "software engineering"
+    },
+    {
+      "stuNo": 2020151044,
+      "name": "Zhong Lize",
+      "gender": "male",
+      "major": "software engineering"
+    },
+    {
+      "stuNo": 2020151001,
+      "name": "Yu Qigeng",
+      "gender": "male",
+      "major": "software engineering"
+    },
+    {
+      "stuNo": 2019151059,
+      "name": "He Rongjin",
+      "gender": "male",
+      "major": "software engineering"
+    }
+  ]
+}
