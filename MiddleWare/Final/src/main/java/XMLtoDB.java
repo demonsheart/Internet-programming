@@ -9,14 +9,9 @@ public class XMLtoDB {
 
             if (list != null) {
                 //连接数据库
-                //看jdbc版本决定是否注释Class.forName()
-                //Class.forName(com.mysql.jdbc.Driver);
-                String url = "jdbc:mysql://localhost/test";
-                String username = "root";
-                String password = "123456";
-                Connection conn = DriverManager.getConnection(url, username, password);
+                Connection conn = DBConnectTool.getConnection();
                 String sql = "insert ignore into TstudentInfo (stuNo,name,gender,major) values(?,?,?,?)";
-                PreparedStatement pstmt = conn.prepareStatement(sql);
+                PreparedStatement stmt = conn.prepareStatement(sql);
 
                 //遍历列表中的所有学生
                 for (Student student : list) {
@@ -27,14 +22,14 @@ public class XMLtoDB {
                     gender = student.getGender();
                     major = student.getMajor();
 
-                    pstmt.setString(1, stuNo);
-                    pstmt.setString(2, name);
-                    pstmt.setString(3, gender);
-                    pstmt.setString(4, major);
-                    pstmt.executeUpdate();
+                    stmt.setString(1, stuNo);
+                    stmt.setString(2, name);
+                    stmt.setString(3, gender);
+                    stmt.setString(4, major);
+                    stmt.executeUpdate();
                     System.out.println("学生信息已上传到数据库");
                 }
-                pstmt.close();
+                stmt.close();
                 conn.close();
             } else {
                 System.out.println("获取学生信息失败");
