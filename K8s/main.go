@@ -13,12 +13,13 @@ import (
 )
 
 const (
-	NAMESPACE = "test-client"
-	PodName   = "client-test-pod"
+	NAMESPACE = "default"
+	PodName   = "go-test"
 )
 
 // https://xinchen.blog.csdn.net/article/details/113788269 参考
 // https://github.com/kubernetes/client-go/tree/master/examples/in-cluster-client-configuration
+// https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authentication/#client-go-credential-plugins 用户身份验证
 func main() {
 
 	var kubeConfig *string
@@ -76,13 +77,15 @@ func clean(clientSet *kubernetes.Clientset) {
 
 // 新建pod
 func createPod(clientSet *kubernetes.Clientset) {
+	// 获取podClient操作对象
 	podClient := clientSet.CoreV1().Pods(NAMESPACE)
+	// 新建一个pod示例 里面包含各种配置参数
 	pod := &apiv1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
 			Name: PodName,
 		},
 		Spec: apiv1.PodSpec{
-			NodeName: "node-name",
+			NodeName: "minikube-m03", // TODO 关联的NodeName 根据HTTP请求传入
 			Containers: []apiv1.Container{
 				{
 					Name:            "tomcat",
@@ -92,7 +95,7 @@ func createPod(clientSet *kubernetes.Clientset) {
 			},
 		},
 	}
-
+	// 发起一个Create请求
 	res, err := podClient.Create(context.TODO(), pod, metav1.CreateOptions{})
 
 	if err != nil {
