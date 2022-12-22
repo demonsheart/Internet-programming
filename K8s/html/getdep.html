@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deployments</title>
+</head>
+<body>
+<h1>Deployments</h1>
+<div>
+    {{ range . }}
+    <p>
+        <span>{{ .Name }}</span>
+        <span>{{ .Spec.Template.Spec.NodeName }}</span>
+    </p>
+    {{ end }}
+</div>
+</body>
+</html>

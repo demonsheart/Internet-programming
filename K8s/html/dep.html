@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Deployment</title>
+</head>
+<body>
+<H1>Create Deployments</H1>
+<form action="/createdep" method="post">
+    image: <input type="text" name="image" value="tomcat"><br>
+    name: <input type="text" name="name" value="mytomcat"><br>
+    node: <input type="text" name="node" value="minikube-m03"><br>
+    replicas: <input type="text" name="replicas" value="2"><br>
+    <input type="submit">
+</form>
+</body>
+</html>
